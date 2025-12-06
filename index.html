@@ -7,64 +7,78 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- DESIGN GÉNÉRAL --- */
         body { font-family: 'Roboto', sans-serif; max-width: 900px; margin: 0 auto; background-color: #fdfbff; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
         
-        header { background-color: #fff; padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        header { background-color: #fff; padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         h1 { color: #4a148c; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
         .subtitle { color: #7f8c8d; font-style: italic; margin-top: 10px; }
 
-        main { padding: 20px; flex: 1; }
+        /* --- LE BLOC CITATION (NOUVEAU !) --- */
+        .quote-container {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #fafafa; /* Fond très léger */
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+        .quote-text {
+            font-family: 'Dancing Script', cursive; /* Belle écriture manuscrite */
+            font-size: 2em;
+            color: #6a1b9a; /* Violet élégant */
+            margin: 0;
+            line-height: 1.2;
+        }
+        .quote-source {
+            font-size: 0.75em; /* Très petit */
+            color: #999; /* Gris discret */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+
+        main { padding: 0 20px 20px 20px; flex: 1; }
 
         /* --- ACCORDÉONS (TIROIRS) --- */
-        details { margin-bottom: 15px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.3s; }
+        details { margin-bottom: 15px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.3s; border: 1px solid #f0f0f0; }
         
-        /* NIVEAU 1 : CATEGORIES (Cognitif, Emotionnel, Social) */
+        /* NIVEAU 1 : CATEGORIES */
         summary.cat-header { padding: 20px; font-size: 1.2em; font-weight: bold; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
         summary.cat-header::-webkit-details-marker { display: none; }
-        
-        /* Couleurs des catégories */
-        .bg-cognitif { background: linear-gradient(135deg, #1976d2, #42a5f5); } /* Bleu */
-        .bg-emotion { background: linear-gradient(135deg, #d81b60, #f06292); } /* Rose */
-        .bg-social { background: linear-gradient(135deg, #7b1fa2, #ab47bc); } /* Violet */
+        .bg-cognitif { background: linear-gradient(135deg, #1976d2, #42a5f5); }
+        .bg-emotion { background: linear-gradient(135deg, #d81b60, #f06292); }
+        .bg-social { background: linear-gradient(135deg, #7b1fa2, #ab47bc); }
 
-        /* NIVEAU 2 : CPS GÉNÉRALES */
-        .general-block { padding: 15px; background-color: #fafafa; border-left: 5px solid #ddd; margin: 10px; border-radius: 4px; }
-        summary.general-header { font-weight: 600; color: #444; cursor: pointer; padding: 10px; background-color: #fff; border: 1px solid #eee; border-radius: 4px; margin-bottom: 5px; list-style: none; }
-        summary.general-header:hover { background-color: #f0f0f0; }
+        /* NIVEAU 2 & 3 */
+        .general-block { padding: 15px; background-color: #fff; border-left: 4px solid #eee; margin: 10px; }
+        summary.general-header { font-weight: 600; color: #444; cursor: pointer; padding: 12px; background-color: #f9f9f9; border-radius: 6px; margin-bottom: 5px; list-style: none; display: flex; justify-content: space-between; }
+        .specific-block { margin-left: 15px; margin-top: 10px; padding-left: 15px; border-left: 2px dotted #ddd; }
+        summary.specific-header { color: #555; font-weight: 500; cursor: pointer; padding: 8px; list-style: none; display: flex; justify-content: space-between; }
+        summary.specific-header:hover { color: #000; text-decoration: underline; }
 
-        /* NIVEAU 3 : CPS SPÉCIFIQUES */
-        .specific-block { margin-left: 20px; margin-top: 10px; border-left: 3px solid #ccc; padding-left: 15px; }
-        summary.specific-header { color: #555; font-weight: 500; cursor: pointer; padding: 8px; text-decoration: underline; list-style: none; }
-        
-        /* TABLEAU DES SAVOIRS (NIVEAU 4) */
-        .savoir-container { background: #fff; padding: 15px; border-radius: 5px; margin-top: 10px; }
-        .savoir-item { 
-            display: flex; flex-direction: column; /* Mobile first */
-            padding: 15px; border-bottom: 1px solid #eee; 
-        }
+        /* TABLEAU DES SAVOIRS */
+        .savoir-container { background: #fff; padding: 10px 15px; border-radius: 5px; margin-top: 5px; }
+        .savoir-item { display: flex; flex-direction: column; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .savoir-item:last-child { border-bottom: none; }
         .savoir-text { flex: 1; margin-bottom: 10px; font-size: 0.95em; line-height: 1.5; }
         
-        /* BOUTONS D'ACTION */
+        /* BOUTONS */
         .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn { 
-            text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.85em; font-weight: bold; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px;
-        }
-        .btn-exo { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; } /* Vert */
-        .btn-exo:hover { background-color: #c8e6c9; }
-        .btn-memo { background-color: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; } /* Bleu */
-        .btn-memo:hover { background-color: #bbdefb; }
+        .btn { text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.85em; font-weight: bold; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; }
+        .btn-exo { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .btn-exo:hover { background-color: #c8e6c9; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn-memo { background-color: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .btn-memo:hover { background-color: #bbdefb; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
         /* Indicateur + / - */
-        summary::after { content: '+'; font-weight: bold; float: right; }
-        details[open] > summary::after { content: '-'; }
+        summary::after { content: '+'; font-weight: bold; opacity: 0.6; }
+        details[open] > summary::after { content: '−'; }
 
-        footer { text-align: center; padding: 30px; color: #666; margin-top: auto; font-size: 0.9em; border-top: 1px solid #eee; }
+        footer { text-align: center; padding: 30px; color: #666; margin-top: auto; font-size: 0.85em; border-top: 1px solid #eee; background: #fafafa; }
 
-        /* Responsive */
         @media (min-width: 600px) {
             .savoir-item { flex-direction: row; align-items: center; }
             .savoir-text { margin-bottom: 0; margin-right: 20px; }
@@ -78,70 +92,45 @@
         <div class="subtitle">Savoir-être et Vivre-ensemble</div>
     </header>
 
+    <div class="quote-container">
+        <p class="quote-text">"Parce que les compétences humaines sont le socle de toute réussite."</p>
+        <p class="quote-source">cela découle : SANTÉ PUBLIQUE FRANCE / Les compétences psychosociales .</p>
+    </div>
+
     <main>
         
         <details>
             <summary class="cat-header bg-cognitif">🧠 CPS COGNITIVES</summary>
-            
             <div class="general-block">
                 <details>
                     <summary class="general-header">C1. Renforcer sa conscience de soi</summary>
-                    
                     <div class="specific-block">
                         <details>
                             <summary class="specific-header">C1.1 Accroître sa connaissance de soi</summary>
                             <div class="savoir-container">
                                 <div class="savoir-item">
                                     <div class="savoir-text">1. Connaître les différentes dimensions du Soi psychologique.</div>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-exo">🧩 Exercice</a>
-                                        <a href="#" class="btn btn-memo">📄 Fiche</a>
-                                    </div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text">2. Connaître le rôle et les limites de l'image de soi.</div>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-exo">🧩 Exercice</a>
-                                    </div>
+                                    <div class="btn-group"><a href="#" class="btn btn-exo">🧩 Exercice</a></div>
                                 </div>
                             </div>
                         </details>
                     </div>
-
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">C1.2 Penser de façon critique</summary>
-                            <div class="savoir-container"><p>Contenu à venir...</p></div>
-                        </details>
-                    </div>
-
                 </details>
             </div>
         </details>
-
 
         <details>
             <summary class="cat-header bg-emotion">❤️ CPS ÉMOTIONNELLES</summary>
-            
             <div class="general-block">
                 <details>
                     <summary class="general-header">E1. Renforcer sa conscience des émotions</summary>
-                    
                     <div class="specific-block">
-                        <details open>
+                        <details>
                             <summary class="specific-header">E1.1 Comprendre les émotions</summary>
                             <div class="savoir-container">
                                 <div class="savoir-item">
-                                    <div class="savoir-text">1. Connaître la nature des émotions (composantes, liens avec les cognitions, déclencheurs...).</div>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-exo">🧩 Quiz Émotions</a>
-                                    </div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text">2. Connaître la fonction des émotions (information et impulsion pour l'action).</div>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-exo">🎥 Vidéo</a>
-                                    </div>
+                                    <div class="savoir-text">1. Connaître la nature des émotions.</div>
+                                    <div class="btn-group"><a href="#" class="btn btn-exo">🎥 Vidéo</a></div>
                                 </div>
                             </div>
                         </details>
@@ -150,18 +139,15 @@
             </div>
         </details>
 
-
-        <details open> <summary class="cat-header bg-social">🤝 CPS SOCIALES</summary>
-            
+        <details open>
+            <summary class="cat-header bg-social">🤝 CPS SOCIALES</summary>
             <div class="general-block">
                 <details open>
                     <summary class="general-header">S1. Développer des relations constructives</summary>
-                    
                     <div class="specific-block">
                         <details open>
                             <summary class="specific-header">S1.1 Communiquer de façon efficace et positive</summary>
                             <div class="savoir-container">
-                                
                                 <div class="savoir-item">
                                     <div class="savoir-text">1. Éviter les attitudes et comportements verbaux qui détériorent le message et la relation.</div>
                                     <div class="btn-group">
@@ -169,18 +155,9 @@
                                         <a href="#" class="btn btn-memo">📄 Synthèse</a>
                                     </div>
                                 </div>
-
-                                <div class="savoir-item">
-                                    <div class="savoir-text">2. Savoir développer des attitudes et comportements verbaux soutenants.</div>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-exo">🧩 Exercice</a>
-                                    </div>
-                                </div>
-
                             </div>
                         </details>
                     </div>
-
                 </details>
             </div>
         </details>
