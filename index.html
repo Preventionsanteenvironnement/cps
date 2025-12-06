@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C1.4 : Renforcer le Soi Sujet (AADA)</title>
+    <title>L'essentiel à retenir (C1.1 et C1.2)</title>
     <style>
         :root {
-            --primary: #2c3e50; /* Bleu foncé (Le Pilote) */
-            --secondary: #27ae60; /* Vert (AADA - Action) */
-            --accent: #e67e22; /* Orange (Attention/Éveil) */
-            --text: #333;
-            --bg: #f8f9fa;
+            --primary: #2c3e50;
+            --accent: #2980b9;
+            --bg: #f4f6f7;
             --card-bg: #ffffff;
-            --nav-bg: #34495e;
-            --nav-text: #ecf0f1;
+            --text: #333;
+            --radius: 10px;
         }
 
         body {
@@ -22,330 +20,151 @@
             color: var(--text);
             background-color: var(--bg);
             margin: 0;
-            padding-top: 60px; /* Espace pour le menu fixe */
+            padding: 20px;
         }
 
-        /* --- MENU DE NAVIGATION (GitHub Friendly) --- */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--nav-bg);
-            color: var(--nav-text);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 1000;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            height: 60px;
-            overflow-x: auto; /* Permet le scroll sur mobile */
-            white-space: nowrap;
-        }
-
-        nav a {
-            color: var(--nav-text);
-            text-decoration: none;
-            padding: 0 15px;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-            border-right: 1px solid rgba(255,255,255,0.1);
-        }
-
-        nav a:hover, nav a.active {
-            opacity: 1;
-            font-weight: bold;
-            color: var(--secondary);
-        }
-
-        /* --- STRUCTURE PRINCIPALE --- */
         .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 20px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         header {
-            text-align: center;
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, var(--primary), #3498db);
+            background: var(--accent);
             color: white;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+            margin-bottom: 30px;
+            text-align: center;
         }
 
         h1 { margin: 0; font-size: 1.8rem; }
-        h2 { color: var(--primary); border-bottom: 2px solid var(--secondary); padding-bottom: 8px; margin-top: 40px; }
-        h3 { color: var(--secondary); margin-top: 25px; }
+        h2 { color: var(--accent); border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: var(--primary); margin-top: 25px; }
 
         .card {
             background: var(--card-bg);
             padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-            border-left: 5px solid var(--primary);
+            border-radius: var(--radius);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
         }
 
-        /* --- VISUEL AADA --- */
-        .aada-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+        .definition-box {
+            background-color: #eaf2f8;
+            border-left: 5px solid var(--accent);
+            padding: 20px;
             margin: 20px 0;
-            justify-content: center;
         }
 
-        .aada-step {
-            flex: 1 1 200px;
-            background: #fff;
-            border: 2px solid var(--secondary);
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.2s;
-        }
-
-        .aada-step:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2); }
-        .aada-letter { font-size: 2.5rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
-        .aada-desc { font-size: 0.9rem; color: #555; }
-
-        /* --- INTROSPECTION --- */
-        .introspection {
-            background-color: #e8f8f5;
-            border-left-color: var(--secondary);
-        }
-        
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-top: 10px;
-            min-height: 80px;
-            font-family: inherit;
-        }
-
-        /* --- EXERCICE INTERACTIF --- */
-        .scenario-box {
-            background: #fdfefe;
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-        
-        .sortable-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .sortable-item {
-            background: white;
-            border: 1px solid #ccc;
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: move;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .btn {
-            background: var(--primary);
+        /* BOUTONS D'EXPLORATION (LIENS VERS TES FICHIERS) */
+        .explorer-btn {
+            display: inline-block;
+            background-color: var(--primary);
             color: white;
-            border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
+            text-decoration: none;
             border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
+            font-weight: bold;
             margin-top: 15px;
             transition: background 0.3s;
         }
-        .btn:hover { background: #34495e; }
-
-        .feedback { margin-top: 10px; font-weight: bold; }
-
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 0.8rem;
-            color: #7f8c8d;
-            padding-bottom: 20px;
+        .explorer-btn:hover {
+            background-color: #1a252f;
         }
+        
+        .savoir-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #eee;
+        }
+        .savoir-item:last-child { border-bottom: none; }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+
+        strong { color: var(--primary); }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="C1.1 Connaître les différentes dimensions du Soi psychologique.html">C1.1 Dimensions du Soi</a>
-    <a href="C1.2 Connaître le rôle et les limites de l'Image de soi copie.html">C1.2 Image de Soi</a>
-    <a href="C1.3 Questionner l'Image de soi et penser de façon critique.html">C1.3 Esprit Critique</a>
-    <a href="#" class="active">C1.4 Soi Sujet (AADA)</a>
-    <a href="C1.5 Observer et accueillir son Soi interne.html">C1.5 Soi Interne</a>
-    <a href="L'essentiel à retenir (C1.1 et C1.2).html">L'Essentiel</a>
-</nav>
-
 <div class="container">
 
     <header>
-        <h1>C1.4 : Renforcer le Soi Sujet</h1>
-        <p>Activer le "Pilote" pour réaliser des actions conscientes et volontaires</p>
+        <h1>L'essentiel à retenir (C1.1 et C1.2)</h1>
+        <p>Synthèse des savoirs et savoir-faire pour la connaissance de soi et la pensée critique</p>
     </header>
 
     <section>
-        <h2>🔷 1. Comprendre : Le Moteur AADA</h2>
         <div class="card">
-            <p>Le <strong>Soi sujet</strong> est la partie de nous-mêmes qui agit comme un pilote. C'est lui qui nous permet d'exercer une action volontaire et consciente, plutôt que de réagir par automatisme.</p>
+            <h2>Définitions</h2>
             
-            <p>Pour simplifier les 4 grandes fonctions cognitives (Réceptives, Mnésiques, Analytiques, Expressives), le référentiel propose l'acronyme <strong>AADA</strong> :</p>
+            <div class="definition-box">
+                <h3>Définition conceptuelle</h3>
+                <p>La connaissance de soi s'appuie sur la compréhension de ses <strong>cognitions</strong> (pensées, croyances, valeurs...), ses <strong>émotions</strong> (sentiments, affects...) et ses <strong>volitions</strong> (désirs, besoins, aspirations, rêves...) ainsi que leurs <strong>liens avec les comportements</strong>.</p>
+                <p>Cela permet de mieux comprendre le processus de genèse des représentations (de soi) et le rôle des différentes influences sociales afin de pouvoir ajuster au mieux son image de soi à ses propres perceptions et développer un rapport à soi bienveillant.</p>
+            </div>
+        </div>
+    </section>
 
-            <div class="aada-container">
-                <div class="aada-step">
-                    <span class="aada-letter">A</span>
-                    <strong>Attention</strong><br>
-                    <span class="aada-desc">Observation de l'information présente (interne ou externe).</span>
-                </div>
-                <div class="aada-step">
-                    <span class="aada-letter">A</span>
-                    <strong>Analyse</strong><br>
-                    <span class="aada-desc">Traitement via les infos présentes + la mémoire/expérience.</span>
-                </div>
-                <div class="aada-step">
-                    <span class="aada-letter">D</span>
-                    <strong>Décision</strong><br>
-                    <span class="aada-desc">Choix conscient basé sur l'analyse.</span>
-                </div>
-                <div class="aada-step">
-                    <span class="aada-letter">A</span>
-                    <strong>Action</strong><br>
-                    <span class="aada-desc">Verbale ou comportementale.</span>
-                </div>
+    <section>
+        <div class="card">
+            <h2>Définition opérationnelle : 5 Savoirs et Savoir-faire</h2>
+            <p>Voici les points clés permettant d'accroître la connaissance de soi et de penser de façon critique :</p>
+
+            <div class="savoir-item">
+                <h3>1. Connaître les différentes dimensions du Soi psychologique</h3>
+                <p>Le <u>Soi externe</u> (aspects perceptibles par les autres), l'<u>Image de soi</u> (représentations et estime de soi), le <u>Soi interne</u> (états psychiques : cognitions, émotions, sensations, impressions, volitions) et le <u>Soi sujet</u> (capacités cognitives et comportementales).</p>
+                
+                <a href="C1.1 Connaître les différentes dimensions du Soi psychologique.html" class="explorer-btn">
+                    👉 Explorer l'exercice C1.1
+                </a>
             </div>
 
-            <p><strong>Exemple cité :</strong><br>
-            <em>« J'ai <u>observé</u> (Attention) et <u>analysé</u> les comportements des élèves puis j'ai <u>décidé</u> de <u>réaliser</u> (Action) un atelier... »</em></p>
-        </div>
-    </section>
-
-    <section>
-        <h2>🔷 2. Introspection : Êtes-vous en Pilote Automatique ?</h2>
-        <div class="card introspection">
-            <h3>⚠️ Analyse de votre pratique</h3>
-            <p>Le document précise que le Soi Sujet est "au cœur du développement des CPS". Sans lui, nous sommes en réaction, pas en action.</p>
-            
-            <p><strong>Pensez à une situation professionnelle récente un peu tendue (conflit, imprévu).</strong></p>
-            
-            <label>1. Avez-vous pris le temps de l'<strong>Attention</strong> (observer sans juger) ?</label>
-            <textarea placeholder="Ex: J'ai vu que l'élève serrait les poings... (Au lieu de : 'Il était agressif')"></textarea>
-
-            <label>2. Avez-vous fait une <strong>Analyse</strong> consciente (lien avec vos connaissances/mémoire) ?</label>
-            <textarea placeholder="Ex: Je me suis souvenu qu'il a du mal le matin..."></textarea>
-
-            <label>3. Votre <strong>Action</strong> était-elle le fruit d'une <strong>Décision</strong> ou un réflexe ?</label>
-            <textarea placeholder="Ex: J'ai crié tout de suite (Réflexe) VS J'ai décidé de baisser la voix (Décision)..."></textarea>
-        </div>
-    </section>
-
-    <section>
-        <h2>🔷 3. Activité : Reconstituer le cycle AADA</h2>
-        <div class="card">
-            <p>Mettez dans l'ordre les étapes de ce scénario pour qu'il respecte le cycle du Soi Sujet conscient.</p>
-            
-            <div class="scenario-box">
-                <strong>Scénario :</strong> Un usager refuse de participer à l'activité.
+            <div class="savoir-item">
+                <h3>2. Connaître le rôle et les limites de l'Image de soi</h3>
+                <p>L'Image de soi est constituée de représentations ; ce n'est pas la réalité de ce que nous sommes. Ces représentations influencent nos comportements mais sont dépendantes de notre environnement social et peuvent être modifiées.</p>
+                
+                <a href="C1.2 Connaître le rôle et les limites de l'Image de soi copie.html" class="explorer-btn">
+                    👉 Explorer l'exercice C1.2
+                </a>
             </div>
 
-            <ul class="sortable-list" id="sortable">
-                <li class="sortable-item" draggable="true" data-step="4">Je lui propose une alternative ou je le laisse observer (Action). <span>↕️</span></li>
-                <li class="sortable-item" draggable="true" data-step="2">Je comprends qu'il a peur d'échouer (Analyse/Mémoire). <span>↕️</span></li>
-                <li class="sortable-item" draggable="true" data-step="1">Je remarque qu'il croise les bras et regarde le sol (Attention). <span>↕️</span></li>
-                <li class="sortable-item" draggable="true" data-step="3">Je choisis de ne pas le forcer pour préserver le lien (Décision). <span>↕️</span></li>
-            </ul>
+            <div class="savoir-item">
+                <h3>3. Questionner l'Image de soi et penser de façon critique</h3>
+                <p>En réduisant notre tendance à prendre nos idées pour des faits (mécanisme dénommé « <strong>fusion cognitive</strong> »), il devient plus facile de questionner et de remettre en question nos représentations de soi et du monde.</p>
+            </div>
 
-            <button class="btn" onclick="checkOrder()">Vérifier l'ordre</button>
-            <div id="feedback" class="feedback"></div>
+            <div class="savoir-item">
+                <h3>4. Renforcer le Soi sujet pour réaliser des actions conscientes</h3>
+                <p>Les capacités cognitives et comportementales du Soi sujet (Attention/Analyse/Décision/Action - AADA) sont à la base de toutes les actions conscientes et volontaires ; elles jouent un rôle essentiel dans le développement des CPS.</p>
+            </div>
+
+            <div class="savoir-item">
+                <h3>5. Observer et accueillir son Soi interne</h3>
+                <p>En réduisant la tendance à refuser ou modifier notre expérience intérieure (« évitement expérientiel »), nous pouvons davantage percevoir nos états psychiques (mécanisme dénommé « <strong>acceptation expérientielle</strong> »).</p>
+            </div>
         </div>
     </section>
 
     <section>
-        <h2>🔷 4. Le Soi Sujet au service des autres CPS</h2>
         <div class="card">
-            <p>Le <strong>Tableau 3</strong> montre que le Soi Sujet (AADA) est la "tour de contrôle" nécessaire pour les autres compétences :</p>
+            <h2>Principaux effets et Conditions</h2>
+            
+            <h3>Accroître sa connaissance de soi permet de :</h3>
             <ul>
-                <li>Pour <strong>C1.2 (Esprit Critique)</strong> : On utilise surtout la capacité d'<strong>Analyse</strong> (pour la Défusion cognitive).</li>
-                <li>Pour <strong>E1.1 (Comprendre ses émotions)</strong> : On utilise l'Analyse pour décoder le Soi Interne.</li>
-                <li>Pour <strong>S1.1 (Communiquer)</strong> : On mobilise tout le cycle AADA (Attention à l'autre, Analyse du message, Décision de la réponse, Action verbale).</li>
+                <li><strong>Renforcer son pouvoir d'agir (empowerment) :</strong> En nous différenciant de nos idées par la défusion cognitive, nous pouvons choisir de les changer ou de les ajuster.</li>
+                <li><strong>Mieux accueillir son expérience interne et favoriser le bien-être :</strong> En reconnaissant ses états internes sans fusionner avec eux, il est plus facile de les réguler et d'agir de façon intentionnelle. Diminuer l'évitement expérientiel permet d'éviter des problématiques (conduites à risques, violences...).</li>
             </ul>
-            <p>👉 <em>Utilisez le menu en haut pour explorer ces compétences spécifiques.</em></p>
+
+            <h3>Principales conditions :</h3>
+            <ul>
+                <li><strong>Des capacités cognitives</strong> d'attention, d'observation et de réflexion (liées au Soi sujet).</li>
+                <li><strong>L'acceptation que son Soi psychologique est largement construit par les autres :</strong> Le processus d'internalisation est central. En prendre conscience est une étape incontournable pour ne pas se contenter d'une simple représentation illusoire de liberté.</li>
+            </ul>
         </div>
     </section>
-
-    <footer>
-        CPS Studio - Fiche générée à partir des extraits du référentiel (Tome 1, p. 30, Tableau 3).
-    </footer>
 
 </div>
-
-<script>
-    /* --- LOGIQUE DU DRAG & DROP SIMPLE --- */
-    const list = document.getElementById('sortable');
-    let draggedItem = null;
-
-    list.querySelectorAll('.sortable-item').forEach(item => {
-        item.addEventListener('dragstart', function() {
-            draggedItem = item;
-            setTimeout(() => item.style.display = 'none', 0);
-        });
-
-        item.addEventListener('dragend', function() {
-            setTimeout(() => item.style.display = 'flex', 0);
-            draggedItem = null;
-        });
-
-        item.addEventListener('dragover', function(e) {
-            e.preventDefault();
-        });
-
-        item.addEventListener('dragenter', function(e) {
-            e.preventDefault();
-            this.style.background = '#f0f0f0';
-        });
-        
-        item.addEventListener('dragleave', function() {
-            this.style.background = 'white';
-        });
-
-        item.addEventListener('drop', function() {
-            this.style.background = 'white';
-            list.insertBefore(draggedItem, this);
-        });
-    });
-
-    /* --- VALIDATION --- */
-    function checkOrder() {
-        const items = document.querySelectorAll('.sortable-item');
-        let currentOrder = [];
-        items.forEach(item => currentOrder.push(parseInt(item.getAttribute('data-step'))));
-
-        const correctOrder = [1, 2, 3, 4];
-        const isCorrect = JSON.stringify(currentOrder) === JSON.stringify(correctOrder);
-        
-        const feedback = document.getElementById('feedback');
-        
-        if (isCorrect) {
-            feedback.innerText = "BRAVO ! C'est le bon ordre : Attention -> Analyse -> Décision -> Action.";
-            feedback.style.color = "var(--secondary)";
-        } else {
-            feedback.innerText = "Ce n'est pas encore ça. Rappelez-vous : on observe d'abord (Attention), on réfléchit (Analyse), on décide, puis on agit.";
-            feedback.style.color = "#c0392b";
-        }
-    }
-</script>
 
 </body>
 </html>
