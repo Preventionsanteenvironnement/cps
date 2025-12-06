@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Studio - L'Image de Soi : Rôle et Limites</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --accent-light: #ebf5fb;
+            --success: #27ae60;
+            --warning: #e67e22;
+            --danger: #c0392b;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --radius: 12px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        h1 { margin: 0; font-size: 1.8rem; }
+        h2 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: var(--accent); margin-top: 25px; }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            border-left: 5px solid var(--accent);
+        }
+
+        .card.introspection {
+            border-left-color: var(--warning);
+            background-color: #fffaf4;
+        }
+
+        .analogy {
+            background-color: var(--accent-light);
+            padding: 15px;
+            border-radius: var(--radius);
+            margin: 15px 0;
+        }
+
+        .important {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Interactive Elements */
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .btn:hover { background: #2980b9; }
+
+        /* Matching Game */
+        .match-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            .match-container { grid-template-columns: 1fr; }
+        }
+        .match-item {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .match-item.selected { border-color: var(--accent); background: var(--accent-light); }
+        .match-item.correct { border-color: var(--success); background: #d4efdf; cursor: default; }
+        .match-item.wrong { border-color: var(--danger); animation: shake 0.4s; }
+
+        /* Quiz */
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px;
+            margin: 8px 0;
+            background: #f1f2f6;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quiz-option:hover { background: #e2e6ea; }
+        .quiz-option.correct { background: #d4efdf; border-color: var(--success); color: var(--success); font-weight: bold; }
+        .quiz-option.incorrect { background: #fadbd8; border-color: var(--danger); color: var(--danger); }
+
+        /* Input Area */
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        /* Utilities */
+        .hidden { display: none; }
+        .feedback-msg { margin-top: 10px; font-weight: bold; }
+        
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Compétence Cognitive C1.3<br>Connaître le rôle et les limites de l'Image de Soi</h1>
+        <p>Comprendre comment nos représentations mentales façonnent nos vies</p>
+    </header>
+
+    <section id="comprehension">
+        <h2>🔷 1. Comprendre la notion</h2>
+        
+        <div class="card">
+            <h3>Qu'est-ce que l'Image de Soi ?</h3>
+            <p>L'<strong>Image de Soi</strong> (ou concept de soi) est l'ensemble des représentations mentales qu'un individu a de lui-même. Elle couvre de multiples domaines : physique, intellectuel, social, professionnel.</p>
+            <p>Ces représentations ne sont pas la réalité absolue, mais une construction :</p>
+            <ul>
+                <li>Elles dépendent de notre <strong>identité culturelle</strong> et de nos rôles sociaux.</li>
+                <li>Elles se construisent en <strong>interaction avec l'environnement social</strong> (famille, école, amis).</li>
+                <li>Elles sont un déterminant majeur de nos comportements : nous agissons souvent sans le savoir pour confirmer cette image (Besoin de cohérence).</li>
+            </ul>
+
+            <div class="analogy">
+                <strong>💡 L'Analogie du Quotidien : Le Filtre Photo</strong>
+                <p>Le document compare l'image de soi à un <strong>filtre de couleur</strong> ou un <strong>programme d'ordinateur</strong>. Tout comme un filtre Instagram modifie les couleurs d'une photo sans changer la scène réelle, l'image de soi colore notre perception de la réalité. Si mon filtre est "Je suis timide", je vais interpréter une situation neutre comme menaçante, même si elle ne l'est pas.</p>
+            </div>
+
+            <p><strong>Exemple Professionnel :</strong><br>
+            Un éducateur qui a intégré l'image du "Sauveur" (construite par son éducation ou ses expériences passées) va chercher à résoudre tous les problèmes des jeunes à leur place. Ce comportement est dicté par son besoin de cohérence avec son image de soi, et non forcément par les besoins réels du jeune.</p>
+        </div>
+    </section>
+
+    <section id="introspection">
+        <h2>🔷 2. Introspection du Professionnel</h2>
+        
+        <div class="card introspection">
+            <h3>⚠️ Étape Obligatoire : D'abord vous</h3>
+            <p>Les compétences psychosociales ne se transmettent pas comme des savoirs théoriques. Elles doivent être vécues. Avant d'accompagner un public sur l'image de soi, vous devez explorer la vôtre.</p>
+            
+            <p>Le texte mentionne le phénomène de <strong>fusion cognitive</strong> ou d'<strong>identification</strong> : prendre l'image mentale pour la réalité (ex: "Je suis le rigolo", "Je suis la rebelle").</p>
+
+            <h4>Exercice : Vos étiquettes</h4>
+            <p>Identifiez une "étiquette" ou une représentation que vous avez de vous-même dans votre cadre professionnel (ex: "Celui qui ne dit jamais non", "L'expert technique", "La personne stricte").</p>
+            
+            <label for="self-label">Quelle est cette image ?</label>
+            <textarea id="self-label" placeholder="Ex: Je me vois comme 'celui qui doit toujours être fort'..."></textarea>
+
+            <p>Comment cette image dicte-t-elle vos comportements actuels (évitement, action, tenue vestimentaire...) ?</p>
+            <textarea placeholder="Ex: À cause de cette image, je refuse de demander de l'aide quand je suis débordé..."></textarea>
+            
+            <button class="btn" onclick="revealAdvice()">Terminer ma réflexion</button>
+
+            <div id="advice-reveal" class="hidden" style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 10px;">
+                <p><em>Merci pour ce travail. Gardez en tête le mécanisme du <strong>Besoin de cohérence et de confirmation de soi</strong> mentionné dans le texte : nous agissons souvent pour maintenir cette vision, même si elle nous limite. Prendre conscience de ce mécanisme est le premier pas pour s'en libérer.</em></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="activite">
+        <h2>🔷 3. Appropriation des concepts</h2>
+        <div class="card">
+            <h3>Jeu d'association : Les mécanismes en jeu</h3>
+            <p>Associez chaque concept du référentiel à sa définition ou sa fonction. Cliquez sur un concept (colonne gauche), puis sur sa définition (colonne droite).</p>
+
+            <div class="match-container">
+                <div id="terms">
+                    <div class="match-item term" data-id="1">Besoin de cohérence</div>
+                    <div class="match-item term" data-id="2">Image de soi future</div>
+                    <div class="match-item term" data-id="3">Estime de soi</div>
+                    <div class="match-item term" data-id="4">Internalisation</div>
+                    <div class="match-item term" data-id="5">Besoin d'affiliation</div>
+                </div>
+
+                <div id="defs">
+                    <div class="match-item def" data-id="5">Désir de relations harmonieuses qui pousse à adopter les vues des autres.</div>
+                    <div class="match-item def" data-id="3">Résultat de la comparaison entre "Image de soi" et "Image de soi idéale".</div>
+                    <div class="match-item def" data-id="1">Tendance à agir pour confirmer et maintenir notre vision de nous-mêmes.</div>
+                    <div class="match-item def" data-id="4">Processus où les représentations des autres (parents, amis) deviennent les nôtres.</div>
+                    <div class="match-item def" data-id="2">Concept motivationnel majeur : ce que l'on veut devenir ou ce que l'on craint de devenir.</div>
+                </div>
+            </div>
+            <div id="match-feedback" class="feedback-msg"></div>
+        </div>
+    </section>
+
+    <section id="accompagnement">
+        <h2>🔷 4. Pistes pour l'accompagnement (Optionnel)</h2>
+        <div class="card">
+            <p>Une fois que vous avez identifié vos propres mécanismes, vous pouvez aider votre public à faire de même.</p>
+            <p>Le levier d'action majeur mentionné est <strong>l'image de soi future</strong> (les "soi possibles").</p>
+            <ul>
+                <li><strong>Observation :</strong> Aidez les usagers à repérer l'écart entre leur "Image de soi" et leur "Image de soi idéale" (source de tension ou de motivation).</li>
+                <li><strong>Action :</strong> Utilisez les "soi possibles" (ce qu'ils rêvent d'être ou craignent de devenir) comme moteur pour définir des buts (voir Compétence C1.3).</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="validation">
+        <h2>🔷 5. Validation des acquis</h2>
+        <div class="card">
+            <h3>Quiz Final</h3>
+            <p>Testez votre compréhension de l'ensemble des notions de la fiche.</p>
+
+            <div id="quiz-container">
+                
+                <div class="quiz-item">
+                    <p><strong>1. Selon le texte, quelles sont les deux raisons principales qui expliquent le processus d'internalisation (faire sienne l'image renvoyée par les autres) ?</strong></p>
+                    <button class="quiz-option" onclick="checkQuiz(this, false)">Le besoin de sécurité et le besoin physiologique.</button>
+                    <button class="quiz-option" onclick="checkQuiz(this, true)">Le besoin d'affiliation et le besoin d'adaptation/compétence.</button>
+                    <button class="quiz-option" onclick="checkQuiz(this, false)">Le besoin de pouvoir et le besoin d'autonomie.</button>
+                </div>
+
+                <div class="quiz-item">
+                    <p><strong>2. Qu'est-ce que la "fusion cognitive" évoquée à la fin du texte ?</strong></p>
+                    <button class="quiz-option" onclick="checkQuiz(this, false)">Le fait de mélanger plusieurs souvenirs.</button>
+                    <button class="quiz-option" onclick="checkQuiz(this, true)">La tendance à prendre ses images mentales pour la réalité absolue.</button>
+                    <button class="quiz-option" onclick="checkQuiz(this, false)">La capacité à réfléchir sur soi-même.</button>
+                </div>
+
+                <div class="quiz-item">
+                    <p><strong>3. Comment l'écart entre l'image de soi et l'image de soi idéale agit-il ?</strong></p>
+                    <button class="quiz-option" onclick="checkQuiz(this, false)">Il n'a aucun impact réel.</button>
+                    <button class="quiz-option" onclick="checkQuiz(this, true)">Il crée une tension/malaise qui peut pousser à l'action (se changer ou réagir agressivement).</button>
+                    <button class="quiz-option" onclick="checkQuiz(this, false)">Il améliore automatiquement l'estime de soi.</button>
+                </div>
+
+            </div>
+            <div id="quiz-final-score" class="feedback-msg"></div>
+        </div>
+    </section>
+
+    <footer>
+        CPS Studio - Créateur de fiches pédagogiques<br>
+        Basé strictement sur les extraits fournis.
+    </footer>
+
+</div>
+
+<script>
+    // --- INTROSPECTION REVEAL ---
+    function revealAdvice() {
+        const textCheck = document.getElementById('self-label').value;
+        if(textCheck.length > 5) {
+            document.getElementById('advice-reveal').classList.remove('hidden');
+        } else {
+            alert("Prenez le temps d'écrire quelques mots sur votre propre image avant de continuer.");
+        }
+    }
+
+    // --- MATCHING GAME LOGIC ---
+    let selectedTerm = null;
+    let matchesFound = 0;
+    const totalMatches = 5;
+
+    document.querySelectorAll('.term').forEach(item => {
+        item.addEventListener('click', function() {
+            if (this.classList.contains('correct')) return;
+            
+            // Reset previous selection
+            document.querySelectorAll('.term').forEach(t => t.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedTerm = this;
+            checkMatch();
+        });
+    });
+
+    document.querySelectorAll('.def').forEach(item => {
+        item.addEventListener('click', function() {
+            if (this.classList.contains('correct')) return;
+            
+            // Highlight selection briefly
+            document.querySelectorAll('.def').forEach(d => d.classList.remove('selected'));
+            this.classList.add('selected');
+            checkMatch();
+        });
+    });
+
+    function checkMatch() {
+        const term = document.querySelector('.term.selected');
+        const def = document.querySelector('.def.selected');
+
+        if (term && def) {
+            if (term.getAttribute('data-id') === def.getAttribute('data-id')) {
+                // Correct match
+                term.classList.remove('selected');
+                def.classList.remove('selected');
+                term.classList.add('correct');
+                def.classList.add('correct');
+                term.innerHTML += " ✅";
+                matchesFound++;
+                selectedTerm = null;
+                
+                if (matchesFound === totalMatches) {
+                    document.getElementById('match-feedback').innerText = "Bravo ! Vous avez relié tous les concepts clés du texte.";
+                    document.getElementById('match-feedback').style.color = "var(--success)";
+                }
+            } else {
+                // Wrong match
+                def.classList.add('wrong');
+                setTimeout(() => {
+                    def.classList.remove('wrong');
+                    def.classList.remove('selected');
+                }, 500);
+            }
+        }
+    }
+
+    // --- QUIZ LOGIC ---
+    function checkQuiz(btn, isCorrect) {
+        // Disable siblings
+        let parent = btn.parentElement;
+        let options = parent.querySelectorAll('.quiz-option');
+        options.forEach(opt => {
+            opt.disabled = true;
+            opt.style.cursor = 'default';
+            if (opt === btn) {
+                if (isCorrect) {
+                    opt.classList.add('correct');
+                    opt.innerHTML += " ✅ (Correct)";
+                } else {
+                    opt.classList.add('incorrect');
+                    opt.innerHTML += " ❌ (Relisez la section correspondante)";
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

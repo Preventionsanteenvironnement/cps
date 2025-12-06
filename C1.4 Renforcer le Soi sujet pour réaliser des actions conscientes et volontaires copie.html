@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Studio - Penser de façon critique (Fusion vs Défusion)</title>
+    <style>
+        :root {
+            --primary: #8e44ad; /* Violet : Pensée critique / Cognitif */
+            --primary-light: #f4ecf7;
+            --secondary: #2c3e50; /* Bleu nuit : Soi Sujet */
+            --accent: #27ae60; /* Vert : Défusion/Réussite */
+            --warning: #c0392b; /* Rouge : Fusion/Danger */
+            --text: #333;
+            --bg: #fdfefe;
+            --card-bg: #ffffff;
+            --radius: 16px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--primary), #9b59b6);
+            color: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 1.8rem; margin-bottom: 10px; }
+        header .subtitle { font-size: 1.1rem; opacity: 0.9; }
+
+        /* CARDS & SECTIONS */
+        section { margin-bottom: 50px; }
+        
+        h2 {
+            color: var(--secondary);
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        /* ANALOGY BOX */
+        .analogy {
+            background-color: #eaf2f8;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* CONCEPT COMPARISON */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .comp-box {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .fusion-box { background-color: #fadbd8; border: 1px solid #e6b0aa; }
+        .defusion-box { background-color: #d4efdf; border: 1px solid #a9dfbf; }
+        .comp-title { font-weight: bold; display: block; margin-bottom: 10px; text-transform: uppercase; }
+
+        /* INTROSPECTION STYLES */
+        .introspection {
+            background-color: var(--primary-light);
+            border: 1px solid #d2b4de;
+        }
+        .input-group { margin-bottom: 15px; }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: inherit;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        /* INTERACTIVE EXERCISE */
+        .game-area {
+            text-align: center;
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            border-radius: var(--radius);
+        }
+        .card-display {
+            background: white;
+            color: #333;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 12px;
+            max-width: 500px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .btn-fusion { background: var(--warning); color: white; }
+        .btn-defusion { background: var(--accent); color: white; }
+        .feedback-msg { margin-top: 15px; font-weight: bold; min-height: 25px; }
+
+        /* QUIZ */
+        .quiz-opt {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .quiz-opt:hover { background: #e9ecef; }
+        .quiz-opt.correct { background: #d4efdf; border-color: var(--accent); color: #145a32; }
+        .quiz-opt.wrong { background: #fadbd8; border-color: var(--warning); color: #7b241c; }
+
+        footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-top: 60px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>C1.2 : Savoir penser de façon critique</h1>
+        <div class="subtitle">Questionner l'Image de soi & Mécanisme de Défusion</div>
+    </header>
+
+    <section id="comprendre">
+        <h2>🔷 1. Comprendre la notion</h2>
+        <div class="card">
+            <p>Le développement de l'esprit critique envers soi-même repose sur la capacité à distinguer nos pensées de la réalité. Le référentiel met en lumière deux mécanismes opposés :</p>
+
+            <div class="comparison">
+                <div class="comp-box fusion-box">
+                    <span class="comp-title" style="color:var(--warning)">🛑 Fusion Cognitive</span>
+                    <p>Processus <strong>automatique</strong> et <strong>inconscient</strong>.</p>
+                    <p>On confond l'idée avec le fait. On s'identifie totalement à la représentation.</p>
+                    <p><em>Ex: "Je suis nul." (Vécu comme une vérité absolue)</em></p>
+                </div>
+                <div class="comp-box defusion-box">
+                    <span class="comp-title" style="color:var(--accent)">✅ Défusion Cognitive</span>
+                    <p>Mécanisme <strong>volontaire</strong> et <strong>conscient</strong>.</p>
+                    <p>On prend de la distance. On observe la pensée comme une production mentale.</p>
+                    <p><em>Ex: "J'ai la pensée que je suis nul."</em></p>
+                </div>
+            </div>
+
+            <div class="analogy">
+                <strong>🖥️ L'analogie du document : Le Programme d'Ordinateur</strong>
+                <p>Le texte compare nos représentations (image de soi) à un <strong>programme informatique</strong> qui tourne en arrière-plan. Sans nous en rendre compte, ce "programme" dicte nos comportements. La fusion, c'est être <em>dans</em> l'écran. La défusion, c'est reculer pour <em>regarder</em> l'écran.</p>
+            </div>
+
+            <h3>Le lien avec le Soi Sujet (AADA)</h3>
+            <p>Selon le <strong>Tableau 3</strong> du référentiel, la compétence <em>"Savoir penser de façon critique (C1.2)"</em> mobilise spécifiquement la <strong>Capacité d'Analyse (AADA)</strong> du Soi Sujet.</p>
+            <p>La défusion est l'outil qui permet d'activer cette analyse : au lieu de réagir par réflexe (fusion), j'analyse que ce que je ressens est une pensée, et je décide d'y adhérer ou non.</p>
+        </div>
+    </section>
+
+    <section id="introspection">
+        <h2>🔷 2. Introspection du Professionnel</h2>
+        <div class="card introspection">
+            <h3>⚠️ Étape Obligatoire : D'abord soi-même</h3>
+            <p>Les CPS ne peuvent être transmises sans être vécues. Avant d'accompagner un public, expérimentez le pouvoir de la distanciation.</p>
+
+            <div class="input-group">
+                <label><strong>1. Identification (Fusion) :</strong> Notez une pensée négative ou une "étiquette" que vous vous attribuez parfois professionnellement (ex: "Je suis incompétent avec ce groupe", "Je suis trop laxiste").</label>
+                <input type="text" id="fusionInput" placeholder="Ex: Je suis débordé(e)...">
+            </div>
+
+            <div class="input-group">
+                <label><strong>2. Distanciation (Défusion) :</strong> Reformulez cette phrase en utilisant la structure proposée par le texte : <em>« J'ai la pensée que... »</em> ou <em>« Je remarque que mon esprit me dit que... »</em></label>
+                <input type="text" id="defusionInput" placeholder="Ex: J'ai la pensée que je suis débordé(e)...">
+            </div>
+
+            <button class="btn btn-defusion" onclick="checkIntrospection()">Valider mon expérience</button>
+            <p id="introFeedback" style="display:none; color: var(--accent); margin-top:10px;">
+                <strong>Bravo.</strong> Sentez-vous la différence ? La première phrase vous définit. La seconde vous rend votre liberté de choix (adhérer ou non). C'est cela, activer son "Soi Sujet".
+            </p>
+        </div>
+    </section>
+
+    <section id="exercice">
+        <h2>🔷 3. Entraînement : Le Détecteur de Fusion</h2>
+        <div class="card game-area">
+            <p>Pour développer votre <strong>Capacité d'Analyse (AADA)</strong>, apprenez à repérer instantanément si une affirmation relève de la Fusion (Fait apparent) ou de la Défusion (Observation).</p>
+
+            <div id="game-ui">
+                <div class="card-display" id="cardText">Chargement...</div>
+                
+                <div class="btn-container">
+                    <button class="btn btn-fusion" onclick="playTurn('fusion')">C'est de la FUSION</button>
+                    <button class="btn btn-defusion" onclick="playTurn('defusion')">C'est de la DÉFUSION</button>
+                </div>
+                <div class="feedback-msg" id="gameFeedback"></div>
+            </div>
+            
+            <div id="game-end" style="display:none;">
+                <h3>🎉 Exercice terminé !</h3>
+                <p>Vous savez distinguer la réalité psychologique de la réalité factuelle.</p>
+                <button class="btn btn-defusion" onclick="resetGame()">Recommencer</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="accompagnement">
+        <h2>🔷 4. Pistes pour l'accompagnement</h2>
+        <div class="card">
+            <p>Une fois ce mécanisme intégré pour vous, voici comment l'utiliser avec votre public :</p>
+            <ul>
+                <li><strong>Écoute active (Attention) :</strong> Repérez quand l'usager utilise le verbe "Être" pour décrire un état passager (ex: "Je suis triste", "Je suis nul").</li>
+                <li><strong>Reformulation (Analyse) :</strong> Aidez-le à traduire "Je suis l'émotion" en "Je ressens une émotion".</li>
+                <li><strong>Objectif :</strong> Comme le dit le texte, cela permet de <em>"ne plus considérer notre image de soi comme la réalité"</em> et de redonner le pouvoir d'agir.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="validation">
+        <h2>🔷 5. Validation des acquis</h2>
+        <div class="card">
+            <div id="quiz-container">
+                
+                <div class="quiz-item">
+                    <p><strong>1. Selon le texte, qu'est-ce que la "fusion cognitive" ?</strong></p>
+                    <div class="quiz-opt" onclick="checkQuiz(this, false)">La capacité à mélanger plusieurs idées pour être créatif.</div>
+                    <div class="quiz-opt" onclick="checkQuiz(this, true)">Le processus automatique où l'on confond nos idées/pensées avec les faits.</div>
+                    <div class="quiz-opt" onclick="checkQuiz(this, false)">Une technique de relaxation.</div>
+                </div>
+
+                <div class="quiz-item">
+                    <p><strong>2. Quelle capacité du Soi Sujet (Tableau 3) est spécifiquement renforcée par la compétence C1.2 "Savoir penser de façon critique" ?</strong></p>
+                    <div class="quiz-opt" onclick="checkQuiz(this, true)">La capacité d'Analyse (AADA).</div>
+                    <div class="quiz-opt" onclick="checkQuiz(this, false)">La capacité d'Action verbale.</div>
+                    <div class="quiz-opt" onclick="checkQuiz(this, false)">La capacité d'Attention uniquement.</div>
+                </div>
+
+                <div class="quiz-item">
+                    <p><strong>3. Quel est le but principal de la défusion ?</strong></p>
+                    <div class="quiz-opt" onclick="checkQuiz(this, false)">Supprimer les émotions négatives.</div>
+                    <div class="quiz-opt" onclick="checkQuiz(this, true)">Prendre de la distance pour retrouver la liberté d'adhérer ou non à une pensée.</div>
+                    <div class="quiz-opt" onclick="checkQuiz(this, false)">Prouver aux autres qu'ils ont tort.</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        CPS Studio - Fiche générée exclusivement à partir des extraits du référentiel fournis (Tome 1, p.30 & Tableaux).
+    </footer>
+
+</div>
+
+<script>
+    /* --- INTROSPECTION LOGIC --- */
+    function checkIntrospection() {
+        const i1 = document.getElementById('fusionInput').value;
+        const i2 = document.getElementById('defusionInput').value;
+        
+        if (i1.length > 3 && i2.length > 3) {
+            document.getElementById('introFeedback').style.display = 'block';
+        } else {
+            alert("Prenez le temps de remplir les deux champs pour expérimenter la nuance.");
+        }
+    }
+
+    /* --- GAME LOGIC --- */
+    const questions = [
+        { text: "Je ne vais jamais y arriver.", type: "fusion", expl: "C'est une pensée confondue avec une prédiction factuelle." },
+        { text: "Je remarque que j'ai la pensée que c'est difficile.", type: "defusion", expl: "Il y a une distanciation ('Je remarque que...')." },
+        { text: "Je suis en colère.", type: "fusion", expl: "Identification totale à l'émotion ('Je suis')." },
+        { text: "Je ressens de la colère.", type: "defusion", expl: "L'émotion est un objet observé, pas l'identité." },
+        { text: "C'est injuste !", type: "fusion", expl: "Jugement présenté comme une vérité absolue." },
+        { text: "Mon esprit me suggère que c'est injuste.", type: "defusion", expl: "Observation du jugement mental." }
+    ];
+
+    let currentQ = 0;
+
+    function loadQuestion() {
+        if (currentQ < questions.length) {
+            document.getElementById('cardText').innerText = questions[currentQ].text;
+            document.getElementById('gameFeedback').innerText = "";
+            document.getElementById('gameFeedback').className = "feedback-msg";
+        } else {
+            document.getElementById('game-ui').style.display = 'none';
+            document.getElementById('game-end').style.display = 'block';
+        }
+    }
+
+    function playTurn(choice) {
+        const q = questions[currentQ];
+        const feedback = document.getElementById('gameFeedback');
+        
+        if (choice === q.type) {
+            feedback.innerText = "Correct ! " + q.expl;
+            feedback.style.color = "#2ecc71";
+            setTimeout(() => {
+                currentQ++;
+                loadQuestion();
+            }, 2000);
+        } else {
+            feedback.innerText = "Oups. Regardez bien : " + (q.type === 'fusion' ? "C'est affirmé comme une vérité." : "Il y a une distance linguistique.");
+            feedback.style.color = "#e74c3c";
+        }
+    }
+    
+    function resetGame() {
+        currentQ = 0;
+        document.getElementById('game-ui').style.display = 'block';
+        document.getElementById('game-end').style.display = 'none';
+        loadQuestion();
+    }
+
+    // Init Game
+    loadQuestion();
+
+    /* --- QUIZ LOGIC --- */
+    function checkQuiz(el, isCorrect) {
+        // Bloquer les autres options du même groupe
+        const siblings = el.parentElement.children;
+        for (let btn of siblings) {
+            if (btn.tagName === 'DIV' || btn.tagName === 'P') continue; // Skip title
+            btn.onclick = null; // Disable clicks
+            btn.style.cursor = 'default';
+        }
+
+        if (isCorrect) {
+            el.classList.add('correct');
+            el.innerHTML += " ✅";
+        } else {
+            el.classList.add('wrong');
+            el.innerHTML += " ❌";
+        }
+    }
+</script>
+
+</body>
+</html>
