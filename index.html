@@ -47,24 +47,29 @@
         summary.specific-header { color: #444; font-weight: 500; cursor: pointer; padding: 10px; list-style: none; display: flex; justify-content: space-between; background: #fff; border-bottom: 1px dashed #eee; }
         summary.specific-header:hover { color: #6a1b9a; font-weight: bold; background: #fafafa; }
 
-        /* TABLEAU DES SAVOIRS (Niveau 4) */
+        /* NIVEAU 4 : TABLEAU DES SAVOIRS */
         .savoir-container { background: #fdfdfd; padding: 0 15px 15px 15px; }
         .savoir-item { display: flex; flex-direction: column; padding: 12px 0; border-bottom: 1px solid #eee; }
         .savoir-item:last-child { border-bottom: none; }
         
+        /* Zone Consigne (Exemple sur le premier) */
+        .consigne-box { background-color: #fff3cd; border-left: 4px solid #ffecb3; color: #664d03; padding: 10px; margin: 10px 0; border-radius: 4px; font-size: 0.9em; }
+
         /* Le texte du savoir-faire */
         .savoir-text { 
             flex: 1; margin-bottom: 8px; font-size: 0.95em; line-height: 1.4; color: #333; 
             font-weight: 400; display: flex; gap: 10px;
         }
-        .savoir-number { font-weight: bold; color: #6a1b9a; min-width: 20px; } /* Numéro 1. 2. 3. */
+        .savoir-number { font-weight: bold; color: #6a1b9a; min-width: 20px; }
 
         /* BOUTONS */
         .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-left: 30px; }
-        .btn { text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; font-weight: bold; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; }
+        .btn { text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; font-weight: bold; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; border: 1px solid #ccc; background: #f5f5f5; color: #333; }
+        .btn:hover { background-color: #e0e0e0; color: #000; border-color: #999; }
         
-        .btn-exo { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
-        .btn-exo:hover { background-color: #c8e6c9; }
+        /* Style spécifique pour le bouton Explorer */
+        .btn-explore { background-color: #e8f5e9; color: #2e7d32; border-color: #c8e6c9; }
+        .btn-explore:hover { background-color: #c8e6c9; }
 
         /* Indicateurs */
         summary::after { content: '+'; font-weight: bold; opacity: 0.5; }
@@ -105,48 +110,45 @@
                         <details>
                             <summary class="specific-header">C1.1 Accroître sa connaissance de soi</summary>
                             <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Connaître les différentes dimensions du Soi psychologique.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Connaître le rôle et les limites de l'Image de soi.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">3.</span> Questionner l'image de soi pour penser de façon critique.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">4.</span> Renforcer le Soi sujet pour réaliser des actions conscientes et volontaires.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">5.</span> Observer et accueillir son Soi interne.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
+                                <div class="consigne-box"><strong>Consigne :</strong> Cliquez sur "Explorer" pour accéder aux ressources.</div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les différentes dimensions du soi psychologique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître le rôle et les limites de l’image de soi</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Questionner l’image de soi pour penser de façon critique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Renforcer le soi sujet pour réaliser des actions conscientes et volontaires</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">5.</span> Observer et accueillir son soi interne</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
 
                         <details>
                             <summary class="specific-header">C1.2 Penser de façon critique</summary>
-                            </details>
+                            <div class="savoir-container"><p style="padding:10px; color:#666;">(Contenu inclus dans C1.1 point 3)</p></div>
+                        </details>
 
                         <details>
-                            <summary class="specific-header">C1.3 Connaître ses valeurs, besoins et buts</summary>
+                            <summary class="specific-header">C1.3 Connaître ses valeurs, ses besoins et ses buts personnels</summary>
                             <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Connaître les buts personnels concordants.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Connaître les besoins psychologiques pour choisir des buts concordants.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">3.</span> Connaître ses valeurs personnelles pour choisir des buts concordants.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les buts personnels concordants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les besoins psychologiques</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Connaître ses valeurs personnelles pour choisir des buts concordants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
+
+                        <details><summary class="specific-header">C1.4 Prendre des décisions constructives</summary></details>
+
+                        <details>
+                            <summary class="specific-header">C1.5 S’auto-évaluer positivement</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Enrichir son image de soi en reconnaissant ses qualités, forces et compétences</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Développer une relation bienveillante et constructive avec soi</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary class="specific-header">C1.6 Renforcer sa pleine attention à soi</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Diriger volontairement son attention sur l’expérience sensible présente</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Observer et accueillir l’expérience sensible sans jugement ni modification</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Réaliser au quotidien des activités formelles et informelles de pleine attention</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
                     </div>
@@ -158,14 +160,31 @@
                         <details>
                             <summary class="specific-header">C2.1 Atteindre ses buts personnels</summary>
                             <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Formuler ses buts concordants de façon précise.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Mettre en œuvre ses buts concordants de façon efficace.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Formuler ses buts de façon précise</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Mettre en œuvre ses buts de façon efficace</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
+                        <details>
+                            <summary class="specific-header">C2.2 Gérer ses impulsions</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la capacité d’autocontrôle</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Renforcer l’autocontrôle en améliorant l’état du soi interne</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Renforcer l’autocontrôle via l’environnement immédiat</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Renforcer la capacité d’autocontrôle en renforçant les capacités du soi sujet</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
+                        <details>
+                            <summary class="specific-header">C2.3 Résoudre des problèmes de façon créative et efficace</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Observer et analyser une situation problématique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Utiliser la technique de résolution de problèmes (stratégie 1)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
+                        <details>
+                            <summary class="specific-header">C2.4 Savoir demander de l’aide</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Demander de l’aide pour résoudre un problème que l’on peut résoudre seul (stratégie 2)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Demander de l’aide aux professionnels des urgences face à une situation dangereuse (stratégie 3)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
                     </div>
@@ -181,32 +200,18 @@
                 <details>
                     <summary class="general-header">E1. Renforcer sa conscience des émotions</summary>
                     <div class="specific-block">
-                        
                         <details>
                             <summary class="specific-header">E1.1 Comprendre les émotions</summary>
                             <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Connaître la nature des émotions (composantes, liens avec cognitions, déclencheurs...).</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Connaître la fonction des émotions (information et impulsion pour l'action).</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la nature des émotions (composantes, liens cognition/comportement...)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître la fonction des émotions (information, impulsion pour l’action)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
-
                         <details>
                             <summary class="specific-header">E1.2 Identifier ses émotions</summary>
                             <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Percevoir l'expérience émotionnelle présente à l'intérieur de soi.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Nommer l'émotion (ou les émotions) perçue(s).</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Percevoir l’expérience émotionnelle interne</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Nommer les émotions perçues</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
                     </div>
@@ -218,14 +223,33 @@
                         <details>
                             <summary class="specific-header">E2.2 Exprimer ses émotions de façon constructive</summary>
                             <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Formuler un message-je de base pour exprimer ses émotions agréables et désagréables.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Formuler un message-je complexe pour exprimer ses émotions désagréables.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Formuler un message-je simple</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Formuler un message-je complexe pour exprimer des émotions désagréables</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
+                        <details>
+                            <summary class="specific-header">E2.2(a) Réguler ses émotions agréables</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les stratégies efficaces / inefficaces</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Accepter et écouter ses émotions et besoins psychologiques</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Renforcer les émotions agréables via des stratégies efficaces</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
+                        <details>
+                            <summary class="specific-header">E2.2(b) Réguler ses émotions désagréables</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la régulation des émotions désagréables</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Réduire les émotions désagréables au quotidien par des stratégies efficaces</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Gérer les émotions désagréables en situation de crise</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
+                        <details>
+                            <summary class="specific-header">E2.3 Gérer son stress</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître le stress au quotidien et en situation d’adversité</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les stratégies de gestion du stress (coping)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Réduire les réactions de stress par des stratégies centrées sur l’expérience émotionnelle</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Agir sur les stresseurs par des stratégies centrées sur le problème</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
                     </div>
@@ -238,60 +262,31 @@
             <summary class="cat-header bg-social">CPS SOCIALES</summary>
             
             <div class="general-block">
-                <details open> <summary class="general-header">S1. Développer des relations constructives</summary>
+                <details>
+                    <summary class="general-header">S1. Développer des relations constructives</summary>
                     <div class="specific-block">
-                        
-                        <details open>
+                        <details>
                             <summary class="specific-header">S1.1 Communiquer de façon efficace et positive</summary>
                             <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Éviter les attitudes et comportements verbaux qui détériorent le message et la relation.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Jeu de rôle</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Savoir développer des attitudes et comportements verbaux soutenants (=communication positive).</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">3.</span> Formuler des demandes claires et ajustées à l'autre (=communication efficace).</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Éviter les attitudes verbales qui détériorent le message</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Développer des comportements verbaux soutenants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Formuler des demandes claires et ajustées</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
-
                         <details>
                             <summary class="specific-header">S1.2 Communiquer de façon empathique</summary>
                             <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Connaître les caractéristiques de la communication empathique.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Écouter de façon empathique.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">3.</span> Parler de façon empathique (reformulation empathique et écoute active).</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les caractéristiques de la communication empathique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Écouter de façon empathique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Parler de façon empathique (reformulation, écoute active)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
-
                         <details>
-                            <summary class="specific-header">S1.3 Développer des liens et comportements prosociaux</summary>
+                            <summary class="specific-header">S1.3 Développer des liens et des comportements prosociaux</summary>
                             <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Savoir entrer en relation et développer des relations de qualité.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Connaître les différents comportements prosociaux.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">3.</span> Mettre en œuvre des comportements prosociaux au-delà de ses proches et savoir exprimer de la reconnaissance (gratitude).</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
-                                </div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Savoir entrer en relation et développer des relations de qualité</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les comportements prosociaux</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Mettre en œuvre des comportements prosociaux et exprimer la gratitude</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
                     </div>
@@ -300,8 +295,23 @@
                 <details>
                     <summary class="general-header">S2. Résoudre des difficultés relationnelles</summary>
                     <div class="specific-block">
-                        <details><summary class="specific-header">S2.1 S'affirmer et résister à la pression</summary></details>
-                        <details><summary class="specific-header">S2.2 Résoudre les conflits de manière constructive</summary></details>
+                        <details>
+                            <summary class="specific-header">S2.1 S’affirmer (et résister à la pression sociale)</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître l’influence sociale et la pression</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Communiquer de manière assertive</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Refuser de manière assertive</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Exprimer et recevoir des critiques constructives</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
+                        <details>
+                            <summary class="specific-header">S2.2 Résoudre les conflits de manière constructive</summary>
+                            <div class="savoir-container">
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> S’apaiser, observer et analyser une situation conflictuelle</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Mettre en œuvre une stratégie d’aide type 1 (besoins frustrés)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Mettre en œuvre une stratégie de négociation type 2 (besoins opposés)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                            </div>
+                        </details>
                     </div>
                 </details>
             </div>
