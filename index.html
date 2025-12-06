@@ -3,328 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPS - Compétences Psychosociales</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
-
+    <title>C1.4 : Renforcer le Soi Sujet (AADA)</title>
     <style>
-        /* --- DESIGN GÉNÉRAL --- */
-        body { font-family: 'Roboto', sans-serif; max-width: 950px; margin: 0 auto; background-color: #fdfbff; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
+        :root {
+            --primary: #2c3e50; /* Bleu foncé (Le Pilote) */
+            --secondary: #27ae60; /* Vert (AADA - Action) */
+            --accent: #e67e22; /* Orange (Attention/Éveil) */
+            --text: #333;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --nav-bg: #34495e;
+            --nav-text: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding-top: 60px; /* Espace pour le menu fixe */
+        }
+
+        /* --- MENU DE NAVIGATION (GitHub Friendly) --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-bg);
+            color: var(--nav-text);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            height: 60px;
+            overflow-x: auto; /* Permet le scroll sur mobile */
+            white-space: nowrap;
+        }
+
+        nav a {
+            color: var(--nav-text);
+            text-decoration: none;
+            padding: 0 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        nav a:hover, nav a.active {
+            opacity: 1;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        /* --- STRUCTURE PRINCIPALE --- */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--primary), #3498db);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 1.8rem; }
+        h2 { color: var(--primary); border-bottom: 2px solid var(--secondary); padding-bottom: 8px; margin-top: 40px; }
+        h3 { color: var(--secondary); margin-top: 25px; }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+        }
+
+        /* --- VISUEL AADA --- */
+        .aada-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .aada-step {
+            flex: 1 1 200px;
+            background: #fff;
+            border: 2px solid var(--secondary);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .aada-step:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2); }
+        .aada-letter { font-size: 2.5rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
+        .aada-desc { font-size: 0.9rem; color: #555; }
+
+        /* --- INTROSPECTION --- */
+        .introspection {
+            background-color: #e8f8f5;
+            border-left-color: var(--secondary);
+        }
         
-        header { background-color: #fff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 10px;
+            min-height: 80px;
+            font-family: inherit;
+        }
+
+        /* --- EXERCICE INTERACTIF --- */
+        .scenario-box {
+            background: #fdfefe;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
         
-        .main-title { font-size: 3em; font-weight: 900; color: #4a148c; margin: 0; line-height: 1; letter-spacing: -2px; }
-        h1 { color: #6a1b9a; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; font-size: 1.5em; }
-        .subtitle { color: #7f8c8d; font-style: italic; margin-top: 15px; font-size: 1.1em; }
-
-        /* --- LE BLOC CITATION --- */
-        .quote-container { text-align: center; padding: 30px 20px; background-color: #fafafa; border-bottom: 1px solid #eee; margin-bottom: 30px; }
-        .quote-text { font-family: 'Dancing Script', cursive; font-size: 2em; color: #6a1b9a; margin: 0; line-height: 1.3; }
-        .quote-source { font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 15px; font-weight: bold; }
-
-        main { padding: 0 20px 40px 20px; flex: 1; }
-
-        /* --- ACCORDÉONS (TIROIRS) --- */
-        details { margin-bottom: 10px; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; transition: all 0.2s; }
+        .sortable-list {
+            list-style: none;
+            padding: 0;
+        }
         
-        /* NIVEAU 1 : CATEGORIES */
-        summary.cat-header { padding: 20px; font-size: 1.2em; font-weight: 700; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; text-transform: uppercase; }
-        summary.cat-header::-webkit-details-marker { display: none; }
+        .sortable-item {
+            background: white;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: move;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         
-        .bg-cognitif { background-color: #1565c0; } /* Bleu */
-        .bg-emotion { background-color: #c2185b; } /* Rose */
-        .bg-social { background-color: #6a1b9a; } /* Violet */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .btn:hover { background: #34495e; }
 
-        /* NIVEAU 2 : CPS GÉNÉRALES */
-        .general-block { padding: 10px; background-color: #fff; border-left: 4px solid #eee; margin: 10px; }
-        summary.general-header { font-weight: 600; color: #333; cursor: pointer; padding: 12px; background-color: #f5f5f5; border-radius: 4px; margin-bottom: 5px; list-style: none; display: flex; justify-content: space-between; border: 1px solid #eee; }
-        summary.general-header:hover { background-color: #eeeeee; color: #000; }
+        .feedback { margin-top: 10px; font-weight: bold; }
 
-        /* NIVEAU 3 : CPS SPÉCIFIQUES */
-        .specific-block { margin-left: 15px; margin-top: 8px; border-left: 2px solid #ddd; padding-left: 10px; }
-        summary.specific-header { color: #444; font-weight: 500; cursor: pointer; padding: 10px; list-style: none; display: flex; justify-content: space-between; background: #fff; border-bottom: 1px dashed #eee; line-height: 1.4; }
-        summary.specific-header:hover { color: #6a1b9a; font-weight: bold; background: #fafafa; }
-
-        /* NIVEAU 4 : TABLEAU DES SAVOIRS */
-        .savoir-container { background: #fdfdfd; padding: 0 15px 15px 15px; }
-        .savoir-item { display: flex; flex-direction: column; padding: 12px 0; border-bottom: 1px solid #eee; }
-        .savoir-item:last-child { border-bottom: none; }
-        
-        /* Zone Consigne */
-        .consigne-box { background-color: #fff3cd; border-left: 4px solid #ffecb3; color: #664d03; padding: 10px; margin: 10px 0; border-radius: 4px; font-size: 0.9em; }
-
-        /* Boite Essentiel */
-        .essentiel-box { background-color: #e8eaf6; border-left: 5px solid #3949ab; padding: 20px; margin: 20px 10px 10px 10px; border-radius: 4px; }
-        .essentiel-title { display: block; font-weight: bold; color: #283593; text-transform: uppercase; margin-bottom: 10px; font-size: 0.9em; letter-spacing: 1px; }
-
-        .savoir-text { flex: 1; margin-bottom: 8px; font-size: 0.95em; line-height: 1.4; color: #333; font-weight: 400; display: flex; gap: 10px; }
-        .savoir-number { font-weight: bold; color: #6a1b9a; min-width: 20px; }
-
-        /* BOUTONS */
-        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-left: 30px; }
-        .btn { text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; font-weight: bold; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; border: 1px solid #ccc; background: #f5f5f5; color: #333; }
-        .btn:hover { background-color: #e0e0e0; color: #000; border-color: #999; }
-        
-        .btn-explore { background-color: #e8f5e9; color: #2e7d32; border-color: #c8e6c9; }
-        .btn-explore:hover { background-color: #c8e6c9; }
-
-        summary::after { content: '+'; font-weight: bold; opacity: 0.5; }
-        details[open] > summary::after { content: '−'; }
-
-        footer { text-align: center; padding: 30px; color: #666; margin-top: auto; font-size: 0.85em; border-top: 1px solid #eee; background: #fafafa; }
-        
-        @media (min-width: 600px) {
-            .savoir-item { flex-direction: row; align-items: flex-start; justify-content: space-between; }
-            .savoir-text { margin-bottom: 0; margin-right: 15px; }
-            .btn-group { margin-left: 0; margin-top: 0; }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            padding-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
+<nav>
+    <a href="C1.1 Connaître les différentes dimensions du Soi psychologique.html">C1.1 Dimensions du Soi</a>
+    <a href="C1.2 Connaître le rôle et les limites de l'Image de soi copie.html">C1.2 Image de Soi</a>
+    <a href="C1.3 Questionner l'Image de soi et penser de façon critique.html">C1.3 Esprit Critique</a>
+    <a href="#" class="active">C1.4 Soi Sujet (AADA)</a>
+    <a href="C1.5 Observer et accueillir son Soi interne.html">C1.5 Soi Interne</a>
+    <a href="L'essentiel à retenir (C1.1 et C1.2).html">L'Essentiel</a>
+</nav>
+
+<div class="container">
+
     <header>
-        <div class="main-title">CPS</div>
-        <h1>Compétences Psychosociales</h1>
-        <div class="subtitle">Savoir-être et Vivre-ensemble</div>
+        <h1>C1.4 : Renforcer le Soi Sujet</h1>
+        <p>Activer le "Pilote" pour réaliser des actions conscientes et volontaires</p>
     </header>
 
-    <div class="quote-container">
-        <p class="quote-text">"Parce que les compétences humaines sont le socle de toute réussite."</p>
-        <p class="quote-source">SANTÉ PUBLIQUE FRANCE / Les compétences psychosociales</p>
-    </div>
-
-    <main>
-        
-        <details>
-            <summary class="cat-header bg-cognitif">CPS COGNITIVES</summary>
+    <section>
+        <h2>🔷 1. Comprendre : Le Moteur AADA</h2>
+        <div class="card">
+            <p>Le <strong>Soi sujet</strong> est la partie de nous-mêmes qui agit comme un pilote. C'est lui qui nous permet d'exercer une action volontaire et consciente, plutôt que de réagir par automatisme.</p>
             
-            <div class="general-block">
-                <details>
-                    <summary class="general-header">C1. Renforcer sa conscience de soi</summary>
-                    <div class="specific-block">
-                        
-                        <details>
-                            <summary class="specific-header">C1.1 Accroître sa connaissance de soi & C1.2 Penser de façon critique</summary>
-                            <div class="savoir-container">
-                                <div class="consigne-box"><strong>Consigne :</strong> Cliquez sur "Explorer" pour accéder aux ressources.</div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les différentes dimensions du soi psychologique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître le rôle et les limites de l’image de soi</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Questionner l’image de soi pour penser de façon critique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Renforcer le soi sujet pour réaliser des actions conscientes et volontaires</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">5.</span> Observer et accueillir son soi interne</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
+            <p>Pour simplifier les 4 grandes fonctions cognitives (Réceptives, Mnésiques, Analytiques, Expressives), le référentiel propose l'acronyme <strong>AADA</strong> :</p>
 
-                        <details>
-                            <summary class="specific-header">C1.3 Connaître ses valeurs, besoins, buts & C1.4 Prendre des décisions</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les buts personnels concordants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les besoins psychologiques pour choisir des buts concordants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Connaître ses valeurs personnelles pour choisir des buts concordants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-
-                        <details>
-                            <summary class="specific-header">C1.5 S’auto-évaluer positivement</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Enrichir son image de soi en reconnaissant ses qualités, forces et compétences</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Développer une relation bienveillante et constructive avec soi</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-
-                        <details>
-                            <summary class="specific-header">C1.6 Renforcer sa pleine attention à soi</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Diriger volontairement son attention sur l’expérience sensible présente</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Observer et accueillir l’expérience sensible sans jugement ni modification</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Réaliser au quotidien des activités formelles et informelles de pleine attention</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="essentiel-box">
-                        <span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - C1</span>
-                        <p>Écris ici ton résumé...</p>
-                    </div>
-                </details>
-
-                <details>
-                    <summary class="general-header">C2. Renforcer sa maîtrise de soi et son accomplissement</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">C2.1 Atteindre ses buts personnels</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Formuler ses buts de façon précise</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Mettre en œuvre ses buts de façon efficace</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">C2.2 Gérer ses impulsions</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la capacité d’autocontrôle</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Renforcer l’autocontrôle en améliorant l’état du soi interne</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Renforcer l’autocontrôle via l’environnement immédiat</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Renforcer la capacité d’autocontrôle en renforçant les capacités du soi sujet</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                        
-                        <details>
-                            <summary class="specific-header">C2.3 Résoudre des problèmes & C2.4 Savoir demander de l'aide</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Observer et analyser une situation problématique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Utiliser la technique de résolution de problèmes (stratégie 1)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Demander de l’aide pour résoudre un problème que l’on peut résoudre seul (stratégie 2)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Demander de l’aide aux professionnels des urgences face à une situation dangereuse (stratégie 3)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="essentiel-box">
-                        <span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - C2</span>
-                        <p>Écris ici ton résumé...</p>
-                    </div>
-                </details>
+            <div class="aada-container">
+                <div class="aada-step">
+                    <span class="aada-letter">A</span>
+                    <strong>Attention</strong><br>
+                    <span class="aada-desc">Observation de l'information présente (interne ou externe).</span>
+                </div>
+                <div class="aada-step">
+                    <span class="aada-letter">A</span>
+                    <strong>Analyse</strong><br>
+                    <span class="aada-desc">Traitement via les infos présentes + la mémoire/expérience.</span>
+                </div>
+                <div class="aada-step">
+                    <span class="aada-letter">D</span>
+                    <strong>Décision</strong><br>
+                    <span class="aada-desc">Choix conscient basé sur l'analyse.</span>
+                </div>
+                <div class="aada-step">
+                    <span class="aada-letter">A</span>
+                    <strong>Action</strong><br>
+                    <span class="aada-desc">Verbale ou comportementale.</span>
+                </div>
             </div>
-        </details>
 
+            <p><strong>Exemple cité :</strong><br>
+            <em>« J'ai <u>observé</u> (Attention) et <u>analysé</u> les comportements des élèves puis j'ai <u>décidé</u> de <u>réaliser</u> (Action) un atelier... »</em></p>
+        </div>
+    </section>
 
-        <details>
-            <summary class="cat-header bg-emotion">CPS ÉMOTIONNELLES</summary>
+    <section>
+        <h2>🔷 2. Introspection : Êtes-vous en Pilote Automatique ?</h2>
+        <div class="card introspection">
+            <h3>⚠️ Analyse de votre pratique</h3>
+            <p>Le document précise que le Soi Sujet est "au cœur du développement des CPS". Sans lui, nous sommes en réaction, pas en action.</p>
             
-            <div class="general-block">
-                <details>
-                    <summary class="general-header">E1. Renforcer sa conscience des émotions</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">E1.1 Comprendre les émotions</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la nature des émotions (composantes, liens cognition/comportement...)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître la fonction des émotions (information, impulsion pour l’action)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">E1.2 Identifier ses émotions</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Percevoir l’expérience émotionnelle interne</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Nommer les émotions perçues</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="essentiel-box"><span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - E1</span><p>Résumé...</p></div>
-                </details>
-
-                <details>
-                    <summary class="general-header">E2. Réguler ses émotions et son stress</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">E2.2 Exprimer ses émotions de façon constructive</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Formuler un message-je simple</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Formuler un message-je complexe pour exprimer des émotions désagréables</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">E2.2(a) Réguler ses émotions agréables</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les stratégies efficaces / inefficaces</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Accepter et écouter ses émotions et besoins psychologiques</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Renforcer les émotions agréables via des stratégies efficaces</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">E2.2(b) Réguler ses émotions désagréables</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la régulation des émotions désagréables</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Réduire les émotions désagréables au quotidien par des stratégies efficaces</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Gérer les émotions désagréables en situation de crise</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">E2.3 Gérer son stress</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître le stress au quotidien et en situation d’adversité</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les stratégies de gestion du stress (coping)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Réduire les réactions de stress par des stratégies centrées sur l’expérience émotionnelle</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Agir sur les stresseurs par des stratégies centrées sur le problème</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                    </div>
-                    <div class="essentiel-box"><span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - E2</span><p>Résumé...</p></div>
-                </details>
-            </div>
-        </details>
-
-
-        <details>
-            <summary class="cat-header bg-social">CPS SOCIALES</summary>
+            <p><strong>Pensez à une situation professionnelle récente un peu tendue (conflit, imprévu).</strong></p>
             
-            <div class="general-block">
-                <details>
-                    <summary class="general-header">S1. Développer des relations constructives</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">S1.1 Communiquer de façon efficace et positive</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Éviter les attitudes verbales qui détériorent le message</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Développer des comportements verbaux soutenants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Formuler des demandes claires et ajustées</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">S1.2 Communiquer de façon empathique</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les caractéristiques de la communication empathique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Écouter de façon empathique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Parler de façon empathique (reformulation, écoute active)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">S1.3 Développer des liens et des comportements prosociaux</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Savoir entrer en relation et développer des relations de qualité</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les comportements prosociaux</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Mettre en œuvre des comportements prosociaux et exprimer la gratitude</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                    </div>
-                    <div class="essentiel-box"><span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - S1</span><p>Résumé...</p></div>
-                </details>
+            <label>1. Avez-vous pris le temps de l'<strong>Attention</strong> (observer sans juger) ?</label>
+            <textarea placeholder="Ex: J'ai vu que l'élève serrait les poings... (Au lieu de : 'Il était agressif')"></textarea>
 
-                <details>
-                    <summary class="general-header">S2. Résoudre des difficultés relationnelles</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">S2.1 S’affirmer (et résister à la pression sociale)</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître l’influence sociale et la pression</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Communiquer de manière assertive</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Refuser de manière assertive</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Exprimer et recevoir des critiques constructives</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">S2.2 Résoudre les conflits de manière constructive</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> S’apaiser, observer et analyser une situation conflictuelle</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Mettre en œuvre une stratégie d’aide type 1 (besoins frustrés)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Mettre en œuvre une stratégie de négociation type 2 (besoins opposés)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
-                    </div>
-                    <div class="essentiel-box"><span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - S2</span><p>Résumé...</p></div>
-                </details>
+            <label>2. Avez-vous fait une <strong>Analyse</strong> consciente (lien avec vos connaissances/mémoire) ?</label>
+            <textarea placeholder="Ex: Je me suis souvenu qu'il a du mal le matin..."></textarea>
+
+            <label>3. Votre <strong>Action</strong> était-elle le fruit d'une <strong>Décision</strong> ou un réflexe ?</label>
+            <textarea placeholder="Ex: J'ai crié tout de suite (Réflexe) VS J'ai décidé de baisser la voix (Décision)..."></textarea>
+        </div>
+    </section>
+
+    <section>
+        <h2>🔷 3. Activité : Reconstituer le cycle AADA</h2>
+        <div class="card">
+            <p>Mettez dans l'ordre les étapes de ce scénario pour qu'il respecte le cycle du Soi Sujet conscient.</p>
+            
+            <div class="scenario-box">
+                <strong>Scénario :</strong> Un usager refuse de participer à l'activité.
             </div>
-        </details>
 
-    </main>
+            <ul class="sortable-list" id="sortable">
+                <li class="sortable-item" draggable="true" data-step="4">Je lui propose une alternative ou je le laisse observer (Action). <span>↕️</span></li>
+                <li class="sortable-item" draggable="true" data-step="2">Je comprends qu'il a peur d'échouer (Analyse/Mémoire). <span>↕️</span></li>
+                <li class="sortable-item" draggable="true" data-step="1">Je remarque qu'il croise les bras et regarde le sol (Attention). <span>↕️</span></li>
+                <li class="sortable-item" draggable="true" data-step="3">Je choisis de ne pas le forcer pour préserver le lien (Décision). <span>↕️</span></li>
+            </ul>
+
+            <button class="btn" onclick="checkOrder()">Vérifier l'ordre</button>
+            <div id="feedback" class="feedback"></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>🔷 4. Le Soi Sujet au service des autres CPS</h2>
+        <div class="card">
+            <p>Le <strong>Tableau 3</strong> montre que le Soi Sujet (AADA) est la "tour de contrôle" nécessaire pour les autres compétences :</p>
+            <ul>
+                <li>Pour <strong>C1.2 (Esprit Critique)</strong> : On utilise surtout la capacité d'<strong>Analyse</strong> (pour la Défusion cognitive).</li>
+                <li>Pour <strong>E1.1 (Comprendre ses émotions)</strong> : On utilise l'Analyse pour décoder le Soi Interne.</li>
+                <li>Pour <strong>S1.1 (Communiquer)</strong> : On mobilise tout le cycle AADA (Attention à l'autre, Analyse du message, Décision de la réponse, Action verbale).</li>
+            </ul>
+            <p>👉 <em>Utilisez le menu en haut pour explorer ces compétences spécifiques.</em></p>
+        </div>
+    </section>
 
     <footer>
-        <p>Ressources CPS - Prévention Santé Environnement</p>
-        <p>Conçu par M. MECHERI</p>
+        CPS Studio - Fiche générée à partir des extraits du référentiel (Tome 1, p. 30, Tableau 3).
     </footer>
+
+</div>
+
+<script>
+    /* --- LOGIQUE DU DRAG & DROP SIMPLE --- */
+    const list = document.getElementById('sortable');
+    let draggedItem = null;
+
+    list.querySelectorAll('.sortable-item').forEach(item => {
+        item.addEventListener('dragstart', function() {
+            draggedItem = item;
+            setTimeout(() => item.style.display = 'none', 0);
+        });
+
+        item.addEventListener('dragend', function() {
+            setTimeout(() => item.style.display = 'flex', 0);
+            draggedItem = null;
+        });
+
+        item.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        });
+
+        item.addEventListener('dragenter', function(e) {
+            e.preventDefault();
+            this.style.background = '#f0f0f0';
+        });
+        
+        item.addEventListener('dragleave', function() {
+            this.style.background = 'white';
+        });
+
+        item.addEventListener('drop', function() {
+            this.style.background = 'white';
+            list.insertBefore(draggedItem, this);
+        });
+    });
+
+    /* --- VALIDATION --- */
+    function checkOrder() {
+        const items = document.querySelectorAll('.sortable-item');
+        let currentOrder = [];
+        items.forEach(item => currentOrder.push(parseInt(item.getAttribute('data-step'))));
+
+        const correctOrder = [1, 2, 3, 4];
+        const isCorrect = JSON.stringify(currentOrder) === JSON.stringify(correctOrder);
+        
+        const feedback = document.getElementById('feedback');
+        
+        if (isCorrect) {
+            feedback.innerText = "BRAVO ! C'est le bon ordre : Attention -> Analyse -> Décision -> Action.";
+            feedback.style.color = "var(--secondary)";
+        } else {
+            feedback.innerText = "Ce n'est pas encore ça. Rappelez-vous : on observe d'abord (Attention), on réfléchit (Analyse), on décide, puis on agit.";
+            feedback.style.color = "#c0392b";
+        }
+    }
+</script>
 
 </body>
 </html>
