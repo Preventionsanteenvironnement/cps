@@ -18,22 +18,60 @@
         h1 { color: #6a1b9a; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; font-size: 1.5em; }
         .subtitle { color: #7f8c8d; font-style: italic; margin-top: 15px; font-size: 1.1em; }
 
-        /* --- BLOC CITATION --- */
         .quote-container { text-align: center; padding: 30px 20px; background-color: #fff; border-bottom: 1px solid #e0e0e0; margin-bottom: 30px; }
         .quote-text { font-family: 'Dancing Script', cursive; font-size: 2em; color: #6a1b9a; margin: 0; line-height: 1.3; }
         .quote-source { font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 15px; font-weight: bold; }
 
-        /* --- BLOC D'ACCUEIL PRO --- */
+        /* --- BLOC D'ACCUEIL PRO (Mise à jour : Plus aéré) --- */
         .intro-pro {
-            background: linear-gradient(to right, #f3e5f5, #fff);
-            border-left: 5px solid #8e24aa;
-            padding: 25px;
-            margin: 0 20px 30px 20px;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: #fff;
+            border-left: 6px solid #8e24aa; /* Bordure violette plus épaisse */
+            padding: 30px;
+            margin: 0 20px 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        .intro-pro h3 { margin-top: 0; color: #4a148c; text-transform: uppercase; font-size: 1.1em; letter-spacing: 1px; }
-        .intro-pro p { margin-bottom: 0; line-height: 1.6; color: #444; }
+        .intro-pro h3 { 
+            margin-top: 0; 
+            color: #4a148c; 
+            text-transform: uppercase; 
+            font-size: 1.3em; 
+            letter-spacing: 1px; 
+            border-bottom: 2px solid #f3e5f5;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .intro-pro p { 
+            margin-bottom: 15px; 
+            line-height: 1.8; 
+            color: #444; 
+            font-size: 1.05em;
+        }
+        .intro-note {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
+            font-size: 0.95em;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* --- NOUVEAU STYLE DU BADGE (Juste du texte rouge) --- */
+        .badge-new {
+            color: #d32f2f; /* Rouge vif */
+            font-size: 0.75em;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-left: 8px;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite; /* Clignotement */
+            vertical-align: middle;
+        }
+        @keyframes pulse { 
+            0% { opacity: 1; } 
+            50% { opacity: 0.4; } 
+            100% { opacity: 1; } 
+        }
 
         main { padding: 0 20px 40px 20px; flex: 1; }
 
@@ -60,7 +98,6 @@
         .savoir-text { flex: 1; margin-bottom: 8px; font-size: 0.95em; line-height: 1.4; color: #333; font-weight: 400; display: flex; gap: 10px; }
         .savoir-number { font-weight: bold; color: #6a1b9a; min-width: 20px; }
 
-        /* --- BOUTONS --- */
         .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-left: 30px; align-items: center; }
         
         .btn-explore { 
@@ -82,12 +119,6 @@
             padding: 10px 20px; border-radius: 30px; font-weight: bold; font-size: 0.9em; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .btn-essentiel:hover { background-color: #ffecb3; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-
-        .badge-new {
-            background-color: #d32f2f; color: white; font-size: 0.65em; padding: 2px 6px; border-radius: 4px; 
-            margin-left: 5px; text-transform: uppercase; font-weight: bold; animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
 
         summary::after { content: '+'; font-weight: bold; opacity: 0.5; }
         details[open] > summary::after { content: '−'; }
@@ -116,8 +147,15 @@
 
     <div class="intro-pro">
         <h3>Bienvenue sur la plateforme de ressources CPS</h3>
-        <p>Cet outil est conçu pour accompagner les professionnels. Pour chaque module, vous pourrez <strong>Explorer</strong> des pistes pédagogiques et des exercices, puis <strong>Synthétiser</strong> les acquis grâce aux fiches "L'essentiel à retenir".<br>
-        <em>Les modules marqués <span class="badge-new" style="display:inline-block; animation:none;">NOUVEAU</span> sont disponibles. Les autres sont en cours de construction.</em></p>
+        <p>Cet outil est conçu pour accompagner les professionnels dans le développement des compétences psychosociales.</p>
+        <p>Pour chaque module, vous pourrez :<br>
+        <strong>1. Identifier</strong> les savoirs et savoir-faire spécifiques.<br>
+        <strong>2. Explorer</strong> des pistes pédagogiques et des exercices.<br>
+        <strong>3. Synthétiser</strong> les acquis grâce aux fiches "L'essentiel à retenir".</p>
+        
+        <div class="intro-note">
+            Les modules marqués <span class="badge-new">NOUVEAU</span> sont disponibles. Les autres sont en cours de construction.
+        </div>
     </div>
 
     <main>
@@ -153,7 +191,10 @@
                                     <div class="savoir-text"><span class="savoir-number">5.</span> Observer et accueillir son soi interne</div>
                                     <div class="btn-group"><a href="c1-5_observer_soi.html" class="btn btn-explore">Explorer</a></div>
                                 </div>
-                                <div class="footer-action"><a href="resume_c1-1_c1-2.html" class="btn-essentiel">💡 L'essentiel à retenir</a></div>
+                                
+                                <div class="footer-action">
+                                    <a href="resume_c1-1_c1-2.html" class="btn-essentiel">💡 L'essentiel à retenir</a>
+                                </div>
                             </div>
                         </details>
 
@@ -161,206 +202,14 @@
                             <summary class="specific-header">C1.3 Connaître ses valeurs et buts & C1.4 Prendre des décisions</summary>
                             <div class="savoir-container">
                                 <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les buts personnels concordants</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les besoins psychologiques</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Connaître ses valeurs personnelles</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
                                 <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
                             </div>
                         </details>
-
-                        <details>
-                            <summary class="specific-header">C1.5 S’auto-évaluer positivement</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Enrichir son image de soi</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Développer une relation bienveillante avec soi</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-
-                        <details>
-                            <summary class="specific-header">C1.6 Renforcer sa pleine attention à soi</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Diriger volontairement son attention</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Observer et accueillir l’expérience sensible</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Réaliser des activités de pleine attention</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                    </div>
+                        </div>
                 </details>
-
-                <details>
-                    <summary class="general-header">C2. Renforcer sa maîtrise de soi et son accomplissement</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">C2.1 Atteindre ses buts personnels</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Formuler ses buts de façon précise</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Mettre en œuvre ses buts de façon efficace</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">C2.2 Gérer ses impulsions</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la capacité d’autocontrôle</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Renforcer l’autocontrôle (soi interne)</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Renforcer l’autocontrôle (environnement)</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Renforcer la capacité d’autocontrôle (soi sujet)</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">C2.3 Résoudre des problèmes & C2.4 Savoir demander de l'aide</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Observer et analyser une situation problématique</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Utiliser la technique de résolution de problèmes</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Demander de l’aide pour résoudre un problème seul</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Demander de l’aide aux professionnels (urgence)</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                    </div>
-                </details>
-            </div>
+                </div>
         </details>
-
-
-        <details>
-            <summary class="cat-header bg-emotion">CPS ÉMOTIONNELLES</summary>
-            
-            <div class="general-block">
-                <details>
-                    <summary class="general-header">E1. Renforcer sa conscience des émotions</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">E1.1 Comprendre les émotions</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la nature des émotions</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître la fonction des émotions</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">E1.2 Identifier ses émotions</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Percevoir l’expérience émotionnelle interne</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Nommer les émotions perçues</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                    </div>
-                </details>
-
-                <details>
-                    <summary class="general-header">E2. Réguler ses émotions et son stress</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">E2.2 Exprimer ses émotions de façon constructive</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Formuler un message-je simple</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Formuler un message-je complexe</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">E2.2(a) Réguler ses émotions agréables</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les stratégies efficaces / inefficaces</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Accepter et écouter ses émotions et besoins</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Renforcer les émotions agréables</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">E2.2(b) Réguler ses émotions désagréables</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la régulation des émotions désagréables</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Réduire les émotions désagréables au quotidien</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Gérer les émotions désagréables en situation de crise</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">E2.3 Gérer son stress</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître le stress au quotidien</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les stratégies de gestion du stress (coping)</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Réduire les réactions de stress (centré émotion)</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Agir sur les stresseurs (centré problème)</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                    </div>
-                </details>
-            </div>
-        </details>
-
-
-        <details>
-            <summary class="cat-header bg-social">CPS SOCIALES</summary>
-            
-            <div class="general-block">
-                <details>
-                    <summary class="general-header">S1. Développer des relations constructives</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">S1.1 Communiquer de façon efficace et positive</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Éviter les attitudes verbales qui détériorent le message</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Développer des comportements verbaux soutenants</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Formuler des demandes claires et ajustées</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">S1.2 Communiquer de façon empathique</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître la communication empathique</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Écouter de façon empathique</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Parler de façon empathique</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">S1.3 Développer des liens prosociaux</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Savoir entrer en relation</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les comportements prosociaux</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Mettre en œuvre des comportements prosociaux</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                    </div>
-                </details>
-
-                <details>
-                    <summary class="general-header">S2. Résoudre des difficultés relationnelles</summary>
-                    <div class="specific-block">
-                        <details>
-                            <summary class="specific-header">S2.1 S’affirmer (et résister à la pression sociale)</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître l’influence sociale et la pression</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Communiquer de manière assertive</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Refuser de manière assertive</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Exprimer et recevoir des critiques constructives</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        <details>
-                            <summary class="specific-header">S2.2 Résoudre les conflits de manière constructive</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> S’apaiser, observer et analyser une situation</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Stratégie d’aide type 1 (besoins frustrés)</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Stratégie de négociation type 2 (besoins opposés)</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                    </div>
-                </details>
-            </div>
-        </details>
-
-    </main>
+        </main>
 
     <footer>
         <p>Ressources CPS - Prévention Santé Environnement</p>
