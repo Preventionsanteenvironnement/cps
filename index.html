@@ -44,7 +44,7 @@
 
         /* NIVEAU 3 : CPS SPÉCIFIQUES */
         .specific-block { margin-left: 15px; margin-top: 8px; border-left: 2px solid #ddd; padding-left: 10px; }
-        summary.specific-header { color: #444; font-weight: 500; cursor: pointer; padding: 10px; list-style: none; display: flex; justify-content: space-between; background: #fff; border-bottom: 1px dashed #eee; }
+        summary.specific-header { color: #444; font-weight: 500; cursor: pointer; padding: 10px; list-style: none; display: flex; justify-content: space-between; background: #fff; border-bottom: 1px dashed #eee; line-height: 1.4; }
         summary.specific-header:hover { color: #6a1b9a; font-weight: bold; background: #fafafa; }
 
         /* NIVEAU 4 : TABLEAU DES SAVOIRS */
@@ -52,14 +52,14 @@
         .savoir-item { display: flex; flex-direction: column; padding: 12px 0; border-bottom: 1px solid #eee; }
         .savoir-item:last-child { border-bottom: none; }
         
-        /* Zone Consigne (Exemple sur le premier) */
+        /* Zone Consigne */
         .consigne-box { background-color: #fff3cd; border-left: 4px solid #ffecb3; color: #664d03; padding: 10px; margin: 10px 0; border-radius: 4px; font-size: 0.9em; }
 
-        /* Le texte du savoir-faire */
-        .savoir-text { 
-            flex: 1; margin-bottom: 8px; font-size: 0.95em; line-height: 1.4; color: #333; 
-            font-weight: 400; display: flex; gap: 10px;
-        }
+        /* Boite Essentiel */
+        .essentiel-box { background-color: #e8eaf6; border-left: 5px solid #3949ab; padding: 20px; margin: 20px 10px 10px 10px; border-radius: 4px; }
+        .essentiel-title { display: block; font-weight: bold; color: #283593; text-transform: uppercase; margin-bottom: 10px; font-size: 0.9em; letter-spacing: 1px; }
+
+        .savoir-text { flex: 1; margin-bottom: 8px; font-size: 0.95em; line-height: 1.4; color: #333; font-weight: 400; display: flex; gap: 10px; }
         .savoir-number { font-weight: bold; color: #6a1b9a; min-width: 20px; }
 
         /* BOUTONS */
@@ -67,11 +67,9 @@
         .btn { text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; font-weight: bold; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; border: 1px solid #ccc; background: #f5f5f5; color: #333; }
         .btn:hover { background-color: #e0e0e0; color: #000; border-color: #999; }
         
-        /* Style spécifique pour le bouton Explorer */
         .btn-explore { background-color: #e8f5e9; color: #2e7d32; border-color: #c8e6c9; }
         .btn-explore:hover { background-color: #c8e6c9; }
 
-        /* Indicateurs */
         summary::after { content: '+'; font-weight: bold; opacity: 0.5; }
         details[open] > summary::after { content: '−'; }
 
@@ -108,7 +106,7 @@
                     <div class="specific-block">
                         
                         <details>
-                            <summary class="specific-header">C1.1 Accroître sa connaissance de soi</summary>
+                            <summary class="specific-header">C1.1 Accroître sa connaissance de soi & C1.2 Penser de façon critique</summary>
                             <div class="savoir-container">
                                 <div class="consigne-box"><strong>Consigne :</strong> Cliquez sur "Explorer" pour accéder aux ressources.</div>
                                 <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les différentes dimensions du soi psychologique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
@@ -120,20 +118,13 @@
                         </details>
 
                         <details>
-                            <summary class="specific-header">C1.2 Penser de façon critique</summary>
-                            <div class="savoir-container"><p style="padding:10px; color:#666;">(Contenu inclus dans C1.1 point 3)</p></div>
-                        </details>
-
-                        <details>
-                            <summary class="specific-header">C1.3 Connaître ses valeurs, ses besoins et ses buts personnels</summary>
+                            <summary class="specific-header">C1.3 Connaître ses valeurs, besoins, buts & C1.4 Prendre des décisions</summary>
                             <div class="savoir-container">
                                 <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les buts personnels concordants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les besoins psychologiques</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Connaître les besoins psychologiques pour choisir des buts concordants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                                 <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Connaître ses valeurs personnelles pour choisir des buts concordants</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
-
-                        <details><summary class="specific-header">C1.4 Prendre des décisions constructives</summary></details>
 
                         <details>
                             <summary class="specific-header">C1.5 S’auto-évaluer positivement</summary>
@@ -151,6 +142,11 @@
                                 <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Réaliser au quotidien des activités formelles et informelles de pleine attention</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
+                    </div>
+
+                    <div class="essentiel-box">
+                        <span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - C1</span>
+                        <p>Écris ici ton résumé...</p>
                     </div>
                 </details>
 
@@ -173,20 +169,21 @@
                                 <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Renforcer la capacité d’autocontrôle en renforçant les capacités du soi sujet</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
+                        
                         <details>
-                            <summary class="specific-header">C2.3 Résoudre des problèmes de façon créative et efficace</summary>
+                            <summary class="specific-header">C2.3 Résoudre des problèmes & C2.4 Savoir demander de l'aide</summary>
                             <div class="savoir-container">
                                 <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Observer et analyser une situation problématique</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                                 <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Utiliser la technique de résolution de problèmes (stratégie 1)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">3.</span> Demander de l’aide pour résoudre un problème que l’on peut résoudre seul (stratégie 2)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
+                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">4.</span> Demander de l’aide aux professionnels des urgences face à une situation dangereuse (stratégie 3)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
                             </div>
                         </details>
-                        <details>
-                            <summary class="specific-header">C2.4 Savoir demander de l’aide</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Demander de l’aide pour résoudre un problème que l’on peut résoudre seul (stratégie 2)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">2.</span> Demander de l’aide aux professionnels des urgences face à une situation dangereuse (stratégie 3)</div><div class="btn-group"><a href="#" class="btn btn-explore">Explorer</a></div></div>
-                            </div>
-                        </details>
+                    </div>
+
+                    <div class="essentiel-box">
+                        <span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - C2</span>
+                        <p>Écris ici ton résumé...</p>
                     </div>
                 </details>
             </div>
@@ -215,6 +212,8 @@
                             </div>
                         </details>
                     </div>
+
+                    <div class="essentiel-box"><span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - E1</span><p>Résumé...</p></div>
                 </details>
 
                 <details>
@@ -253,6 +252,7 @@
                             </div>
                         </details>
                     </div>
+                    <div class="essentiel-box"><span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - E2</span><p>Résumé...</p></div>
                 </details>
             </div>
         </details>
@@ -290,6 +290,7 @@
                             </div>
                         </details>
                     </div>
+                    <div class="essentiel-box"><span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - S1</span><p>Résumé...</p></div>
                 </details>
 
                 <details>
@@ -313,6 +314,7 @@
                             </div>
                         </details>
                     </div>
+                    <div class="essentiel-box"><span class="essentiel-title">💡 L'ESSENTIEL À RETENIR - S2</span><p>Résumé...</p></div>
                 </details>
             </div>
         </details>
