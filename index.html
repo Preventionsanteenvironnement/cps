@@ -13,68 +13,78 @@
         /* --- DESIGN GÉNÉRAL --- */
         body { font-family: 'Roboto', sans-serif; max-width: 900px; margin: 0 auto; background-color: #fdfbff; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
         
-        header { background-color: #fff; padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        h1 { color: #4a148c; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-        .subtitle { color: #7f8c8d; font-style: italic; margin-top: 10px; }
+        header { background-color: #fff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        
+        .main-title { font-size: 3em; font-weight: 900; color: #4a148c; margin: 0; line-height: 1; letter-spacing: -2px; }
+        h1 { color: #6a1b9a; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; font-size: 1.5em; }
+        .subtitle { color: #7f8c8d; font-style: italic; margin-top: 15px; font-size: 1.1em; }
 
-        /* --- LE BLOC CITATION (NOUVEAU !) --- */
+        /* --- LE BLOC CITATION --- */
         .quote-container {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #fafafa; /* Fond très léger */
-            border-bottom: 1px solid #eee;
-            margin-bottom: 30px;
+            text-align: center; padding: 40px 20px; background-color: #fafafa; border-bottom: 1px solid #eee; margin-bottom: 30px;
         }
         .quote-text {
-            font-family: 'Dancing Script', cursive; /* Belle écriture manuscrite */
-            font-size: 2em;
-            color: #6a1b9a; /* Violet élégant */
-            margin: 0;
-            line-height: 1.2;
+            font-family: 'Dancing Script', cursive; font-size: 2.2em; color: #6a1b9a; margin: 0; line-height: 1.3;
         }
         .quote-source {
-            font-size: 0.75em; /* Très petit */
-            color: #999; /* Gris discret */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 15px;
+            font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; font-weight: bold;
         }
 
-        main { padding: 0 20px 20px 20px; flex: 1; }
+        main { padding: 0 20px 40px 20px; flex: 1; }
 
         /* --- ACCORDÉONS (TIROIRS) --- */
-        details { margin-bottom: 15px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.3s; border: 1px solid #f0f0f0; }
+        details { margin-bottom: 15px; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; transition: all 0.2s; }
         
         /* NIVEAU 1 : CATEGORIES */
-        summary.cat-header { padding: 20px; font-size: 1.2em; font-weight: bold; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+        summary.cat-header { padding: 25px; font-size: 1.3em; font-weight: 700; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; text-transform: uppercase; }
         summary.cat-header::-webkit-details-marker { display: none; }
-        .bg-cognitif { background: linear-gradient(135deg, #1976d2, #42a5f5); }
-        .bg-emotion { background: linear-gradient(135deg, #d81b60, #f06292); }
-        .bg-social { background: linear-gradient(135deg, #7b1fa2, #ab47bc); }
+        
+        /* Couleurs sobres "Pro" */
+        .bg-cognitif { background-color: #1565c0; } /* Bleu roi */
+        .bg-emotion { background-color: #c2185b; } /* Rose foncé */
+        .bg-social { background-color: #6a1b9a; } /* Violet foncé */
 
-        /* NIVEAU 2 & 3 */
-        .general-block { padding: 15px; background-color: #fff; border-left: 4px solid #eee; margin: 10px; }
-        summary.general-header { font-weight: 600; color: #444; cursor: pointer; padding: 12px; background-color: #f9f9f9; border-radius: 6px; margin-bottom: 5px; list-style: none; display: flex; justify-content: space-between; }
-        .specific-block { margin-left: 15px; margin-top: 10px; padding-left: 15px; border-left: 2px dotted #ddd; }
-        summary.specific-header { color: #555; font-weight: 500; cursor: pointer; padding: 8px; list-style: none; display: flex; justify-content: space-between; }
-        summary.specific-header:hover { color: #000; text-decoration: underline; }
+        /* NIVEAU 2 : CPS GÉNÉRALES (C1, C2...) */
+        .general-block { padding: 10px 15px; background-color: #fff; border-left: 4px solid #eee; margin: 15px; }
+        summary.general-header { font-weight: 600; color: #333; cursor: pointer; padding: 15px; background-color: #f5f5f5; border-radius: 4px; margin-bottom: 8px; list-style: none; display: flex; justify-content: space-between; border: 1px solid #eee; }
+        summary.general-header:hover { background-color: #eeeeee; }
+
+        /* NIVEAU 3 : CPS SPÉCIFIQUES (C1.1, C1.2...) */
+        .specific-block { margin-left: 20px; margin-top: 10px; border-left: 2px solid #ddd; padding-left: 15px; }
+        summary.specific-header { color: #555; font-weight: 500; cursor: pointer; padding: 10px; list-style: none; display: flex; justify-content: space-between; text-decoration: none; }
+        summary.specific-header:hover { color: #000; font-weight: bold; }
+
+        /* --- NOUVEAU : ZONE DE CONSIGNE / DÉFINITION --- */
+        .consigne-box {
+            background-color: #fff3cd; /* Fond jaune très pâle pour l'info */
+            border-left: 4px solid #ffecb3;
+            color: #664d03;
+            padding: 15px;
+            margin: 10px 0 20px 0;
+            border-radius: 4px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .consigne-title { font-weight: bold; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.8em; opacity: 0.7; }
 
         /* TABLEAU DES SAVOIRS */
-        .savoir-container { background: #fff; padding: 10px 15px; border-radius: 5px; margin-top: 5px; }
+        .savoir-container { background: #fff; padding: 0 10px; border-radius: 5px; }
         .savoir-item { display: flex; flex-direction: column; padding: 15px 0; border-bottom: 1px solid #eee; }
         .savoir-item:last-child { border-bottom: none; }
-        .savoir-text { flex: 1; margin-bottom: 10px; font-size: 0.95em; line-height: 1.5; }
+        .savoir-text { flex: 1; margin-bottom: 10px; font-size: 0.95em; line-height: 1.5; color: #444; }
         
         /* BOUTONS */
         .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn { text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.85em; font-weight: bold; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; }
-        .btn-exo { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-        .btn-exo:hover { background-color: #c8e6c9; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .btn-memo { background-color: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
-        .btn-memo:hover { background-color: #bbdefb; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn { text-decoration: none; padding: 8px 16px; border-radius: 4px; font-size: 0.85em; font-weight: bold; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .btn-exo { background-color: #2e7d32; color: white; border: none; } /* Vert foncé */
+        .btn-exo:hover { background-color: #1b5e20; }
+        
+        .btn-memo { background-color: #1565c0; color: white; border: none; } /* Bleu foncé */
+        .btn-memo:hover { background-color: #0d47a1; }
 
         /* Indicateur + / - */
-        summary::after { content: '+'; font-weight: bold; opacity: 0.6; }
+        summary::after { content: '+'; font-weight: bold; opacity: 0.5; }
         details[open] > summary::after { content: '−'; }
 
         footer { text-align: center; padding: 30px; color: #666; margin-top: auto; font-size: 0.85em; border-top: 1px solid #eee; background: #fafafa; }
@@ -88,75 +98,149 @@
 <body>
 
     <header>
+        <div class="main-title">CPS</div>
         <h1>Compétences Psychosociales</h1>
         <div class="subtitle">Savoir-être et Vivre-ensemble</div>
     </header>
 
     <div class="quote-container">
         <p class="quote-text">"Parce que les compétences humaines sont le socle de toute réussite."</p>
-        <p class="quote-source">cela découle : SANTÉ PUBLIQUE FRANCE / Les compétences psychosociales .</p>
+        <p class="quote-source">SANTÉ PUBLIQUE FRANCE / Les compétences psychosociales</p>
     </div>
 
     <main>
         
         <details>
-            <summary class="cat-header bg-cognitif">🧠 CPS COGNITIVES</summary>
+            <summary class="cat-header bg-cognitif">CPS COGNITIVES</summary>
+            
             <div class="general-block">
                 <details>
                     <summary class="general-header">C1. Renforcer sa conscience de soi</summary>
+                    
                     <div class="specific-block">
                         <details>
                             <summary class="specific-header">C1.1 Accroître sa connaissance de soi</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text">1. Connaître les différentes dimensions du Soi psychologique.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">🧩 Exercice</a></div>
+                            <div style="padding: 15px;">
+                                <div class="consigne-box">
+                                    <span class="consigne-title">Définition & Objectif</span>
+                                    Ici, tu peux écrire la définition de la connaissance de soi. Par exemple : "Capacité à observer ses propres pensées et sentiments..."<br>
+                                    <strong>Consigne :</strong> Cliquez sur les exercices ci-dessous pour tester vos connaissances.
+                                </div>
+
+                                <div class="savoir-container">
+                                    <div class="savoir-item">
+                                        <div class="savoir-text">1. Connaître les différentes dimensions du Soi psychologique.</div>
+                                        <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
+                                    </div>
+                                    <div class="savoir-item">
+                                        <div class="savoir-text">2. Connaître le rôle et les limites de l'image de soi.</div>
+                                        <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
+                                    </div>
                                 </div>
                             </div>
                         </details>
+                        
+                        <details><summary class="specific-header">C1.2 Penser de façon critique</summary></details>
+                        <details><summary class="specific-header">C1.3 Connaître ses valeurs et besoins</summary></details>
+                        <details><summary class="specific-header">C1.4 Prendre des décisions constructives</summary></details>
+                        <details><summary class="specific-header">C1.5 S'auto-évaluer positivement</summary></details>
+                        <details><summary class="specific-header">C1.6 Renforcer sa pleine attention</summary></details>
+                    </div>
+                </details>
+            </div>
+
+            <div class="general-block">
+                <details>
+                    <summary class="general-header">C2. Renforcer sa maîtrise de soi</summary>
+                    <div class="specific-block">
+                        <details><summary class="specific-header">C2.1 Atteindre ses buts personnels</summary></details>
+                        <details><summary class="specific-header">C2.2 Gérer ses impulsions</summary></details>
+                        <details><summary class="specific-header">C2.3 Résoudre des problèmes</summary></details>
+                        <details><summary class="specific-header">C2.4 Savoir demander de l'aide</summary></details>
                     </div>
                 </details>
             </div>
         </details>
 
+
         <details>
-            <summary class="cat-header bg-emotion">❤️ CPS ÉMOTIONNELLES</summary>
+            <summary class="cat-header bg-emotion">CPS ÉMOTIONNELLES</summary>
+            
             <div class="general-block">
                 <details>
                     <summary class="general-header">E1. Renforcer sa conscience des émotions</summary>
                     <div class="specific-block">
                         <details>
                             <summary class="specific-header">E1.1 Comprendre les émotions</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text">1. Connaître la nature des émotions.</div>
-                                    <div class="btn-group"><a href="#" class="btn btn-exo">🎥 Vidéo</a></div>
+                            <div style="padding: 15px;">
+                                <div class="consigne-box">
+                                    <span class="consigne-title">À propos de ce module</span>
+                                    Comprendre les émotions, c'est savoir identifier leurs causes et leurs conséquences.
+                                </div>
+                                <div class="savoir-container">
+                                    <div class="savoir-item">
+                                        <div class="savoir-text">1. Connaître la nature des émotions.</div>
+                                        <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
+                                    </div>
                                 </div>
                             </div>
                         </details>
+                        <details><summary class="specific-header">E1.2 Identifier ses émotions</summary></details>
+                    </div>
+                </details>
+            </div>
+
+            <div class="general-block">
+                <details>
+                    <summary class="general-header">E2. Réguler ses émotions et son stress</summary>
+                    <div class="specific-block">
+                        <details><summary class="specific-header">E2.1 Exprimer ses émotions (constructif)</summary></details>
+                        <details><summary class="specific-header">E2.2 Réguler ses émotions (agréables/désagréables)</summary></details>
+                        <details><summary class="specific-header">E2.3 Gérer son stress</summary></details>
                     </div>
                 </details>
             </div>
         </details>
 
-        <details open>
-            <summary class="cat-header bg-social">🤝 CPS SOCIALES</summary>
+
+        <details>
+            <summary class="cat-header bg-social">CPS SOCIALES</summary>
+            
             <div class="general-block">
-                <details open>
+                <details>
                     <summary class="general-header">S1. Développer des relations constructives</summary>
                     <div class="specific-block">
-                        <details open>
+                        <details>
                             <summary class="specific-header">S1.1 Communiquer de façon efficace et positive</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text">1. Éviter les attitudes et comportements verbaux qui détériorent le message et la relation.</div>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-exo">🧩 Jeu de rôle</a>
-                                        <a href="#" class="btn btn-memo">📄 Synthèse</a>
+                            <div style="padding: 15px;">
+                                <div class="consigne-box">
+                                    <span class="consigne-title">Consigne</span>
+                                    Lisez attentivement les savoir-faire ci-dessous avant de lancer le jeu de rôle.
+                                </div>
+                                <div class="savoir-container">
+                                    <div class="savoir-item">
+                                        <div class="savoir-text">1. Éviter les attitudes qui détériorent la relation.</div>
+                                        <div class="btn-group"><a href="#" class="btn btn-exo">Jeu de rôle</a></div>
+                                    </div>
+                                    <div class="savoir-item">
+                                        <div class="savoir-text">2. Développer des attitudes soutenantes.</div>
+                                        <div class="btn-group"><a href="#" class="btn btn-exo">Exercice</a></div>
                                     </div>
                                 </div>
                             </div>
                         </details>
+                        <details><summary class="specific-header">S1.2 Communiquer de façon empathique</summary></details>
+                        <details><summary class="specific-header">S1.3 Comportements prosociaux</summary></details>
+                    </div>
+                </details>
+            </div>
+
+            <div class="general-block">
+                <details>
+                    <summary class="general-header">S2. Résoudre des difficultés relationnelles</summary>
+                    <div class="specific-block">
+                        <details><summary class="specific-header">S2.1 S'affirmer et résister à la pression</summary></details>
+                        <details><summary class="specific-header">S2.2 Résoudre les conflits</summary></details>
                     </div>
                 </details>
             </div>
