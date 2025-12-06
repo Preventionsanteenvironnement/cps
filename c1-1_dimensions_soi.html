@@ -3,228 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPS - Compétences Psychosociales</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
-
+    <title>Les Dimensions du Soi Psychologique - CPS 2025</title>
     <style>
-        /* --- DESIGN GÉNÉRAL --- */
-        body { font-family: 'Roboto', sans-serif; max-width: 950px; margin: 0 auto; background-color: #f8f9fa; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
-        
-        header { background-color: #fff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e0e0e0; }
-        .main-title { font-size: 3em; font-weight: 900; color: #4a148c; margin: 0; line-height: 1; letter-spacing: -2px; }
-        h1 { color: #6a1b9a; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; font-size: 1.5em; }
-        .subtitle { color: #7f8c8d; font-style: italic; margin-top: 15px; font-size: 1.1em; }
+        :root {
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --secondary: #3498db;
+            --bg-light: #f8f9fa;
+            --text: #333;
+            --success: #27ae60;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
 
-        .quote-container { text-align: center; padding: 30px 20px; background-color: #fff; border-bottom: 1px solid #e0e0e0; margin-bottom: 30px; }
-        .quote-text { font-family: 'Dancing Script', cursive; font-size: 2em; color: #6a1b9a; margin: 0; line-height: 1.3; }
-        .quote-source { font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 15px; font-weight: bold; }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
 
-        /* --- BLOC D'ACCUEIL PRO (Mise à jour : Plus aéré) --- */
-        .intro-pro {
-            background: #fff;
-            border-left: 6px solid #8e24aa; /* Bordure violette plus épaisse */
-            padding: 30px;
-            margin: 0 20px 40px 20px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--secondary);
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight-box {
+            background-color: var(--bg-light);
+            border-left: 5px solid var(--accent);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .analogy {
+            background-color: #e8f4f8;
+            border: 1px solid #b3d7ff;
+            padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .intro-pro h3 { 
-            margin-top: 0; 
-            color: #4a148c; 
-            text-transform: uppercase; 
-            font-size: 1.3em; 
-            letter-spacing: 1px; 
-            border-bottom: 2px solid #f3e5f5;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-        .intro-pro p { 
-            margin-bottom: 15px; 
-            line-height: 1.8; 
-            color: #444; 
-            font-size: 1.05em;
-        }
-        .intro-note {
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 1px dashed #ccc;
-            font-size: 0.95em;
-            color: #666;
-            font-style: italic;
         }
 
-        /* --- NOUVEAU STYLE DU BADGE (Juste du texte rouge) --- */
-        .badge-new {
-            color: #d32f2f; /* Rouge vif */
-            font-size: 0.75em;
-            font-weight: 900;
+        /* Dimension Cards */
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dim-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.2s;
+        }
+
+        .dim-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--card-shadow);
+            border-color: var(--secondary);
+        }
+
+        .dim-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
             text-transform: uppercase;
-            margin-left: 8px;
-            letter-spacing: 1px;
-            animation: pulse 1.5s infinite; /* Clignotement */
-            vertical-align: middle;
-        }
-        @keyframes pulse { 
-            0% { opacity: 1; } 
-            50% { opacity: 0.4; } 
-            100% { opacity: 1; } 
+            font-size: 0.9em;
         }
 
-        main { padding: 0 20px 40px 20px; flex: 1; }
+        /* Introspection Section */
+        .intro-zone {
+            border: 2px dashed var(--secondary);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fcfcfc;
+        }
 
-        /* --- ACCORDÉONS --- */
-        details { margin-bottom: 10px; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; transition: all 0.2s; }
-        summary.cat-header { padding: 20px; font-size: 1.2em; font-weight: 700; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; text-transform: uppercase; }
-        summary.cat-header::-webkit-details-marker { display: none; }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        /* Interactive Game */
+        .game-area {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .draggable-item {
+            background: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 5px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .drop-zones {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .drop-zone {
+            border: 2px dashed #aaa;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 80px;
+            transition: background 0.3s;
+        }
+
+        .drop-zone.active {
+            background-color: #e3f2fd;
+            border-color: var(--secondary);
+        }
+
+        /* Quiz */
+        .quiz-container {
+            margin-top: 20px;
+        }
+
+        .question {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+
+        .options label:hover {
+            background-color: #f0f0f0;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
         
-        .bg-cognitif { background-color: #1565c0; } 
-        .bg-emotion { background-color: #c2185b; } 
-        .bg-social { background-color: #6a1b9a; } 
+        .correct { background-color: #d4edda; color: #155724; }
+        .incorrect { background-color: #f8d7da; color: #721c24; }
 
-        .general-block { padding: 10px; background-color: #fff; border-left: 4px solid #eee; margin: 10px; }
-        summary.general-header { font-weight: 600; color: #333; cursor: pointer; padding: 12px; background-color: #f5f5f5; border-radius: 4px; margin-bottom: 5px; list-style: none; display: flex; justify-content: space-between; border: 1px solid #eee; }
-        summary.general-header:hover { background-color: #eeeeee; color: #000; }
-
-        .specific-block { margin-left: 15px; margin-top: 8px; border-left: 2px solid #ddd; padding-left: 10px; }
-        summary.specific-header { color: #444; font-weight: 500; cursor: pointer; padding: 12px; list-style: none; display: flex; justify-content: space-between; background: #fff; border-bottom: 1px dashed #eee; line-height: 1.4; }
-        summary.specific-header:hover { color: #6a1b9a; font-weight: bold; background: #fafafa; }
-
-        .savoir-container { background: #fdfdfd; padding: 0 15px 15px 15px; }
-        .savoir-item { display: flex; flex-direction: column; padding: 12px 0; border-bottom: 1px solid #eee; }
-        .savoir-item:last-child { border-bottom: none; }
-        .savoir-text { flex: 1; margin-bottom: 8px; font-size: 0.95em; line-height: 1.4; color: #333; font-weight: 400; display: flex; gap: 10px; }
-        .savoir-number { font-weight: bold; color: #6a1b9a; min-width: 20px; }
-
-        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-left: 30px; align-items: center; }
-        
-        .btn-explore { 
-            text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; font-weight: bold; transition: 0.2s; 
-            display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; 
-            background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; 
-        }
-        .btn-explore:hover { background-color: #c8e6c9; }
-
-        .btn-soon {
-            padding: 6px 12px; border-radius: 4px; font-size: 0.8em; font-weight: bold;
-            background-color: #f5f5f5; color: #999; border: 1px solid #e0e0e0;
-            cursor: not-allowed; text-transform: uppercase; display: inline-flex; align-items: center; gap: 5px;
-        }
-
-        .footer-action { margin-top: 15px; padding-top: 15px; border-top: 2px solid #f0f0f0; text-align: center; }
-        .btn-essentiel {
-            display: inline-block; text-decoration: none; background-color: #fff8e1; color: #f57f17; border: 1px solid #ffe082;
-            padding: 10px 20px; border-radius: 30px; font-weight: bold; font-size: 0.9em; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .btn-essentiel:hover { background-color: #ffecb3; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-
-        summary::after { content: '+'; font-weight: bold; opacity: 0.5; }
-        details[open] > summary::after { content: '−'; }
-
-        footer { text-align: center; padding: 30px; color: #666; margin-top: auto; font-size: 0.85em; border-top: 1px solid #eee; background: #fff; }
-        
-        @media (min-width: 600px) {
-            .savoir-item { flex-direction: row; align-items: flex-start; justify-content: space-between; }
-            .savoir-text { margin-bottom: 0; margin-right: 15px; }
-            .btn-group { margin-left: 0; margin-top: 0; }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
 
+<div class="container">
+
     <header>
-        <div class="main-title">CPS</div>
-        <h1>Compétences Psychosociales</h1>
-        <div class="subtitle">Savoir-être et Vivre-ensemble</div>
+        <h1>Le Soi Psychologique et ses 4 Dimensions</h1>
+        <p><em>Fiche pédagogique interactive basée sur le référentiel CPS.</em></p>
     </header>
 
-    <div class="quote-container">
-        <p class="quote-text">"Parce que les compétences humaines sont le socle de toute réussite."</p>
-        <p class="quote-source">SANTÉ PUBLIQUE FRANCE / Les compétences psychosociales</p>
-    </div>
+    <section id="comprehension">
+        <h2>🔷 1. Comprendre le concept</h2>
+        <p>Le <strong>Soi psychologique</strong> est une structure complexe qui relie le psychisme et le corps. Il est composé de dimensions distinctes mais interconnectées, certaines conscientes et d'autres moins. Selon les documents de référence, nous identifions quatre grandes dimensions :</p>
 
-    <div class="intro-pro">
-        <h3>Bienvenue sur la plateforme de ressources CPS</h3>
-        <p>Cet outil est conçu pour accompagner les professionnels dans le développement des compétences psychosociales.</p>
-        <p>Pour chaque module, vous pourrez :<br>
-        <strong>1. Identifier</strong> les savoirs et savoir-faire spécifiques.<br>
-        <strong>2. Explorer</strong> des pistes pédagogiques et des exercices.<br>
-        <strong>3. Synthétiser</strong> les acquis grâce aux fiches "L'essentiel à retenir".</p>
-        
-        <div class="intro-note">
-            Les modules marqués <span class="badge-new">NOUVEAU</span> sont disponibles. Les autres sont en cours de construction.
-        </div>
-    </div>
-
-    <main>
-        
-        <details open>
-            <summary class="cat-header bg-cognitif">CPS COGNITIVES</summary>
+        <div class="dimension-grid">
+            <div class="dim-card" style="border-left: 4px solid #e74c3c;">
+                <div class="dim-title">1. Soi Externe</div>
+                <p>Ce qui est <strong>perceptible par les autres</strong>. C'est votre "façade" sociale : corps, comportements, rôles, possessions.</p>
+                <small><em>Ex: "Femme de 41 ans, professeure, propriétaire..."</em></small>
+            </div>
             
-            <div class="general-block">
-                <details open>
-                    <summary class="general-header">C1. Renforcer sa conscience de soi</summary>
-                    <div class="specific-block">
-                        
-                        <details open>
-                            <summary class="specific-header">C1.1 Accroître sa connaissance de soi & C1.2 Penser de façon critique <span class="badge-new">Nouveau</span></summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">1.</span> Connaître les différentes dimensions du soi psychologique</div>
-                                    <div class="btn-group">
-                                        <a href="c1-1_dimensions_soi.html" class="btn btn-explore">Explorer</a>
-                                    </div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">2.</span> Connaître le rôle et les limites de l’image de soi</div>
-                                    <div class="btn-group">
-                                        <a href="c1-2_role_image.html" class="btn btn-explore">Explorer</a>
-                                    </div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">3.</span> Questionner l’image de soi pour penser de façon critique</div>
-                                    <div class="btn-group">
-                                        <a href="c1-3_questionner_image.html" class="btn btn-explore">Explorer</a>
-                                    </div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">4.</span> Renforcer le soi sujet pour réaliser des actions conscientes et volontaires</div>
-                                    <div class="btn-group">
-                                        <a href="c1-4_renforcer_soi.html" class="btn btn-explore">Explorer</a>
-                                    </div>
-                                </div>
-                                <div class="savoir-item">
-                                    <div class="savoir-text"><span class="savoir-number">5.</span> Observer et accueillir son soi interne</div>
-                                    <div class="btn-group">
-                                        <a href="c1-5_observer_soi.html" class="btn btn-explore">Explorer</a>
-                                    </div>
-                                </div>
-                                
-                                <div class="footer-action">
-                                    <a href="resume_c1-1_c1-2.html" class="btn-essentiel">💡 L'essentiel à retenir</a>
-                                </div>
-                            </div>
-                        </details>
+            <div class="dim-card" style="border-left: 4px solid #3498db;">
+                <div class="dim-title">2. Soi Sujet (Agent/Acteur)</div>
+                <p>C'est la partie qui <strong>agit et décide</strong>. Elle regroupe nos capacités cognitives (observer, décider) et comportementales (s'exprimer, bouger) pour agir de façon volontaire.</p>
+                <small><em>Ex: "Je décide d'observer, je marche, je réfléchis."</em></small>
+            </div>
 
-                        <details>
-                            <summary class="specific-header">C1.3 Connaître ses valeurs et buts & C1.4 Prendre des décisions</summary>
-                            <div class="savoir-container">
-                                <div class="savoir-item"><div class="savoir-text"><span class="savoir-number">1.</span> Connaître les buts personnels concordants</div><div class="btn-group"><span class="btn-soon">🚧 Bientôt</span></div></div>
-                                <div class="footer-action"><span class="btn-soon">💡 L'essentiel à retenir (Bientôt)</span></div>
-                            </div>
-                        </details>
-                        </div>
-                </details>
+            <div class="dim-card" style="border-left: 4px solid #9b59b6;">
+                <div class="dim-title">3. Image de Soi (Concept de soi)</div>
+                <p>Ce sont les <strong>pensées et jugements</strong> que l'on porte sur soi-même. C'est votre "miroir mental".</p>
+                <small><em>Ex: "Je me trouve trop inquiète", "Je suis une bonne institutrice."</em></small>
+            </div>
+
+            <div class="dim-card" style="border-left: 4px solid #f1c40f;">
+                <div class="dim-title">4. Soi Interne (Contenus)</div>
+                <p>Ce qui se passe <strong>à l'intérieur</strong> (états psychiques). Il regroupe 5 éléments : Cognitions, Émotions, Volitions (besoins/envies), Sensations corporelles, Impressions globales.</p>
+                <small><em>Ex: "Je ressens une tension au ventre, de la joie..."</em></small>
+            </div>
+        </div>
+
+        <div class="analogy" style="margin-top: 20px;">
+            <strong>💡 L'Analogie du Théâtre</strong>
+            <ul>
+                <li><strong>Soi Externe :</strong> Le costume de l'acteur et son rôle visible par le public.</li>
+                <li><strong>Soi Sujet :</strong> L'acteur en train de jouer, de bouger et de dire son texte sur scène (l'action).</li>
+                <li><strong>Image de Soi :</strong> La critique que l'acteur se fait de lui-même ("Je joue mal ce soir", "Je suis un grand tragédien").</li>
+                <li><strong>Soi Interne :</strong> Le trac dans son ventre, sa soif (sensation), son envie de finir la pièce (volition) et ses émotions cachées.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="introspection">
+        <h2>🔷 2. Introspection du professionnel</h2>
+        <div class="highlight-box">
+            <strong>⚠️ Étape Obligatoire :</strong> Les Compétences Psychosociales ne se transmettent pas théoriquement. Elles se vivent. Avant d'accompagner autrui, observez ces dimensions chez vous, ici et maintenant.
+        </div>
+
+        <div class="intro-zone">
+            <h3>🔎 Arrêt sur image : Qui êtes-vous à cet instant ?</h3>
+            <p>Prenez un instant pour remplir ces cases pour vous-même (rien n'est enregistré) :</p>
+            
+            <label><strong>Votre Soi Externe :</strong> Décrivez un élément factuel visible de vous maintenant (posture, rôle, vêtement).</label>
+            <textarea rows="2" placeholder="Ex: Je suis assis devant mon écran, je porte des lunettes..."></textarea>
+
+            <label><strong>Votre Soi Interne (Sensation & Émotion) :</strong> Que ressentez-vous dans votre corps et votre cœur ?</label>
+            <textarea rows="2" placeholder="Ex: Tensions dans les épaules, légère curiosité, fatigue..."></textarea>
+
+            <label><strong>Votre Image de Soi :</strong> Quelle pensée ou jugement avez-vous sur vous-même en faisant cet exercice ?</label>
+            <textarea rows="2" placeholder="Ex: Je suis studieux, ou je me trouve lent à comprendre..."></textarea>
+
+            <label><strong>Votre Soi Sujet :</strong> Quelle action décidez-vous de faire juste après cette phrase ?</label>
+            <textarea rows="2" placeholder="Ex: Je décide de scroller vers le bas, je prends une gorgée d'eau..."></textarea>
+        </div>
+    </section>
+
+    <section id="exercice">
+        <h2>🔷 3. Pratique : Le Trieur de Dimensions</h2>
+        <p>Cliquez sur l'élément proposé ci-dessous, puis cliquez sur la dimension correspondante.</p>
+        
+        <div class="game-area">
+            <div id="item-display" class="draggable-item" style="font-size: 1.2em; padding: 15px 30px;">
+                Chargement...
+            </div>
+            <p id="game-feedback" style="height: 20px; font-weight: bold; color: var(--accent);"></p>
+
+            <div class="drop-zones">
+                <div class="drop-zone" onclick="checkAnswer('externe')">
+                    <strong>Soi Externe</strong><br><small>(Visible, Rôles, Corps)</small>
                 </div>
-        </details>
-        </main>
+                <div class="drop-zone" onclick="checkAnswer('image')">
+                    <strong>Image de Soi</strong><br><small>(Jugements, Idées sur soi)</small>
+                </div>
+                <div class="drop-zone" onclick="checkAnswer('sujet')">
+                    <strong>Soi Sujet</strong><br><small>(Agir, Décider, Capacités)</small>
+                </div>
+                <div class="drop-zone" onclick="checkAnswer('interne')">
+                    <strong>Soi Interne</strong><br><small>(Sensations, Émotions, Volitions)</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="accompagnement">
+        <h2>🔷 4. Vers l'accompagnement</h2>
+        <p>Une fois que vous avez identifié ces dimensions en vous, vous pouvez aider votre public (élèves, usagers) à faire de même.</p>
+        <ul>
+            <li><strong>L'objectif :</strong> Aider l'autre à distinguer ce qu'il <em>est</em> (externe), ce qu'il <em>croit être</em> (image de soi), ce qu'il <em>ressent</em> (interne) et sa capacité à <em>agir</em> (sujet).</li>
+            <li><strong>Exemple pratique :</strong> Face à un jeune qui dit "Je suis nul" (Image de soi), invitez-le à explorer son Soi Sujet ("Qu'es-tu capable de faire ?") ou son Soi Externe ("Quels sont tes rôles ?").</li>
+        </ul>
+    </section>
+
+    <section id="validation">
+        <h2>🔷 5. Validation des acquis</h2>
+        <div class="quiz-container">
+            
+            <div class="question">
+                1. Lequel de ces éléments appartient au "Soi Interne" selon le texte ?
+            </div>
+            <div class="options" id="q1">
+                <label><input type="radio" name="q1" value="wrong"> Mon métier et mes possessions.</label>
+                <label><input type="radio" name="q1" value="correct"> Mes volitions (envies/besoins) et sensations corporelles.</label>
+                <label><input type="radio" name="q1" value="wrong"> La décision de bouger mon bras.</label>
+            </div>
+
+            <div class="question">
+                2. Quelle est la différence entre le "Soi Sujet" et l'"Image de Soi" ?
+            </div>
+            <div class="options" id="q2">
+                <label><input type="radio" name="q2" value="wrong"> Aucune, c'est la même chose.</label>
+                <label><input type="radio" name="q2" value="wrong"> Le Soi Sujet est inconscient alors que l'Image de Soi est corporelle.</label>
+                <label><input type="radio" name="q2" value="correct"> Le Soi Sujet est l'acteur qui agit/décide, l'Image de Soi est le jugement/pensée sur soi.</label>
+            </div>
+
+            <button class="btn" onclick="validateQuiz()">Vérifier mes réponses</button>
+            <div id="quiz-feedback" class="feedback"></div>
+        </div>
+    </section>
 
     <footer>
-        <p>Ressources CPS - Prévention Santé Environnement</p>
-        <p>Conçu par M. MECHERI</p>
+        <p>CPS Studio – Créateur de fiches HTML pédagogiques. Basé strictement sur les extraits fournis.</p>
     </footer>
+
+</div>
+
+<script>
+    // --- JEU INTERACTIF ---
+    const items = [
+        { text: "Je suis infirmière", type: "externe" },
+        { text: "Je me trouve incompétent", type: "image" },
+        { text: "J'ai mal au ventre", type: "interne" },
+        { text: "Je décide de lever la main", type: "sujet" },
+        { text: "Je ressens de la joie", type: "interne" },
+        { text: "Je possède une maison", type: "externe" },
+        { text: "Je pense que je suis généreux", type: "image" },
+        { text: "Je suis en train de courir", type: "sujet" } // Action comportementale
+    ];
+
+    let currentItemIndex = 0;
+    const displayElement = document.getElementById('item-display');
+    const feedbackElement = document.getElementById('game-feedback');
+
+    function loadItem() {
+        if (currentItemIndex < items.length) {
+            displayElement.textContent = items[currentItemIndex].text;
+            feedbackElement.textContent = "";
+            feedbackElement.className = "";
+        } else {
+            displayElement.textContent = "Bravo ! Exercice terminé.";
+            feedbackElement.textContent = "Vous maîtrisez les 4 dimensions.";
+            displayElement.style.backgroundColor = "#27ae60";
+        }
+    }
+
+    function checkAnswer(selectedType) {
+        if (currentItemIndex >= items.length) return;
+
+        const correctType = items[currentItemIndex].type;
+        
+        if (selectedType === correctType) {
+            feedbackElement.textContent = "Correct !";
+            feedbackElement.style.color = "green";
+            currentItemIndex++;
+            setTimeout(loadItem, 800);
+        } else {
+            feedbackElement.textContent = "Essaie encore. Relis les définitions.";
+            feedbackElement.style.color = "red";
+        }
+    }
+
+    // Initialisation du jeu
+    loadItem();
+
+    // --- QUIZ VALIDATION ---
+    function validateQuiz() {
+        const q1 = document.querySelector('input[name="q1"]:checked');
+        const q2 = document.querySelector('input[name="q2"]:checked');
+        const feedback = document.getElementById('quiz-feedback');
+
+        if (!q1 || !q2) {
+            feedback.textContent = "Veuillez répondre à toutes les questions.";
+            feedback.className = "feedback incorrect";
+            feedback.style.display = "block";
+            return;
+        }
+
+        if (q1.value === "correct" && q2.value === "correct") {
+            feedback.innerHTML = "<strong>Excellent !</strong><br>Vous avez bien identifié les contenus du Soi interne (dont les volitions) et la distinction cruciale entre l'acteur (Sujet) et le juge (Image).";
+            feedback.className = "feedback correct";
+        } else {
+            feedback.innerHTML = "<strong>Attention :</strong><br>Revoyez les définitions. Le Soi Interne contient les émotions et volitions. Le Soi Sujet est celui qui agit, contrairement à l'Image qui juge.";
+            feedback.className = "feedback incorrect";
+        }
+        feedback.style.display = "block";
+    }
+</script>
 
 </body>
 </html>
