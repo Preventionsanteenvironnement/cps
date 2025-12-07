@@ -36,7 +36,7 @@
 
         .quote-container { text-align: center; padding: 30px 20px; background-color: #fff; border-bottom: 1px solid #e0e0e0; margin-bottom: 30px; }
         
-        /* Animation "Mouvante" pour la citation */
+        /* --- ANIMATION MOUVANTE CITATION --- */
         @keyframes gentleFloat {
             0% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
@@ -48,7 +48,7 @@
             color: #6a1b9a; 
             margin: 0; 
             line-height: 1.3; 
-            animation: gentleFloat 3s ease-in-out infinite; /* Animation ajoutée ici */
+            animation: gentleFloat 3s ease-in-out infinite; 
         }
         .quote-source { font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 15px; font-weight: bold; }
 
@@ -72,9 +72,19 @@
 
         /* --- BADGE NOUVEAU --- */
         .badge-new {
-            color: #d32f2f; font-size: 0.75em; font-weight: 900; text-transform: uppercase; margin-left: 8px; letter-spacing: 1px; animation: pulse 1.5s infinite; vertical-align: middle;
+            color: #d32f2f; 
+            font-size: 0.75em; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            margin-left: 0; /* Ajusté car géré par le gap du parent */
+            letter-spacing: 0.5px;
+            animation: pulse 1s infinite alternate; 
+            vertical-align: middle;
         }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        @keyframes pulse { 
+            0% { opacity: 1; } 
+            100% { opacity: 0.3; } 
+        }
 
         main { padding: 0 20px 40px 20px; flex: 1; }
 
@@ -105,7 +115,7 @@
         
         .btn-explore { 
             text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; font-weight: bold; transition: 0.2s; 
-            display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; 
+            display: inline-flex; align-items: center; text-transform: uppercase; 
             background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; 
         }
         .btn-explore:hover { background-color: #c8e6c9; }
@@ -211,15 +221,24 @@
                             <div class="savoir-container">
                                 <div class="savoir-item">
                                     <div class="savoir-text"><span class="savoir-number">1.</span> Connaître les buts personnels concordants</div>
-                                    <div class="btn-group"><a href="c1-3_buts_personnels.html" class="btn btn-explore">Explorer <span class="badge-new">NOUVEAU</span></a></div>
+                                    <div class="btn-group">
+                                        <a href="c1-3_buts_personnels.html" class="btn btn-explore">Explorer</a>
+                                        <span class="badge-new">NOUVEAU</span>
+                                    </div>
                                 </div>
                                 <div class="savoir-item">
                                     <div class="savoir-text"><span class="savoir-number">2.</span> Connaître les besoins psychologiques</div>
-                                    <div class="btn-group"><a href="c1-3_besoins_psychos.html" class="btn btn-explore">Explorer <span class="badge-new">NOUVEAU</span></a></div>
+                                    <div class="btn-group">
+                                        <a href="c1-3_besoins_psychos.html" class="btn btn-explore">Explorer</a>
+                                        <span class="badge-new">NOUVEAU</span>
+                                    </div>
                                 </div>
                                 <div class="savoir-item">
                                     <div class="savoir-text"><span class="savoir-number">3.</span> Connaître ses valeurs personnelles</div>
-                                    <div class="btn-group"><a href="c1-3_valeurs_personnelles.html" class="btn btn-explore">Explorer <span class="badge-new">NOUVEAU</span></a></div>
+                                    <div class="btn-group">
+                                        <a href="c1-3_valeurs_personnelles.html" class="btn btn-explore">Explorer</a>
+                                        <span class="badge-new">NOUVEAU</span>
+                                    </div>
                                 </div>
                                 <div class="footer-action">
                                     <a href="resume_c1-3_c1-4.html" class="btn-essentiel">💡 L'essentiel à retenir</a>
@@ -232,11 +251,17 @@
                             <div class="savoir-container">
                                 <div class="savoir-item">
                                     <div class="savoir-text"><span class="savoir-number">1.</span> Enrichir son image de soi</div>
-                                    <div class="btn-group"><a href="c1-5_enrichir_image.html" class="btn btn-explore">Explorer <span class="badge-new">NOUVEAU</span></a></div>
+                                    <div class="btn-group">
+                                        <a href="c1-5_enrichir_image.html" class="btn btn-explore">Explorer</a>
+                                        <span class="badge-new">NOUVEAU</span>
+                                    </div>
                                 </div>
                                 <div class="savoir-item">
                                     <div class="savoir-text"><span class="savoir-number">2.</span> Développer une relation bienveillante avec soi</div>
-                                    <div class="btn-group"><a href="c1-5_relation_bienveillante.html" class="btn btn-explore">Explorer <span class="badge-new">NOUVEAU</span></a></div>
+                                    <div class="btn-group">
+                                        <a href="c1-5_relation_bienveillante.html" class="btn btn-explore">Explorer</a>
+                                        <span class="badge-new">NOUVEAU</span>
+                                    </div>
                                 </div>
                                 <div class="footer-action">
                                     <a href="resume_c1-5.html" class="btn-essentiel">💡 L'essentiel à retenir</a>
@@ -249,15 +274,24 @@
                             <div class="savoir-container">
                                 <div class="savoir-item">
                                     <div class="savoir-text"><span class="savoir-number">1.</span> Diriger volontairement son attention</div>
-                                    <div class="btn-group"><a href="c1-6_diriger_attention.html" class="btn btn-explore">Explorer <span class="badge-new">NOUVEAU</span></a></div>
+                                    <div class="btn-group">
+                                        <a href="c1-6_diriger_attention.html" class="btn btn-explore">Explorer</a>
+                                        <span class="badge-new">NOUVEAU</span>
+                                    </div>
                                 </div>
                                 <div class="savoir-item">
                                     <div class="savoir-text"><span class="savoir-number">2.</span> Observer et accueillir l’expérience sensible</div>
-                                    <div class="btn-group"><a href="c1-6_observer_experience.html" class="btn btn-explore">Explorer <span class="badge-new">NOUVEAU</span></a></div>
+                                    <div class="btn-group">
+                                        <a href="c1-6_observer_experience.html" class="btn btn-explore">Explorer</a>
+                                        <span class="badge-new">NOUVEAU</span>
+                                    </div>
                                 </div>
                                 <div class="savoir-item">
                                     <div class="savoir-text"><span class="savoir-number">3.</span> Réaliser des activités de pleine attention</div>
-                                    <div class="btn-group"><a href="c1-6_activites_attention.html" class="btn btn-explore">Explorer <span class="badge-new">NOUVEAU</span></a></div>
+                                    <div class="btn-group">
+                                        <a href="c1-6_activites_attention.html" class="btn btn-explore">Explorer</a>
+                                        <span class="badge-new">NOUVEAU</span>
+                                    </div>
                                 </div>
                                 <div class="footer-action">
                                     <a href="resume_c1-6.html" class="btn-essentiel">💡 L'essentiel à retenir</a>
