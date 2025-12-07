@@ -32,39 +32,32 @@
         header { background-color: #fff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e0e0e0; }
         .main-title { font-size: 3em; font-weight: 900; color: #4a148c; margin: 0; line-height: 1; letter-spacing: -2px; }
         h1 { color: #6a1b9a; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; font-size: 1.5em; }
-        .subtitle { color: #7f8c8d; font-style: italic; margin-top: 15px; font-size: 1.1em; }
-
-        .quote-container { text-align: center; padding: 30px 20px; background-color: #fff; border-bottom: 1px solid #e0e0e0; margin-bottom: 30px; }
         
-        /* --- ANIMATION MOUVANTE CITATION --- */
-        @keyframes gentleFloat {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0); }
+        /* Style de la citation Goethe dans le header */
+        .subtitle { 
+            color: #7f8c8d; 
+            font-style: italic; 
+            margin-top: 20px; 
+            font-size: 0.9em; 
+            max-width: 700px; 
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
-        .quote-text { 
-            font-family: 'Dancing Script', cursive; 
-            font-size: 2em; 
-            color: #6a1b9a; 
-            margin: 0; 
-            line-height: 1.3; 
-            animation: gentleFloat 3s ease-in-out infinite; 
-        }
-        .quote-source { font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 15px; font-weight: bold; }
 
         /* --- BLOC D'ACCUEIL PRO --- */
         .intro-pro {
             background: #fff;
             border-left: 6px solid #8e24aa;
             padding: 30px;
-            margin: 0 20px 40px 20px;
+            margin: 40px 20px 40px 20px; 
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
         .intro-pro h3 { 
             margin-top: 0; color: #4a148c; text-transform: uppercase; font-size: 1.3em; letter-spacing: 1px; 
             border-bottom: 2px solid #f3e5f5; padding-bottom: 15px; margin-bottom: 20px;
-            text-align: center; /* CENTRAGE DU TITRE AJOUTÉ ICI */
+            text-align: center;
         }
         .intro-pro p { margin-bottom: 15px; line-height: 1.8; color: #444; font-size: 1.05em; }
         .intro-note {
@@ -93,11 +86,21 @@
         summary.cat-header { padding: 20px; font-size: 1.2em; font-weight: 700; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; text-transform: uppercase; }
         summary.cat-header::-webkit-details-marker { display: none; }
         
+        /* Couleurs des blocs */
+        .bg-intro { background-color: #546e7a; } /* Gris-Bleu Institutionnel */
         .bg-cognitif { background-color: #1565c0; } 
         .bg-emotion { background-color: #c2185b; } 
         .bg-social { background-color: #6a1b9a; } 
 
         .general-block { padding: 10px; background-color: #fff; border-left: 4px solid #eee; margin: 10px; }
+        
+        /* Style spécifique pour le bloc d'introduction */
+        .intro-content { padding: 20px; color: #444; line-height: 1.6; }
+        .intro-content h4 { color: #546e7a; margin-top: 20px; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; text-transform: uppercase; font-size: 1em; }
+        .intro-content h4:first-child { margin-top: 0; }
+        .intro-content ul { padding-left: 20px; margin-bottom: 15px; }
+        .intro-content li { margin-bottom: 8px; }
+
         summary.general-header { font-weight: 600; color: #333; cursor: pointer; padding: 12px; background-color: #f5f5f5; border-radius: 4px; margin-bottom: 5px; list-style: none; display: flex; justify-content: space-between; border: 1px solid #eee; }
         summary.general-header:hover { background-color: #eeeeee; color: #000; }
 
@@ -111,14 +114,8 @@
         .savoir-text { flex: 1; margin-bottom: 8px; font-size: 0.95em; line-height: 1.4; color: #333; font-weight: 400; display: flex; gap: 10px; }
         .savoir-number { font-weight: bold; color: #6a1b9a; min-width: 20px; }
 
-        /* Groupe bouton pour aligner le texte NOUVEAU à côté */
-        .btn-group { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            flex-wrap: nowrap; 
-            margin-left: 30px; 
-        }
+        /* Groupe bouton */
+        .btn-group { display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; margin-left: 30px; }
         
         .btn-explore { 
             text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; font-weight: bold; transition: 0.2s; 
@@ -162,13 +159,12 @@
     <header>
         <div class="main-title">CPS</div>
         <h1>Compétences Psychosociales</h1>
-        <div class="subtitle">Savoir-être et Vivre-ensemble</div>
+        <div class="subtitle">
+            « Traitez un individu comme il est, et il restera ce qu’il est.<br>
+            Traitez-le comme il peut et doit devenir, et il deviendra ce qu’il peut et doit être. »<br>
+            <span style="font-style: normal; font-weight: bold; font-size: 0.9em;">— Johann Wolfgang von Goethe</span>
+        </div>
     </header>
-
-    <div class="quote-container">
-        <p class="quote-text">"Parce que les compétences humaines sont le socle de toute réussite."</p>
-        <p class="quote-source">SANTÉ PUBLIQUE FRANCE / Les compétences psychosociales</p>
-    </div>
 
     <div class="intro-pro">
         <h3>Bienvenue sur la plateforme de ressources CPS</h3>
@@ -184,6 +180,33 @@
     </div>
 
     <main>
+
+        <details>
+            <summary class="cat-header bg-intro">📘 INTRODUCTION & CADRE DE RÉFÉRENCE</summary>
+            
+            <div class="general-block">
+                <div class="intro-content">
+                    <h4>Qu'est-ce que les CPS ?</h4>
+                    <p>Selon la définition de l'OMS (1993) et le référentiel de Santé Publique France (2022), les compétences psychosociales sont la capacité d'une personne à répondre avec efficacité aux exigences et aux épreuves de la vie quotidienne. C'est la capacité d'une personne à maintenir un état de bien-être psychique et à le démontrer par un comportement adapté et positif.</p>
+                    
+                    <h4>Les 3 enjeux majeurs</h4>
+                    <p>Le développement des CPS joue un rôle déterminant dans :</p>
+                    <ul>
+                        <li><strong>La réussite éducative :</strong> Amélioration du climat scolaire, de la motivation et des résultats.</li>
+                        <li><strong>La santé globale :</strong> Renforcement de la santé mentale positive et réduction du stress.</li>
+                        <li><strong>La prévention :</strong> Diminution des conduites à risques (violences, addictions).</li>
+                    </ul>
+
+                    <h4>La classification officielle</h4>
+                    <p>Ce site reprend la classification actualisée (Santé Publique France, 2022) qui structure les CPS en trois grandes catégories interdépendantes :</p>
+                    <ul>
+                        <li><strong>🧠 CPS Cognitives :</strong> Pour renforcer la conscience de soi et la capacité de réflexion.</li>
+                        <li><strong>❤️ CPS Émotionnelles :</strong> Pour comprendre, identifier et réguler ses émotions.</li>
+                        <li><strong>🤝 CPS Sociales :</strong> Pour interagir de façon constructive et apaisée avec les autres.</li>
+                    </ul>
+                </div>
+            </div>
+        </details>
         
         <details>
             <summary class="cat-header bg-cognitif">CPS COGNITIVES</summary>
