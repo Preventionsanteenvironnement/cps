@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifier ses émotions (E1.2) - Fiche Interactive</title>
+    <style>
+        :root {
+            --primary: #2E86AB;
+            --secondary: #47A025; /* Vert pour l'acceptation/croissance */
+            --accent: #F24333;
+            --light: #F9F9F9;
+            --dark: #333;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--secondary);
+            margin-top: 30px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 25px;
+            background-color: var(--secondary);
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 25px;
+        }
+
+        .highlight-box {
+            background-color: #e8f4f8;
+            border-left: 5px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .analogy-box {
+            background-color: #e9f7ef;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+
+        /* Interactive Elements */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #1a6585;
+        }
+
+        .interactive-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: var(--border-radius);
+            background-color: #fafafa;
+        }
+
+        /* Drag and Drop Styles */
+        .draggable-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .draggable {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: grab;
+            box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+        }
+
+        .drop-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .drop-zone {
+            background-color: #f1f1f1;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            min-height: 150px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .drop-zone h4 {
+            margin-top: 0;
+            color: #666;
+        }
+
+        .drop-zone.correct {
+            border-color: var(--secondary);
+            background-color: #e6ffec;
+        }
+
+        .drop-zone.incorrect {
+            border-color: var(--accent);
+            background-color: #ffe6e6;
+        }
+
+        /* Quiz Styles */
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .options label:hover {
+            background-color: #f0f0f0;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .feedback.success { background-color: #d4edda; color: #155724; }
+        .feedback.error { background-color: #f8d7da; color: #721c24; }
+
+        /* Accordion for Glossary */
+        details {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        details summary {
+            padding: 15px;
+            background: #f9f9f9;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        details div {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #ddd;
+        }
+
+        @media (max-width: 768px) {
+            .drop-zones {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Identifier ses émotions (E1.2)</h1>
+        <p style="text-align: center; color: #666;">Basé sur le processus d'attention, d'observation et d'acceptation expérientielle.</p>
+    </header>
+
+    <section id="comprehension">
+        <h2>1. Comprendre la notion</h2>
+        
+        <p>Identifier ses émotions est un processus complexe qui mobilise deux dimensions de notre être :</p>
+        <ul>
+            <li><strong>Le Soi interne :</strong> C'est le siège de nos états émotionnels et psychiques. C'est là que l'émotion "vit".</li>
+            <li><strong>Le Soi sujet :</strong> C'est notre "pilote" cognitif. Il mobilise son attention et sa capacité d'analyse pour observer ce qui se passe dans le Soi interne.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <strong>La définition clé :</strong> L'identification repose sur la capacité à <em>percevoir l'expérience émotionnelle</em> présente à l'intérieur de soi (via l'attention et l'observation) et, dans un second temps, à la <em>nommer</em> de façon adéquate.
+        </div>
+
+        <h3>L'analogie du quotidien : Le radar météo</h3>
+        <div class="analogy-box">
+            <p>Imaginez que vous êtes une tour de contrôle (<strong>Soi sujet</strong>). Le ciel au-dessus de l'aéroport (<strong>Soi interne</strong>) peut être orageux, venteux ou ensoleillé.</p>
+            <p>Identifier son émotion, ce n'est pas essayer d'arrêter la pluie (modifier l'émotion). C'est simplement tourner le radar vers le ciel pour dire : <em>"Tiens, je détecte une zone de turbulence intense au sud"</em>. C'est une observation pure, sans jugement.</p>
+        </div>
+
+        <h3>Exemple professionnel</h3>
+        <p>Un éducateur sent une boule au ventre et les mains moites (sensations corporelles) face à un groupe agité. Au lieu d'ignorer ces signaux ou de crier immédiatement, il active son <strong>Soi sujet</strong> : <em>"J'observe que mon cœur bat vite. J'analyse que je suis en train de ressentir de l'impuissance et de l'agacement."</em> Cette prise de conscience (conscience émotionnelle) est la première étape indispensable avant toute réaction.</p>
+    </section>
+
+    <section id="introspection">
+        <h2>2. Introspection du professionnel</h2>
+        
+        <div class="warning-box">
+            <strong>⚠️ Règle d'or : D'abord soi, ensuite le public.</strong><br>
+            Les compétences psychosociales ne se transmettent pas comme une leçon théorique. Elles doivent être vécues. Vous ne pouvez pas accompagner quelqu'un à identifier ses émotions si vous êtes vous-même dans l'<strong>évitement expérientiel</strong>.
+        </div>
+
+        <h3>Exercice d'auto-observation (Le Scan AADA)</h3>
+        <p>Prenez un instant, ici et maintenant. Nous allons mobiliser les 2 premiers "A" de l'acronyme <strong>AADA</strong> (Attention et Analyse de l'observation).</p>
+        
+        <div class="interactive-area" style="background: white; border: 1px solid #ddd;">
+            <p><strong>Étape 1 : Acceptation Expérientielle</strong></p>
+            <p>Adoptez une attitude volontaire pour entrer en contact avec ce que vous ressentez, que ce soit agréable ou désagréable, sans chercher à modifier l'expérience.</p>
+            
+            <p><strong>Étape 2 : Les 3 questions du document</strong></p>
+            <form id="introspection-form" onsubmit="return false;">
+                <label>1. Quelles sont les sensations corporelles présentes là, tout de suite ? (ex: tension mâchoire, chaleur...)</label><br>
+                <textarea style="width: 100%; height: 60px; margin-bottom: 10px;" placeholder="Je note mes sensations..."></textarea>
+                
+                <label>2. Quel(s) est(sont) le(s) ressenti(s) subjectif(s) présent(s) ?</label><br>
+                <input type="text" style="width: 100%; margin-bottom: 10px;" placeholder="Je nomme le ressenti...">
+                
+                <label>3. Quel est le niveau d'intensité présent à l'intérieur de moi ? (Curseur)</label><br>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span>Faible</span>
+                    <input type="range" min="1" max="10" value="5" style="flex-grow: 1;">
+                    <span>Fort</span>
+                </div>
+            </form>
+            <p><em>En faisant cela, vous venez de pratiquer l'auto-empathie : la capacité à percevoir et identifier votre propre expérience.</em></p>
+        </div>
+    </section>
+
+    <section id="exercices">
+        <h2>3. S'exercer : La mécanique interne</h2>
+
+        <h3>Exercice 1 : Qui fait quoi ?</h3>
+        <p>Le document distingue deux dimensions. Saurez-vous attribuer les éléments au bon "Soi" ? Glissez les éléments dans la bonne zone.</p>
+
+        <div class="draggable-container" id="source-container">
+            <div class="draggable" draggable="true" data-target="sujet">Attention</div>
+            <div class="draggable" draggable="true" data-target="interne">États émotionnels</div>
+            <div class="draggable" draggable="true" data-target="sujet">Analyse</div>
+            <div class="draggable" draggable="true" data-target="interne">États psychiques</div>
+            <div class="draggable" draggable="true" data-target="sujet">Capacités cognitives</div>
+            <div class="draggable" draggable="true" data-target="sujet">Observation</div>
+        </div>
+
+        <div class="drop-zones">
+            <div class="drop-zone" id="zone-interne" ondragover="allowDrop(event)" ondrop="drop(event, 'interne')">
+                <h4>Le Soi Interne</h4>
+                <small>(Ce qui est ressenti)</small>
+            </div>
+            <div class="drop-zone" id="zone-sujet" ondragover="allowDrop(event)" ondrop="drop(event, 'sujet')">
+                <h4>Le Soi Sujet</h4>
+                <small>(Ce qui perçoit et agit)</small>
+            </div>
+        </div>
+        <div id="drag-feedback" class="feedback"></div>
+
+        <h3>Exercice 2 : Acceptation vs Évitement</h3>
+        <p>L'identification nécessite de sortir de l'<strong>évitement expérientiel</strong> pour aller vers l'<strong>acceptation expérientielle</strong>. Indiquez pour chaque affirmation si elle relève de l'acceptation ou de l'évitement.</p>
+
+        <div class="quiz-question" id="scenario-1">
+            <p><strong>Situation :</strong> "Je sens une angoisse monter. Je me dis 'Stop, ne pense pas à ça, pense à autre chose tout de suite' et je scroll sur mon téléphone."</p>
+            <div class="options">
+                <button class="btn" style="background-color: #7f8c8d;" onclick="checkScenario(1, 'evitement')">C'est de l'évitement expérientiel</button>
+                <button class="btn" style="background-color: #7f8c8d;" onclick="checkScenario(1, 'acceptation')">C'est de l'acceptation expérientielle</button>
+            </div>
+            <div id="feedback-sc-1" class="feedback"></div>
+        </div>
+
+        <div class="quiz-question" id="scenario-2">
+            <p><strong>Situation :</strong> "Je sens une tristesse. C'est désagréable, mais je décide de diriger volontairement mon attention dessus pour observer où elle se loge dans mon corps."</p>
+            <div class="options">
+                <button class="btn" style="background-color: #7f8c8d;" onclick="checkScenario(2, 'evitement')">C'est de l'évitement expérientiel</button>
+                <button class="btn" style="background-color: #7f8c8d;" onclick="checkScenario(2, 'acceptation')">C'est de l'acceptation expérientielle</button>
+            </div>
+            <div id="feedback-sc-2" class="feedback"></div>
+        </div>
+    </section>
+
+    <section id="accompagnement">
+        <h2>4. Pistes pour l'accompagnement</h2>
+        <p>Une fois que vous pratiquez cette "Conscience émotionnelle" pour vous-même, vous pouvez aider un usager ou un élève à le faire.</p>
+        <p>Utilisez les trois questions clés du document comme guide d'entretien :</p>
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li>👉 <em>"Quelles sensations sens-tu dans ton corps ?"</em> (Aide à quitter le mental pour le corps)</li>
+            <li>👉 <em>"Est-ce que c'est fort ? Moyen ? Faible ?"</em> (Évaluation de l'intensité)</li>
+            <li>👉 <em>"Comment appellerais-tu ce ressenti ?"</em> (Nomination adéquate)</li>
+        </ul>
+    </section>
+
+    <section id="validation">
+        <h2>5. Validation des acquis</h2>
+        <p>Répondez à cette question de synthèse pour vérifier votre compréhension du mécanisme décrit dans le document.</p>
+
+        <div class="quiz-question">
+            <p><strong>Selon le document, quelle est la "première action cognitive" indispensable à réaliser pour identifier ses émotions ?</strong></p>
+            
+            <div class="options">
+                <label>
+                    <input type="radio" name="final-quiz" value="A">
+                    Analyser pourquoi on ressent cela pour trouver une solution immédiate.
+                </label>
+                <label>
+                    <input type="radio" name="final-quiz" value="B">
+                    Diriger volontairement son attention sur ses états internes et observer l'expérience sans la modifier.
+                </label>
+                <label>
+                    <input type="radio" name="final-quiz" value="C">
+                    Supprimer l'émotion si elle est désagréable (mécanisme de défense).
+                </label>
+            </div>
+            <button class="btn" onclick="validateFinal()">Valider ma réponse</button>
+            <div id="final-feedback" class="feedback"></div>
+        </div>
+    </section>
+
+    <section id="glossaire" style="margin-top: 50px; border-top: 2px solid #eee; padding-top: 20px;">
+        <h3>📚 Glossaire des notions mobilisées</h3>
+        
+        <details>
+            <summary>Soi Interne</summary>
+            <div>
+                Dimension de soi qui contient les états émotionnels et les 5 états psychiques internes. C'est le lieu du "ressenti".
+            </div>
+        </details>
+        
+        <details>
+            <summary>Soi Sujet</summary>
+            <div>
+                Dimension de soi qui mobilise les capacités cognitives (attention, observation, analyse) pour percevoir ce qui se passe dans le Soi Interne.
+            </div>
+        </details>
+
+        <details>
+            <summary>Conscience émotionnelle (ou Auto-empathie)</summary>
+            <div>
+                Capacité à percevoir ses propres signaux émotionnels et à prendre conscience de l'émotion ressentie sur l'instant.
+            </div>
+        </details>
+
+        <details>
+            <summary>Acceptation expérientielle</summary>
+            <div>
+                Attitude volontaire consistant à entrer en contact avec ses expériences privées (sensations, émotions), qu'elles soient positives ou négatives, sans chercher à les modifier.
+            </div>
+        </details>
+
+        <details>
+            <summary>Évitement expérientiel</summary>
+            <div>
+                Mécanisme de défense (opposé à l'acceptation) consistant à fuir ou supprimer une expérience interne désagréable.
+            </div>
+        </details>
+
+        <details>
+            <summary>AADA (2 premiers A)</summary>
+            <div>
+                Acronyme dont les deux premières lettres signifient <strong>Attention</strong> (diriger son focus) et <strong>Analyse</strong> (de l'observation présente).
+            </div>
+        </details>
+    </section>
+
+</div>
+
+<script>
+    // Drag and Drop Logic
+    let draggedItem = null;
+
+    document.querySelectorAll('.draggable').forEach(item => {
+        item.addEventListener('dragstart', function(e) {
+            draggedItem = this;
+            setTimeout(() => this.style.opacity = '0.5', 0);
+        });
+
+        item.addEventListener('dragend', function() {
+            this.style.opacity = '1';
+            draggedItem = null;
+            checkDragCompletion();
+        });
+    });
+
+    function allowDrop(e) {
+        e.preventDefault();
+    }
+
+    function drop(e, targetZoneId) {
+        e.preventDefault();
+        const correctTarget = draggedItem.getAttribute('data-target');
+        
+        if (correctTarget === targetZoneId) {
+            // Success
+            e.target.closest('.drop-zone').appendChild(draggedItem);
+            draggedItem.style.backgroundColor = "#d4edda";
+            draggedItem.style.border = "1px solid #c3e6cb";
+            draggedItem.setAttribute('draggable', 'false'); // Lock item
+        } else {
+            // Error visual feedback
+            const originalColor = draggedItem.style.backgroundColor;
+            draggedItem.style.backgroundColor = "#f8d7da";
+            setTimeout(() => {
+                draggedItem.style.backgroundColor = originalColor;
+            }, 500);
+        }
+    }
+
+    function checkDragCompletion() {
+        const sourceContainer = document.getElementById('source-container');
+        const feedback = document.getElementById('drag-feedback');
+        if (sourceContainer.children.length === 0) {
+            feedback.textContent = "Bravo ! Vous avez correctement distingué les fonctions du Soi Interne (le vécu) et du Soi Sujet (l'observateur).";
+            feedback.className = "feedback success";
+            feedback.style.display = "block";
+        }
+    }
+
+    // Scenario Logic
+    function checkScenario(id, answer) {
+        const feedbackEl = document.getElementById(`feedback-sc-${id}`);
+        let text = "";
+        let isCorrect = false;
+
+        if (id === 1) {
+            if (answer === 'evitement') {
+                text = "Exact ! Tenter de supprimer ou fuir le ressenti immédiat est de l'évitement expérientiel.";
+                isCorrect = true;
+            } else {
+                text = "Faux. Ici, la personne refuse le contact avec l'expérience et cherche à la modifier. C'est de l'évitement.";
+            }
+        } else if (id === 2) {
+            if (answer === 'acceptation') {
+                text = "Exact ! L'acceptation expérientielle est cette volonté d'observer l'expérience (même désagréable) sans la modifier.";
+                isCorrect = true;
+            } else {
+                text = "Faux. Observer volontairement sa tristesse sans la juger correspond à la définition de l'acceptation expérientielle.";
+            }
+        }
+
+        feedbackEl.textContent = text;
+        feedbackEl.className = isCorrect ? "feedback success" : "feedback error";
+        feedbackEl.style.display = "block";
+    }
+
+    // Final Quiz Logic
+    function validateFinal() {
+        const radios = document.getElementsByName('final-quiz');
+        let selectedValue = null;
+        const feedbackEl = document.getElementById('final-feedback');
+
+        for (const radio of radios) {
+            if (radio.checked) {
+                selectedValue = radio.value;
+                break;
+            }
+        }
+
+        if (!selectedValue) {
+            alert("Veuillez sélectionner une réponse.");
+            return;
+        }
+
+        if (selectedValue === 'B') {
+            feedbackEl.innerHTML = "<strong>Correct !</strong> <br>Le document précise que la première action cognitive correspond aux premiers 'A' de AADA : Attention et observation de l'expérience émotionnelle qui se manifeste, sans la modifier (acceptation).";
+            feedbackEl.className = "feedback success";
+        } else if (selectedValue === 'A') {
+            feedbackEl.innerHTML = "<strong>Incorrect.</strong> <br>L'analyse ne sert pas à trouver une 'solution immédiate' mais à observer l'information présente (les 2 premiers A de AADA). L'action immédiate sans observation préalable mène souvent à l'évitement.";
+            feedbackEl.className = "feedback error";
+        } else if (selectedValue === 'C') {
+            feedbackEl.innerHTML = "<strong>Incorrect.</strong> <br>Supprimer l'émotion correspond à l'évitement expérientiel, qui est un mécanisme de défense allant à l'encontre de l'identification des émotions.";
+            feedbackEl.className = "feedback error";
+        }
+        feedbackEl.style.display = "block";
+    }
+</script>
+
+</body>
+</html>

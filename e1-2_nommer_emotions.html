@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche CPS : Identifier et Nommer l'Émotion</title>
+    <style>
+        :root {
+            --primary: #D81B60; /* Rose soutenu inspiré du document */
+            --primary-light: #F8BBD0;
+            --secondary: #4A90E2;
+            --text: #333;
+            --bg: #FAFAFA;
+            --card-bg: #FFFFFF;
+            --success: #4CAF50;
+            --error: #F44336;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #ad1457 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 1.8rem; }
+        h2 { color: var(--primary); border-bottom: 2px solid var(--primary-light); padding-bottom: 10px; margin-top: 40px;}
+        h3 { color: #555; margin-top: 25px; }
+
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .analogie {
+            background-color: #E3F2FD;
+            border-left-color: var(--secondary);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .warning-box {
+            background-color: #FFF3E0;
+            border: 1px solid #FFB74D;
+            color: #E65100;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Interactive Elements Styles */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s, background 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background-color: #ad1457;
+        }
+
+        .drop-zone {
+            min-height: 100px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+        }
+
+        .draggable {
+            display: inline-block;
+            background: white;
+            border: 1px solid var(--primary);
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 5px;
+            cursor: grab;
+            font-size: 0.9rem;
+        }
+
+        .match-game-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .zone-label {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Quiz Styles */
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quiz-option:hover {
+            background-color: var(--primary-light);
+        }
+
+        .quiz-option.correct {
+            background-color: #C8E6C9;
+            border-color: var(--success);
+            color: #2E7D32;
+        }
+
+        .quiz-option.incorrect {
+            background-color: #FFCDD2;
+            border-color: var(--error);
+            color: #C62828;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        /* Glossary */
+        .glossary-item {
+            margin-bottom: 10px;
+        }
+        .glossary-term {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Accordion */
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .active, .accordion:hover {
+            background-color: #ccc;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Identifier et Nommer l'Émotion</h1>
+        <p>Compétence Cognitive & Émotionnelle • Extrait du Référentiel CPS</p>
+    </header>
+
+    <section>
+        <h2>1. Comprendre la démarche</h2>
+        <div class="card">
+            <p><strong>De quoi s'agit-il ?</strong></p>
+            <p>Identifier ses émotions est la <strong>seconde action mentale</strong> de l'acronyme <strong>AADA</strong> : <em>Analyse de l'information</em>. Ce n'est pas un processus simple : il nécessite de faire correspondre une expérience émotionnelle ressentie à une catégorie sémantique appropriée.</p>
+            
+            <p>Cette identification repose sur deux types d'apprentissages simultanés :</p>
+            <ol>
+                <li><strong>La mise en correspondance :</strong> Relier des ressentis internes (sensations corporelles) à un type d'émotion.</li>
+                <li><strong>La mise en mots :</strong> Utiliser un vocabulaire riche (verbes, noms, adjectifs) pour étiqueter l'expérience.</li>
+            </ol>
+
+            <div class="analogie">
+                <strong>💡 Analogie du quotidien : Le Médecin</strong><br>
+                Imaginez un médecin face à un patient. Le patient décrit des symptômes physiques (fièvre, gorge qui gratte, fatigue = <em>ressentis internes</em>). Le médecin analyse ces signaux pour poser un diagnostic précis (angine virale = <em>catégorie sémantique</em>).<br>
+                Identifier ses émotions, c'est être son propre médecin : écouter ses symptômes corporels pour diagnostiquer son état émotionnel.
+            </div>
+
+            <p><strong>Exemple professionnel :</strong><br>
+            Un éducateur sent sa respiration s'accélérer et ses mâchoires se serrer face à un groupe bruyant (<em>Sensation</em>). Au lieu de crier immédiatement, il identifie ces signaux comme de la "Colère" ou de l'"Agacement" (<em>Nomination</em>). Cette prise de conscience est le point de départ de la régulation.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Introspection du professionnel</h2>
+        
+        <div class="warning-box">
+            🛑 RAPPEL FONDAMENTAL<br>
+            Les CPS ne se transmettent pas, elles se vivent. Vous ne pouvez pas accompagner un public à nommer ses émotions si vous ne pratiquez pas vous-même l'acceptation de vos propres ressenti.
+        </div>
+
+        <div class="card">
+            <h3>Le défi de l'Acceptation Expérientielle</h3>
+            <p>Pour identifier une émotion, une condition est requise : l'abandon de l'<strong>évitement expérientiel</strong>. Il est nécessaire d'accepter de ressentir son expérience interne, même lorsqu'elle est désagréable ou douloureuse. C'est ce qu'on appelle l'<strong>acceptation expérientielle</strong>.</p>
+            
+            <p><strong>Exercice d'auto-observation (à faire mentalement) :</strong></p>
+            <p>Pensez à une émotion forte ressentie récemment dans votre cadre professionnel.</p>
+            <ul>
+                <li>Avez-vous essayé de la repousser (évitement) ou l'avez-vous laissée exister ?</li>
+                <li>Quels signaux votre corps vous a-t-il envoyés avant que vous ne mettiez un mot dessus ?</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Entraînement interactif</h2>
+        <p>Pour développer cette compétence, nous allons travailler les deux piliers : les <strong>sensations</strong> et le <strong>vocabulaire</strong>.</p>
+
+        <div class="card">
+            <h3>Exercice 1 : Le décodeur de sensations</h3>
+            <p>Associez les sensations corporelles (tirées du Tableau E1.2a) à l'émotion de base correspondante. Cliquez sur une sensation, puis cliquez sur l'émotion qui convient.</p>
+            
+            <div id="sensation-game" class="match-game-container">
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;" id="sensation-source">
+                    <button class="draggable" onclick="selectSensation(this, 'colere')">Mâchoires serrées, impression d'exploser</button>
+                    <button class="draggable" onclick="selectSensation(this, 'peur')">Nœud dans la gorge, tremblement</button>
+                    <button class="draggable" onclick="selectSensation(this, 'joie')">Sensation d'expansion, légèreté</button>
+                    <button class="draggable" onclick="selectSensation(this, 'tristesse')">Gorge nouée, ralentissement corporel</button>
+                    <button class="draggable" onclick="selectSensation(this, 'degoût')">Narines serrées, envie de reculer</button>
+                    <button class="draggable" onclick="selectSensation(this, 'surprise')">Yeux grands ouverts, état de choc</button>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <div class="drop-zone" onclick="checkMatch('joie')"><span class="zone-label">JOIE</span><div id="zone-joie"></div></div>
+                    <div class="drop-zone" onclick="checkMatch('peur')"><span class="zone-label">PEUR</span><div id="zone-peur"></div></div>
+                    <div class="drop-zone" onclick="checkMatch('colere')"><span class="zone-label">COLÈRE</span><div id="zone-colere"></div></div>
+                    <div class="drop-zone" onclick="checkMatch('tristesse')"><span class="zone-label">TRISTESSE</span><div id="zone-tristesse"></div></div>
+                    <div class="drop-zone" onclick="checkMatch('degoût')"><span class="zone-label">DÉGOÛT</span><div id="zone-degoût"></div></div>
+                    <div class="drop-zone" onclick="checkMatch('surprise')"><span class="zone-label">SURPRISE</span><div id="zone-surprise"></div></div>
+                </div>
+                <div id="sensation-feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Exercice 2 : Richesse du vocabulaire</h3>
+            <p>Le tableau E1.2(b) souligne l'importance d'un vocabulaire précis. Classez ces termes dans la bonne famille émotionnelle.</p>
+
+            <div id="vocab-quiz">
+                <div class="vocab-q" id="vq1">
+                    <p><strong>1. Où classer : "Allégresse, félicité, être aux anges" ?</strong></p>
+                    <button class="quiz-option" onclick="checkVocab(1, false)">Amour</button>
+                    <button class="quiz-option" onclick="checkVocab(1, true)">Joie</button>
+                    <button class="quiz-option" onclick="checkVocab(1, false)">Surprise</button>
+                    <div class="feedback" id="vf1">Correct ! Ces termes désignent une intensité de la Joie.</div>
+                </div>
+
+                <div class="vocab-q" id="vq2" style="display:none;">
+                    <p><strong>2. Où classer : "Appréhender, redouter, effroi" ?</strong></p>
+                    <button class="quiz-option" onclick="checkVocab(2, false)">Colère</button>
+                    <button class="quiz-option" onclick="checkVocab(2, false)">Tristesse</button>
+                    <button class="quiz-option" onclick="checkVocab(2, true)">Peur</button>
+                    <div class="feedback" id="vf2">Exact ! L'appréhension et l'effroi sont des nuances de la Peur.</div>
+                </div>
+
+                <div class="vocab-q" id="vq3" style="display:none;">
+                    <p><strong>3. Où classer : "Affliction, morosité, avoir un vague à l'âme" ?</strong></p>
+                    <button class="quiz-option" onclick="checkVocab(3, true)">Tristesse</button>
+                    <button class="quiz-option" onclick="checkVocab(3, false)">Dégoût</button>
+                    <button class="quiz-option" onclick="checkVocab(3, false)">Peur</button>
+                    <div class="feedback" id="vf3">Oui, ce sont des termes liés au Chagrin et à la Tristesse.</div>
+                </div>
+                 <div class="vocab-q" id="vq4" style="display:none;">
+                    <p><strong>4. Où classer : "Exaspération, irritation, s'indigner" ?</strong></p>
+                    <button class="quiz-option" onclick="checkVocab(4, false)">Dégoût</button>
+                    <button class="quiz-option" onclick="checkVocab(4, true)">Colère</button>
+                    <button class="quiz-option" onclick="checkVocab(4, false)">Surprise</button>
+                    <div class="feedback" id="vf4">Correct. L'exaspération est une forme de colère.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Accompagner les autres</h2>
+        <div class="card">
+            <h3>La Mentalisation Parentale</h3>
+            <p>Une fois que vous savez identifier vos émotions, comment aider un enfant ?</p>
+            <p>Le document mentionne le concept de <strong>mentalisation parentale</strong> (ou empathie des parents). C'est le processus par lequel l'adulte (ou le caregiver) est capable de :</p>
+            <ol>
+                <li>Décrire l'expérience mentale de l'enfant (ce qu'il vit à l'intérieur).</li>
+                <li>Lui présenter à nouveau, traduite dans le langage des actions.</li>
+            </ol>
+            <p><em>Exemple : "Je vois que tu serres les poings et que tu es rouge (Description), tu sembles très en colère parce que ton tour est passé (Traduction)."</em></p>
+            <p>Cela permet à l'enfant de guider sa propre identification des émotions et de comprendre ses états internes.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Validation des acquis</h2>
+        <div class="card">
+            <p>Testez votre compréhension globale des documents fournis.</p>
+            
+            <button class="accordion">Question 1 : Quels sont les deux bénéfices principaux d'identifier ses émotions ?</button>
+            <div class="panel">
+                <button class="quiz-option" onclick="finalQuiz(this, false)">Supprimer le stress et oublier les souvenirs douloureux.</button>
+                <button class="quiz-option" onclick="finalQuiz(this, true)">Mettre en route la régulation émotionnelle et améliorer l'identification des émotions des autres.</button>
+                <button class="quiz-option" onclick="finalQuiz(this, false)">Augmenter son vocabulaire et réussir ses examens.</button>
+                <div class="feedback">
+                    <strong>Réponse : B.</strong> Selon le texte, identifier ses émotions est le point de départ de la régulation (cela réduit l'intensité) et favorise l'empathie (auto-empathie vers empathie pour autrui).
+                </div>
+            </div>
+
+            <button class="accordion">Question 2 : Qu'est-ce que l'acceptation expérientielle ?</button>
+            <div class="panel">
+                <button class="quiz-option" onclick="finalQuiz(this, true)">Accepter de ressentir son expérience interne, même désagréable, au lieu de l'éviter.</button>
+                <button class="quiz-option" onclick="finalQuiz(this, false)">Accepter de faire toutes les expériences proposées par son entourage.</button>
+                <button class="quiz-option" onclick="finalQuiz(this, false)">Le fait de ne ressentir que des émotions positives.</button>
+                <div class="feedback">
+                    <strong>Réponse : A.</strong> C'est l'abandon du mécanisme d'évitement expérientiel. C'est une condition nécessaire pour identifier ses émotions.
+                </div>
+            </div>
+
+            <button class="accordion">Question 3 : Sur quoi s'appuie le développement de l'identification des émotions chez l'enfant ?</button>
+            <div class="panel">
+                <button class="quiz-option" onclick="finalQuiz(this, false)">Uniquement sur l'apprentissage scolaire.</button>
+                <button class="quiz-option" onclick="finalQuiz(this, true)">D'abord sur leur valence (agréable/désagréable) et les émotions de base, puis vers une différenciation plus spécifique.</button>
+                <button class="quiz-option" onclick="finalQuiz(this, false)">Sur la capacité à cacher ses émotions aux adultes.</button>
+                <div class="feedback">
+                    <strong>Réponse : B.</strong> Le texte précise que l'identification s'organise d'abord autour des émotions de base et de leur valence, avant de s'affiner à l'âge adulte.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Glossaire des notions mobilisées</h2>
+        <div class="card">
+            <div class="glossary-item">
+                <span class="glossary-term">AADA :</span> Acronyme dont "Identifier ses émotions" est la seconde étape (Analyse de l'information).
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Acceptation expérientielle :</span> Capacité à accepter et ressentir son expérience interne (sensations, émotions), même lorsqu'elle est perçue comme désagréable ou douloureuse. Contraire de l'évitement expérientiel.
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Auto-empathie :</span> Capacité de reconnaître ses propres émotions, qui participe ensuite à la reconnaissance des émotions chez autrui.
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Émotions de base :</span> Catégories émotionnelles fondamentales utilisées pour structurer l'identification (Joie, Amour, Peur, Colère, Tristesse, Dégoût, Surprise).
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Mentalisation parentale :</span> Processus par lequel l'adulte décrit l'expérience mentale de l'enfant et la lui traduit en langage, aidant ainsi l'enfant à comprendre ses états internes.
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Régulation émotionnelle :</span> Compétence qui débute par la conscience émotionnelle (identifier et nommer). Le simple fait de nommer réduit l'intensité émotionnelle.
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // SENSATION GAME LOGIC
+    let selectedSensation = null;
+    let selectedType = null;
+
+    function selectSensation(element, type) {
+        // Reset previous styles
+        const buttons = document.querySelectorAll('.draggable');
+        buttons.forEach(btn => btn.style.backgroundColor = 'white');
+        buttons.forEach(btn => btn.style.color = 'var(--text)');
+        
+        // Set active style
+        element.style.backgroundColor = 'var(--primary)';
+        element.style.color = 'white';
+        
+        selectedSensation = element;
+        selectedType = type;
+        
+        document.getElementById('sensation-feedback').style.display = 'block';
+        document.getElementById('sensation-feedback').innerHTML = "Maintenant, cliquez sur la zone (émotion) correspondante ci-dessous.";
+        document.getElementById('sensation-feedback').style.backgroundColor = '#E3F2FD';
+        document.getElementById('sensation-feedback').style.color = '#0D47A1';
+    }
+
+    function checkMatch(zoneType) {
+        const feedback = document.getElementById('sensation-feedback');
+        
+        if (!selectedSensation) {
+            feedback.style.display = 'block';
+            feedback.innerHTML = "Sélectionnez d'abord une sensation en haut !";
+            return;
+        }
+
+        if (zoneType === selectedType) {
+            // Success
+            const zone = document.getElementById('zone-' + zoneType);
+            zone.appendChild(selectedSensation);
+            selectedSensation.style.backgroundColor = '#C8E6C9';
+            selectedSensation.style.color = '#2E7D32';
+            selectedSensation.style.border = 'none';
+            selectedSensation.onclick = null; // Disable click
+            
+            feedback.innerHTML = "Bravo ! C'est la bonne association.";
+            feedback.className = "feedback quiz-option correct";
+            feedback.style.display = 'block';
+            
+            selectedSensation = null;
+            selectedType = null;
+        } else {
+            // Error
+            feedback.innerHTML = "Ce n'est pas la bonne émotion pour cette sensation. Essayez encore.";
+            feedback.className = "feedback quiz-option incorrect";
+            feedback.style.display = 'block';
+        }
+    }
+
+    // VOCABULARY GAME LOGIC
+    function checkVocab(qIndex, isCorrect) {
+        const feedback = document.getElementById('vf' + qIndex);
+        feedback.style.display = 'block';
+        
+        if (isCorrect) {
+            feedback.className = 'feedback correct';
+            // Show next question after delay
+            if(document.getElementById('vq' + (qIndex + 1))) {
+                setTimeout(() => {
+                    document.getElementById('vq' + qIndex).style.display = 'none';
+                    document.getElementById('vq' + (qIndex + 1)).style.display = 'block';
+                }, 1500);
+            }
+        } else {
+            feedback.className = 'feedback incorrect';
+            feedback.innerHTML = "Ce n'est pas tout à fait ça. Regardez bien le tableau des exemples.";
+        }
+    }
+
+    // ACCORDION LOGIC
+    var acc = document.getElementsByClassName("accordion");
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+        });
+    }
+
+    // FINAL QUIZ LOGIC
+    function finalQuiz(btn, isCorrect) {
+        const parent = btn.parentElement;
+        const feedback = parent.querySelector('.feedback');
+        
+        // Reset buttons in this group
+        const siblings = parent.getElementsByClassName('quiz-option');
+        for(let sib of siblings) {
+            sib.classList.remove('correct', 'incorrect');
+        }
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+        } else {
+            btn.classList.add('incorrect');
+        }
+        
+        feedback.style.display = 'block';
+        // Auto resize accordion to fit feedback
+        parent.style.maxHeight = parent.scrollHeight + "px";
+    }
+</script>
+
+</body>
+</html>
