@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprendre les Émotions - Fiche E1.1</title>
+    <style>
+        :root {
+            --primary: #d6336c; /* Rose inspiré du document */
+            --primary-light: #fce7f3;
+            --secondary: #1e293b;
+            --accent: #0ea5e9;
+            --success: #22c55e;
+            --error: #ef4444;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #db2777);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 { margin: 0; font-size: 2rem; }
+        .subtitle { opacity: 0.9; font-weight: 300; margin-top: 10px; display: block;}
+
+        section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 { color: var(--secondary); margin-top: 25px; }
+
+        .highlight {
+            background-color: var(--primary-light);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .analogy-box {
+            background-color: #e0f2fe;
+            border-left: 5px solid var(--accent);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* --- Elements Interactifs --- */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.1s, background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:hover { background-color: #be185d; transform: translateY(-1px); }
+        .btn:active { transform: translateY(1px); }
+
+        /* Zone de saisie introspection */
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+            margin-top: 10px;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Jeu de classement */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .draggables {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            min-height: 50px;
+        }
+
+        .draggable {
+            background-color: white;
+            border: 2px solid var(--accent);
+            color: var(--secondary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: move;
+            user-select: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .drop-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .drop-zones { grid-template-columns: 1fr; }
+        }
+
+        .drop-zone {
+            background-color: #f1f5f9;
+            border: 2px dashed #94a3b8;
+            border-radius: 12px;
+            padding: 15px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .drop-zone.hover { background-color: #e2e8f0; border-color: var(--primary); }
+        .drop-zone h4 { margin: 0 0 10px 0; color: #64748b; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Quiz Styles */
+        .quiz-container { margin-top: 20px; }
+        .question { font-weight: 600; margin-bottom: 10px; font-size: 1.1rem; }
+        .options { display: flex; flex-direction: column; gap: 8px; }
+        
+        .option {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover { background-color: #f8fafc; border-color: var(--primary); }
+        .option.selected { background-color: var(--primary-light); border-color: var(--primary); color: var(--primary); font-weight: bold; }
+        .option.correct { background-color: #dcfce7; border-color: var(--success); color: #166534; }
+        .option.incorrect { background-color: #fee2e2; border-color: var(--error); color: #991b1b; }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .feedback.show { display: block; }
+        .feedback.success { background-color: #dcfce7; color: #166534; border-left: 4px solid var(--success); }
+        .feedback.error { background-color: #fee2e2; color: #991b1b; border-left: 4px solid var(--error); }
+
+        /* Glossaire */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .term-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .term-title { color: var(--primary); font-weight: bold; display: block; margin-bottom: 5px; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #64748b;
+            font-size: 0.9rem;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Comprendre les Émotions</h1>
+        <span class="subtitle">Nature, Fonction et Déconstruction des Idées Reçues (E1.1)</span>
+    </div>
+</header>
+
+<div class="container">
+
+    <section id="comprendre">
+        <h2>1. Comprendre la notion</h2>
+        <p>Pour développer une compétence psychosociale émotionnelle, il ne suffit pas de ressentir. Selon la définition opérationnelle, il faut acquérir deux savoirs psychologiques fondamentaux :</p>
+        
+        <ol>
+            <li><strong>Connaître la nature des émotions :</strong> Elles sont composées d'éléments <em>internes</em> (ressentis, sensations corporelles) et <em>externes</em> (expression du visage, paralangage). Elles sont interconnectées avec nos cognitions (pensées) et nos comportements.</li>
+            <li><strong>Comprendre la fonction des émotions :</strong> Elles ne sont pas gratuites. Elles ont une fonction <strong>informative</strong> (indicateur de l'état intérieur) et une fonction d'<strong>impulsion</strong> (pousser à l'action pour satisfaire un besoin).</li>
+        </ol>
+
+        <div class="analogy-box">
+            <h3>💡 L'analogie du tableau de bord</h3>
+            <p>Imaginez votre psychisme comme une voiture. L'émotion est le <strong>voyant lumineux</strong> sur le tableau de bord.</p>
+            <ul>
+                <li>Si le voyant "Essence" s'allume (émotion désagréable), ce n'est pas "négatif" en soi. C'est une <strong>information cruciale</strong>.</li>
+                <li>Si vous ignorez le voyant ou si vous le cachez (évitement émotionnel), vous tomberez en panne.</li>
+                <li>La fonction du voyant est de vous pousser à l'action (aller à la station-service) pour satisfaire le besoin (faire le plein).</li>
+            </ul>
+        </div>
+
+        <p><strong>Exemple professionnel :</strong> Un éducateur ressent une bouffée de chaleur et une tension (nature/interne) lorsqu'un jeune l'insulte. Au lieu de crier (réaction immédiate), il comprend que cette colère l'informe que son besoin de respect est insatisfait (fonction informative) et qu'il doit poser un cadre (action pour satisfaire le besoin).</p>
+    </section>
+
+    <section id="introspection">
+        <h2>2. Introspection du professionnel</h2>
+        <p><em>"Les neurosciences montrent aujourd'hui que l'opposition entre pensée (raison) et émotion n'est pas fondée."</em> Pourtant, nous portons tous l'héritage de cette "erreur de Descartes".</p>
+        
+        <div style="background-color: #fff1f2; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <strong>⚠️ Rappel essentiel :</strong> Avant d'accompagner les autres, vous devez clarifier votre propre rapport aux émotions. Acceptez-vous vos propres signaux d'alerte ?
+        </div>
+
+        <h3>Exercice d'auto-analyse</h3>
+        <p>Identifiez une situation professionnelle récente où vous avez ressenti une émotion qualifiée de "négative" (colère, peur, tristesse, honte). Essayez de répondre pour vous-même :</p>
+        <ul>
+            <li>Avez-vous jugé cette émotion comme "gênante" ou "inadaptée" ?</li>
+            <li>Si vous retirez l'étiquette "négative" pour la remplacer par "désagréable mais utile", quelle information cette émotion essayait-elle de vous donner sur vos besoins ?</li>
+        </ul>
+
+        <textarea placeholder="Écrivez ici votre réflexion (cette zone est privée, rien n'est enregistré)... Par exemple : 'J'ai eu honte de ma peur face à ce parent agressif, car je pensais devoir être infaillible. En réalité, ma peur m'informait d'un danger réel...'"></textarea>
+    </section>
+
+    <section id="activites">
+        <h2>3. S'exercer et Intégrer</h2>
+        <p>Testez votre compréhension de la structure des émotions et des concepts clés.</p>
+
+        <h3>Exercice A : Nature de l'émotion</h3>
+        <p>Classez les éléments suivants selon qu'ils appartiennent à la <strong>composante interne</strong> (ce qui se passe dedans) ou à la <strong>composante externe</strong> (ce qui se voit dehors).</p>
+        <p><em>Cliquez sur un élément puis cliquez dans la zone correspondante.</em></p>
+
+        <div class="game-area">
+            <div class="draggables" id="draggable-container">
+                </div>
+            
+            <div class="drop-zones">
+                <div class="drop-zone" id="zone-interne" onclick="handleDrop('interne')">
+                    <h4>Composantes Internes</h4>
+                </div>
+                <div class="drop-zone" id="zone-externe" onclick="handleDrop('externe')">
+                    <h4>Composantes Externes</h4>
+                </div>
+            </div>
+            <div id="drag-feedback" class="feedback"></div>
+        </div>
+
+        <hr style="margin: 30px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+        <h3>Exercice B : Changer de vocabulaire</h3>
+        <p>Le document souligne l'importance d'abandonner les qualificatifs péjoratifs comme "négatif/positif". Transformez la phrase suivante.</p>
+        
+        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #cbd5e1;">
+            <p style="margin-top: 0;"><strong>Situation :</strong> "Je ne devrais pas être triste, c'est une émotion négative."</p>
+            <p><strong>Reformulation adaptée (cliquez sur la meilleure option) :</strong></p>
+            
+            <div class="options" id="reframe-options">
+                <div class="option" onclick="checkReframe(this, false)">"Je ne devrais pas être triste, car la tristesse empêche d'être rationnel."</div>
+                <div class="option" onclick="checkReframe(this, true)">"Cette tristesse est désagréable, mais elle est utile car elle m'informe d'un manque."</div>
+                <div class="option" onclick="checkReframe(this, false)">"Je dois penser positif pour chasser cette émotion."</div>
+            </div>
+            <div id="reframe-feedback" class="feedback"></div>
+        </div>
+    </section>
+
+    <section id="accompagnement">
+        <h2>4. Accompagner le public</h2>
+        <p>Une fois ce travail fait sur vous-même, comment l'utiliser avec un public (élèves, usagers) ?</p>
+        <ul>
+            <li><strong>Modélisation :</strong> N'hésitez pas à verbaliser vos émotions sans les juger. <em>"Je me sens inquiet (nature), cela m'indique que je ne suis pas sûr que tout le monde ait compris (fonction)."</em></li>
+            <li><strong>Vocabulaire :</strong> Corrigez avec bienveillance l'utilisation des termes "émotion négative". Proposez "émotion désagréable" pour valider l'utilité du ressenti.</li>
+            <li><strong>Légitimation :</strong> Rappelez que l'émotion fait partie de la "nature humaine" tout comme la gravité fait partie de la "nature physique". On ne lutte pas contre la gravité, on la prend en compte.</li>
+        </ul>
+    </section>
+
+    <section id="validation">
+        <h2>5. Validation des acquis</h2>
+        <p>Répondez à ces 3 questions pour valider votre compréhension de la fiche E1.1.</p>
+
+        <div id="final-quiz">
+            </div>
+        <button id="validate-quiz-btn" class="btn" style="width: 100%; margin-top: 20px;" onclick="validateFinalQuiz()">Valider mes réponses</button>
+        <div id="global-feedback" class="feedback"></div>
+    </section>
+
+    <section id="glossaire">
+        <h2>Glossaire des notions travaillées</h2>
+        <div class="glossary-grid">
+            <div class="term-card">
+                <span class="term-title">Composantes Internes</span>
+                Ressentis subjectifs et sensations corporelles (ex: cœur qui bat, chaleur) qui constituent la partie invisible de l'émotion pour autrui.
+            </div>
+            <div class="term-card">
+                <span class="term-title">Composantes Externes</span>
+                Manifestations visibles de l'émotion : expressions du visage, paralangage (ton de la voix), posture.
+            </div>
+            <div class="term-card">
+                <span class="term-title">Fonction Informative</span>
+                Rôle de l'émotion qui agit comme un indicateur de l'état intérieur et de la satisfaction (ou non) des besoins psychologiques.
+            </div>
+            <div class="term-card">
+                <span class="term-title">Fonction d'Impulsion</span>
+                Rôle de l'émotion qui pousse l'organisme à l'action pour rétablir l'équilibre ou satisfaire un besoin.
+            </div>
+            <div class="term-card">
+                <span class="term-title">Erreur de Descartes</span>
+                Idée reçue historique (et fausse) séparant la raison de l'émotion, considérant l'émotion comme une entrave à la pensée rationnelle.
+            </div>
+            <div class="term-card">
+                <span class="term-title">Vocabulaire Émotionnel</span>
+                Nécessité de remplacer les termes "positif/négatif" (jugement de valeur) par "agréable/désagréable" pour reconnaître l'utilité de toutes les émotions.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© CPS Studio - Fiche pédagogique interactive générée à partir du contenu E1.1</p>
+    </footer>
+
+</div>
+
+<script>
+    /* --- LOGIQUE JEU DE CLASSEMENT (SIMPLIFIÉ POUR MOBILE) --- */
+    const items = [
+        { id: 1, text: "Ressenti subjectif", type: "interne" },
+        { id: 2, text: "Expression du visage", type: "externe" },
+        { id: 3, text: "Sensations corporelles", type: "interne" },
+        { id: 4, text: "Paralangage (voix)", type: "externe" },
+        { id: 5, text: "Battements de cœur", type: "interne" }
+    ];
+
+    let selectedItem = null;
+    const container = document.getElementById('draggable-container');
+    const feedbackDrag = document.getElementById('drag-feedback');
+    let correctCount = 0;
+
+    function initGame() {
+        items.forEach(item => {
+            const el = document.createElement('div');
+            el.className = 'draggable';
+            el.innerText = item.text;
+            el.dataset.type = item.type;
+            el.onclick = () => selectItem(el);
+            container.appendChild(el);
+        });
+    }
+
+    function selectItem(el) {
+        // Deselect others
+        document.querySelectorAll('.draggable').forEach(d => {
+            d.style.borderColor = 'var(--accent)';
+            d.style.backgroundColor = 'white';
+        });
+        
+        selectedItem = el;
+        el.style.borderColor = 'var(--primary)';
+        el.style.backgroundColor = 'var(--primary-light)';
+    }
+
+    function handleDrop(zoneType) {
+        if (!selectedItem) return;
+
+        const itemType = selectedItem.dataset.type;
+        const targetZone = document.getElementById(zoneType === 'interne' ? 'zone-interne' : 'zone-externe');
+
+        if (itemType === zoneType) {
+            // Correct
+            targetZone.appendChild(selectedItem);
+            selectedItem.style.borderColor = 'var(--success)';
+            selectedItem.style.backgroundColor = '#dcfce7';
+            selectedItem.onclick = null; // Disable further clicks
+            selectedItem.style.cursor = 'default';
+            selectedItem = null;
+            correctCount++;
+            
+            if (correctCount === items.length) {
+                feedbackDrag.innerHTML = "<strong>Bravo !</strong> Vous avez correctement identifié les composantes internes (ce qu'on vit) et externes (ce qu'on montre).";
+                feedbackDrag.className = "feedback show success";
+            }
+        } else {
+            // Incorrect
+            feedbackDrag.innerHTML = "<strong>Attention :</strong> Cet élément ne va pas dans cette catégorie. Réessayez.";
+            feedbackDrag.className = "feedback show error";
+            setTimeout(() => {
+                feedbackDrag.className = "feedback";
+            }, 2000);
+        }
+    }
+
+    /* --- LOGIQUE REFORMULATION --- */
+    function checkReframe(element, isCorrect) {
+        const feedback = document.getElementById('reframe-feedback');
+        const allOptions = document.querySelectorAll('#reframe-options .option');
+        
+        allOptions.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
+        element.classList.add('selected');
+
+        if (isCorrect) {
+            element.classList.add('correct');
+            feedback.innerHTML = "<strong>Excellent !</strong> Vous avez identifié l'émotion comme un phénomène naturel (ni bon ni mauvais) qui remplit une fonction informative utile.";
+            feedback.className = "feedback show success";
+        } else {
+            element.classList.add('incorrect');
+            feedback.innerHTML = "<strong>Pas tout à fait.</strong> Cette réponse maintient un jugement ('rationnel', 'chasser') ou une opposition raison/émotion (l'erreur de Descartes).";
+            feedback.className = "feedback show error";
+        }
+    }
+
+    /* --- LOGIQUE QUIZ FINAL --- */
+    const quizData = [
+        {
+            question: "1. Selon l'état actuel des connaissances (neurosciences), quelle affirmation est vraie ?",
+            options: [
+                "L'émotion est l'ennemie de la raison (Erreur de Descartes).",
+                "Les émotions et les cognitions (pensées) sont interreliées.",
+                "Il faut supprimer les émotions pour avoir un comportement adapté."
+            ],
+            correct: 1,
+            explanation: "Il y a un consensus scientifique sur le fait que les émotions et les cognitions sont interreliées. L'opposition raison/émotion n'est pas fondée."
+        },
+        {
+            question: "2. Quelle est la double fonction des émotions ?",
+            options: [
+                "Fonction de perturbation et de gêne sociale.",
+                "Fonction informative (état interne) et d'impulsion (action).",
+                "Fonction positive et fonction négative."
+            ],
+            correct: 1,
+            explanation: "Les émotions nous informent sur nos besoins (fonction informative) et nous poussent à agir pour les satisfaire (fonction d'impulsion)."
+        },
+        {
+            question: "3. Pourquoi est-il recommandé d'abandonner les termes 'positif/négatif' ?",
+            options: [
+                "Parce que c'est politiquement incorrect.",
+                "Pour éviter de percevoir certaines émotions (désagréables) comme honteuses ou inutiles.",
+                "Parce qu'il n'existe que des émotions agréables."
+            ],
+            correct: 1,
+            explanation: "Les qualificatifs péjoratifs comme 'négatif' peuvent conduire au rejet des émotions (évitement), alors qu'elles sont toutes utiles pour l'adaptation."
+        }
+    ];
+
+    function renderQuiz() {
+        const container = document.getElementById('final-quiz');
+        quizData.forEach((q, index) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'quiz-block';
+            qDiv.style.marginBottom = "20px";
+            qDiv.innerHTML = `
+                <div class="question">${q.question}</div>
+                <div class="options" id="q${index}-options">
+                    ${q.options.map((opt, i) => `
+                        <div class="option" onclick="selectQuizOption(${index}, ${i})">${opt}</div>
+                    `).join('')}
+                </div>
+                <div class="feedback" id="q${index}-feedback"></div>
+            `;
+            container.appendChild(qDiv);
+        });
+    }
+
+    const userAnswers = new Array(quizData.length).fill(null);
+
+    function selectQuizOption(qIndex, optIndex) {
+        userAnswers[qIndex] = optIndex;
+        const options = document.querySelectorAll(`#q${qIndex}-options .option`);
+        options.forEach((opt, i) => {
+            opt.classList.remove('selected');
+            if (i === optIndex) opt.classList.add('selected');
+        });
+    }
+
+    function validateFinalQuiz() {
+        let score = 0;
+        let allAnswered = true;
+
+        quizData.forEach((q, index) => {
+            const feedbackEl = document.getElementById(`q${index}-feedback`);
+            const options = document.querySelectorAll(`#q${index}-options .option`);
+            
+            if (userAnswers[index] === null) {
+                allAnswered = false;
+                return;
+            }
+
+            options.forEach(opt => opt.classList.remove('correct', 'incorrect'));
+
+            if (userAnswers[index] === q.correct) {
+                score++;
+                options[userAnswers[index]].classList.add('correct');
+                feedbackEl.innerHTML = `<strong>Correct !</strong> ${q.explanation}`;
+                feedbackEl.className = "feedback show success";
+            } else {
+                options[userAnswers[index]].classList.add('incorrect');
+                feedbackEl.innerHTML = `<strong>Erreur.</strong> La bonne réponse était : "${q.options[q.correct]}". <br><em>${q.explanation}</em>`;
+                feedbackEl.className = "feedback show error";
+            }
+        });
+
+        const globalFeedback = document.getElementById('global-feedback');
+        if (!allAnswered) {
+            globalFeedback.innerHTML = "Veuillez répondre à toutes les questions.";
+            globalFeedback.className = "feedback show error";
+        } else {
+            if (score === quizData.length) {
+                globalFeedback.innerHTML = "<strong>Carton plein !</strong> Vous avez parfaitement intégré les concepts de nature, fonction et utilité des émotions.";
+                globalFeedback.className = "feedback show success";
+                document.getElementById('validate-quiz-btn').style.display = 'none';
+            } else {
+                globalFeedback.innerHTML = `<strong>Résultat : ${score}/${quizData.length}.</strong> Prenez le temps de lire les corrections ci-dessus pour bien ancrer les notions.`;
+                globalFeedback.className = "feedback show";
+            }
+        }
+    }
+
+    // Initialize
+    initGame();
+    renderQuiz();
+
+</script>
+
+</body>
+</html>
