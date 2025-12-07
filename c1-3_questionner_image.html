@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Studio - Fusion & Défusion Cognitive</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #8e44ad; /* Violet pour la cognition/esprit */
+            --highlight: #27ae60; /* Vert pour la solution/défusion */
+            --bg: #f8f9fa;
+            --white: #ffffff;
+            --radius: 10px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* En-tête */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 { margin: 0; font-size: 2em; }
+        header p { margin-top: 10px; opacity: 0.9; font-style: italic; }
+
+        /* Sections */
+        section {
+            background: var(--white);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent);
+        }
+
+        h2 { color: var(--accent); border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 0; }
+        h3 { color: var(--primary); margin-top: 20px; font-weight: 600; }
+
+        /* Analogie Box */
+        .analogy {
+            background-color: #f3e5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed var(--accent);
+            margin: 15px 0;
+        }
+
+        /* Introspection Zone */
+        .introspection {
+            background-color: #e8f5e9;
+            border-left-color: var(--highlight);
+        }
+        
+        .introspection-alert {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: inherit;
+        }
+
+        /* Interactive Tools */
+        .reformulator-tool {
+            background: #fdfdfd;
+            border: 2px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button.action-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        button.action-btn:hover { background-color: #7d3c98; }
+
+        .result-box {
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--highlight);
+            min-height: 1.5em;
+        }
+
+        /* Quiz */
+        .quiz-option {
+            display: block;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quiz-option:hover { background: #e9ecef; }
+        .quiz-option.correct { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .quiz-option.incorrect { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+
+        .feedback {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Glossaire */
+        dl { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        dt { font-weight: bold; color: var(--accent); margin-top: 10px;}
+        dd { margin-left: 0; color: #555; }
+
+        footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Questionner l'Image de Soi</h1>
+        <p>De la Fusion à la Défusion Cognitive</p>
+    </header>
+
+    <section>
+        <h2>🔷 1. Comprendre : Fusion vs Défusion</h2>
+        <p>
+            Notre cerveau génère en permanence des pensées, des jugements et des représentations sur nous-mêmes ("Je suis timide", "Je suis nul", "Je suis l'intellectuel").
+            Le problème survient lorsque nous confondons ces idées avec la réalité factuelle.
+        </p>
+
+        <h3>Le piège : La Fusion Cognitive</h3>
+        <p>
+            C'est un processus automatique et souvent inconscient où nous interagissons avec nos pensées comme si elles étaient le monde réel. 
+            <br><em>Exemple :</em> Si je pense "Je ne pourrai jamais réussir", je le prends pour un fait établi et j'arrête d'essayer.
+        </p>
+
+        <div class="analogy">
+            <h3>💡 L'analogie du Programme Informatique</h3>
+            <p>
+                Imaginez que vos représentations de soi sont comme un <strong>programme d'ordinateur</strong> ou un filtre de couleur. 
+                Sans vous en rendre compte, ce programme tourne en arrière-plan et oriente toute votre vie. Vous ne voyez pas le monde tel qu'il est, mais tel que le programme le colore.
+                La fusion, c'est oublier qu'il y a un programme et croire que l'écran EST la réalité.
+            </p>
+        </div>
+
+        <h3>La solution : La Défusion Cognitive</h3>
+        <p>
+            C'est l'habileté à prendre du recul. C'est mettre en place une "perspective psychologique différente" pour observer ses pensées sans y adhérer aveuglément. 
+            Les pensées redeviennent de "simples événements mentaux" et non des ordres à exécuter.
+        </p>
+    </section>
+
+    <section class="introspection">
+        <h2>🔷 2. Introspection du Professionnel</h2>
+        
+        <div class="introspection-alert">
+            🛑 <strong>D'abord soi, ensuite le public.</strong><br>
+            Vous ne pouvez pas inviter un usager à se distancier de ses pensées si vous restez fusionné avec les vôtres.
+        </div>
+
+        <h3>Exercice : L'Observateur Intérieur</h3>
+        <p>
+            Le texte explique que nous avons tendance à dire "Je suis triste" (fusion totale). 
+            Le but est d'activer votre <strong>Soi Sujet</strong> (l'observateur) pour regarder votre <strong>Soi Interne</strong> (l'émotion).
+        </p>
+        
+        <p><strong>1. Identifiez une étiquette ou un jugement négatif que vous portez sur vous-même en tant que professionnel</strong> (ex: "Je suis incompétent avec ce groupe", "Je suis trop laxiste").</p>
+        <textarea rows="2" placeholder="J'ai tendance à penser que je suis..."></textarea>
+
+        <p><strong>2. Observez l'impact.</strong> Si vous croyez cette pensée à 100% (fusion), comment vous comportez-vous ? (ex: je me mets en retrait, je deviens agressif, je me justifie).</p>
+        <textarea rows="2" placeholder="Quand je crois cela, je..."></textarea>
+    </section>
+
+    <section>
+        <h2>🔷 3. Pratique : La Machine à Dêfusionner</h2>
+        <p>
+            Une technique clé mentionnée dans le référentiel est la <strong>reformulation</strong>. Elle permet de "mettre en lumière que la pensée est le produit de mon activité cérébrale".
+        </p>
+        <p>Essayez cet outil pour transformer une pensée fusionnée en pensée défusionnée.</p>
+
+        <div class="reformulator-tool">
+            <label for="thoughtInput">Écrivez une pensée limitante (ex: "Je suis nul") :</label><br>
+            <input type="text" id="thoughtInput" placeholder="Je suis...">
+            <br>
+            <button class="action-btn" onclick="defuseThought()">Activer la Défusion</button>
+
+            <div id="resultArea" class="result-box"></div>
+        </div>
+
+        <p style="font-size: 0.9em; margin-top: 15px; color: #666;">
+            <em>Note : Ce petit changement linguistique crée une distanciation immédiate. Nous ne contrôlons pas les pensées qui surgissent, mais nous avons le choix d'y adhérer ou non.</em>
+        </p>
+    </section>
+
+    <section>
+        <h2>🔷 4. Accompagner le public</h2>
+        <p>Après avoir pratiqué sur vous-même, voici comment guider les autres :</p>
+        <ul>
+            <li><strong>Le langage :</strong> Invitez-les à remplacer "Je suis [émotion]" (ex: Je suis jaloux) par "Je ressens de la [émotion]" (ex: Je ressens de la jalousie). Cela aide à ne plus être défini par l'émotion.</li>
+            <li><strong>Les Soi Possibles :</strong> Utilisez l'image de soi future comme levier. Demandez : "Est-ce que suivre cette pensée ('je suis nul') te rapproche de la personne que tu veux devenir ?"</li>
+            <li><strong>Liberté d'action :</strong> Rappelez-leur que l'on peut avoir la pensée "Je ne vais pas y arriver" et <em>pourtant</em> décider d'agir. La pensée n'empêche pas l'action.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>🔷 5. Validation des acquis</h2>
+        
+        <div id="quiz-container">
+            <p><strong>1. Qu'est-ce que la "Fusion Cognitive" ?</strong></p>
+            <div class="quiz-option" onclick="checkAnswer(this, false)">Une technique de relaxation intense.</div>
+            <div class="quiz-option" onclick="checkAnswer(this, true)">Le fait de confondre ses pensées avec la réalité factuelle.</div>
+            <div class="quiz-option" onclick="checkAnswer(this, false)">L'harmonie parfaite entre le corps et l'esprit.</div>
+
+            <p><strong>2. Selon le texte, quel est le but de la "Défusion" ?</strong></p>
+            <div class="quiz-option" onclick="checkAnswer(this, false)">Supprimer définitivement les pensées négatives.</div>
+            <div class="quiz-option" onclick="checkAnswer(this, false)">Se convaincre que tout est positif (pensée magique).</div>
+            <div class="quiz-option" onclick="checkAnswer(this, true)">Prendre de la distance pour ne plus être identifié à ses représentations.</div>
+
+            <p><strong>3. Quelle reformulation favorise la distanciation ?</strong></p>
+            <div class="quiz-option" onclick="checkAnswer(this, false)">"Je ne dois pas penser ça."</div>
+            <div class="quiz-option" onclick="checkAnswer(this, true)">"J'ai la pensée que..."</div>
+            <div class="quiz-option" onclick="checkAnswer(this, false)">"C'est faux, je suis génial."</div>
+        </div>
+        <div id="final-feedback" class="feedback" style="background: #d1ecf1; color: #0c5460; text-align: center;"></div>
+    </section>
+
+    <section>
+        <h2>📚 Glossaire</h2>
+        <dl>
+            <dt>Fusion Cognitive</dt>
+            <dd>Processus souvent automatique où l'on interagit avec ses pensées comme si elles étaient des faits absolus, perdant le contact avec la réalité concrète.</dd>
+
+            <dt>Défusion Cognitive</dt>
+            <dd>Mécanisme volontaire permettant de mettre en place une perspective distanciée par rapport à ses expériences intérieures (pensées, émotions).</dd>
+
+            <dt>Internalisation</dt>
+            <dd>Processus par lequel les représentations des autres et le feedback social deviennent nos propres représentations de soi.</dd>
+
+            <dt>Soi possibles (Image de soi future)</dt>
+            <dd>Concepts de ce que l'on veut devenir ou craint de devenir. Facteur motivationnel majeur pour modifier le comportement.</dd>
+
+            <dt>Besoin de cohérence</dt>
+            <dd>Tendance à agir pour confirmer et maintenir notre vision de soi, même si celle-ci est limitante.</dd>
+        </dl>
+    </section>
+
+    <footer>
+        <p>CPS Studio - Fiche générée à partir des extraits référentiels 2025.</p>
+    </footer>
+</div>
+
+<script>
+    // Logic for Defusion Tool
+    function defuseThought() {
+        const input = document.getElementById('thoughtInput').value;
+        const resultArea = document.getElementById('resultArea');
+        
+        if(input.trim() === "") {
+            resultArea.innerText = "Veuillez écrire une pensée d'abord.";
+            resultArea.style.color = "orange";
+            return;
+        }
+
+        // Apply the reformulation technique from the text
+        // "J'ai la pensée que..."
+        const defusedText = "J'ai la pensée que « " + input + " »";
+        
+        resultArea.style.color = "var(--highlight)";
+        resultArea.innerHTML = defusedText;
+    }
+
+    // Logic for Quiz
+    let score = 0;
+    let answeredCount = 0;
+
+    function checkAnswer(element, isCorrect) {
+        // Prevent clicking multiple times on the same question logic (simplified)
+        const parent = element.parentElement;
+        const options = parent.getElementsByClassName('quiz-option');
+        
+        // Check if already answered in this block
+        let alreadyAnswered = false;
+        for(let opt of options) {
+            if(opt.classList.contains('correct') || opt.classList.contains('incorrect')) {
+                alreadyAnswered = true;
+            }
+        }
+        if(alreadyAnswered) return;
+
+        // Mark answer
+        if(isCorrect) {
+            element.classList.add('correct');
+            score++;
+        } else {
+            element.classList.add('incorrect');
+            // Show correct one
+            for(let opt of options) {
+                if(opt.onclick.toString().includes('true')) {
+                    opt.classList.add('correct');
+                    opt.style.opacity = "0.7"; // Dim the correct one if user missed
+                }
+            }
+        }
+        answeredCount++;
+
+        // Final feedback
+        if(answeredCount === 3) {
+            const feedback = document.getElementById('final-feedback');
+            feedback.style.display = 'block';
+            if(score === 3) {
+                feedback.innerHTML = "<strong>Bravo ! 3/3</strong>. Vous avez bien saisi la mécanique de la distanciation.";
+            } else {
+                feedback.innerHTML = "<strong>Score : " + score + "/3</strong>. Relisez la section Compréhension pour bien distinguer Fusion et Défusion.";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

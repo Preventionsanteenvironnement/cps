@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Studio : La Pleine Attention au Quotidien</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e67e22;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --text: #333333;
+            --success: #27ae60;
+            --error: #c0392b;
+            --radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        h1 { margin: 0; font-size: 2rem; }
+        p.subtitle { opacity: 0.9; font-size: 1.1rem; margin-top: 0.5rem; }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-left: 5px solid var(--secondary);
+        }
+
+        section.introspection { border-left-color: var(--accent); }
+        section.validation { border-left-color: var(--success); }
+
+        h2 { color: var(--primary); border-bottom: 2px solid var(--bg-light); padding-bottom: 0.5rem; }
+        h3 { color: var(--secondary); margin-top: 1.5rem; }
+
+        .highlight-box {
+            background-color: #eef7fb;
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .analogy {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            font-style: italic;
+        }
+
+        /* Interactive Elements */
+        .btn {
+            background-color: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        .btn:hover { background-color: #2980b9; }
+
+        /* Drag and Drop / Sorting */
+        .sorting-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .bucket {
+            flex: 1;
+            min-width: 250px;
+            background: #f8f9fa;
+            border: 2px dashed #bdc3c7;
+            border-radius: var(--radius);
+            padding: 1rem;
+            min-height: 200px;
+        }
+        .bucket h4 { text-align: center; margin-top: 0; }
+        .draggable-item {
+            background: var(--white);
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            cursor: move;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+        }
+        .draggable-item.correct { border-left: 5px solid var(--success); }
+        .draggable-item.incorrect { border-left: 5px solid var(--error); }
+
+        /* Accordion */
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            border-radius: var(--radius);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .active, .accordion:hover { background-color: #ccc; }
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            margin-bottom: 10px;
+        }
+
+        /* Quiz */
+        .quiz-question { margin-bottom: 1.5rem; }
+        .quiz-options { display: flex; flex-direction: column; gap: 0.5rem; }
+        .quiz-option {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quiz-option:hover { background-color: #f0f0f0; }
+        .quiz-option.selected { background-color: var(--secondary); color: white; }
+        .quiz-option.correct-answer { background-color: var(--success); color: white; }
+        .quiz-option.wrong-answer { background-color: var(--error); color: white; }
+
+        .feedback-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius);
+        }
+        .feedback-box.visible { display: block; }
+        .feedback-box.success { background-color: #d4edda; color: #155724; }
+        .feedback-box.error { background-color: #f8d7da; color: #721c24; }
+
+        /* Introspection Area */
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: var(--radius);
+            border: 1px solid #ccc;
+            font-family: inherit;
+            margin-top: 10px;
+            resize: vertical;
+        }
+
+        /* Glossary */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .glossary-item {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 1rem;
+            border-radius: var(--radius);
+        }
+        .glossary-term { font-weight: bold; color: var(--secondary); display: block; margin-bottom: 0.5rem; }
+
+        @media (max-width: 600px) {
+            .sorting-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>C1.6 - La Pleine Attention</h1>
+    <p class="subtitle">Activités formelles et informelles pour développer la présence attentive</p>
+</header>
+
+<main>
+
+    <section id="comprehension">
+        <h2>🔷 1. Comprendre la notion</h2>
+        <p>Le développement de la pleine attention repose sur la capacité à sortir du "pilote automatique" pour adopter un mode "attention/observation". Selon le référentiel, cela se pratique à travers deux grandes catégories d'activités.</p>
+
+        <div class="highlight-box">
+            <h3>Les 2 types de pratiques</h3>
+            <ul>
+                <li><strong>Activités Formelles :</strong> Des temps dédiés (10-15 min minimum pour l'assise), structurés, visant un entraînement volontaire. Elles mobilisent une posture spécifique (assise, allongée, mouvement).</li>
+                <li><strong>Activités Informelles :</strong> Intégrées au quotidien (routine, transitions, stress). Elles consistent à porter une attention volontaire sur l'instant présent via les 5 sens (Monde Externe) ou l'observation de soi (Monde Interne).</li>
+            </ul>
+        </div>
+
+        <div class="analogy">
+            <strong>💡 L'analogie du Pilote :</strong>
+            Imaginez que votre esprit est un cockpit. 
+            <br>Le <strong>"Mode (Ré)action"</strong> (pilote automatique), c'est quand l'avion vole seul selon des coordonnées pré-entrées : vous marchez, mangez ou réagissez sans y penser, souvent perdu dans vos pensées ("Mode Réflexion").
+            <br>La <strong>Pleine Attention</strong>, c'est quand vous reprenez les commandes manuelles : vous sentez chaque vibration, vous regardez les instruments (sensations internes) et le paysage (monde externe) avec une curiosité neutre.
+        </div>
+
+        <div class="highlight-box">
+            <h3>Exemple professionnel (Éducateur/Enseignant)</h3>
+            <p><strong>Situation :</strong> Un élève provoque une perturbation.</p>
+            <ul>
+                <li><em>Mode Réaction (Pilote auto) :</em> L'enseignant crie immédiatement ou punit sous l'effet de la colère (fusion cognitive).</li>
+                <li><em>Pratique Informelle (Pleine attention) :</em> Avant de répondre, l'enseignant prend une "pause consciente" de 3 secondes. Il observe sa tension corporelle (monde interne) et écoute les sons de la classe (monde externe) pour choisir sa réponse au lieu de la subir.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="introspection" id="introspection">
+        <h2>🔷 2. Introspection du professionnel</h2>
+        <p><strong>⚠️ Étape obligatoire :</strong> Les CPS ne se transmettent pas théoriquement. Elles s'incarnent. Avant de proposer ces outils, observez votre propre fonctionnement.</p>
+        
+        <p>Le référentiel distingue le <strong>"Mode (Ré)action"</strong> (automatique, impulsif) du <strong>"Mode Attention/Observation"</strong> (volontaire, bienveillant).</p>
+
+        <div class="activity-box">
+            <h3>Exercice d'auto-observation</h3>
+            <p>Identifiez un moment récent de votre journée de travail où vous étiez en "pilote automatique" (vous avez agi sans y penser, ou vous étiez perdu dans vos pensées/rêveries).</p>
+            <textarea id="autoPilotInput" rows="3" placeholder="Ex: J'ai conduit jusqu'au travail sans voir le trajet, ou j'ai mangé mon repas en scrollant sur mon téléphone..."></textarea>
+            
+            <p>Comment auriez-vous pu transformer ce moment en activité informelle de pleine attention (type 5 ou 6) ?</p>
+            <textarea id="consciousInput" rows="3" placeholder="Ex: J'aurais pu sentir le goût de chaque bouchée (Type 5 - Monde externe/Sens)..."></textarea>
+            
+            <button class="btn" onclick="saveIntrospection()">Enregistrer ma réflexion</button>
+            <p id="saveFeedback" style="color:var(--success); display:none; margin-top:10px;"><em>Réflexion enregistrée. Prenez un instant pour ressentir la différence entre ces deux modes.</em></p>
+        </div>
+    </section>
+
+    <section id="exercices">
+        <h2>🔷 3. S'exercer : Distinguer les pratiques</h2>
+        <p>Pour renforcer votre compréhension, classez les situations suivantes selon la typologie du référentiel (Tableau 5).</p>
+
+        <h3>Exercice 1 : Formel ou Informel ?</h3>
+        <p>Cliquez sur une étiquette pour la déplacer vers la bonne catégorie.</p>
+
+        <div class="sorting-container">
+            <div class="bucket" id="source-bucket">
+                <h4>Situations à classer</h4>
+                </div>
+            <div class="bucket" id="formal-bucket" style="border-color: var(--secondary);">
+                <h4>Activités Formelles</h4>
+                <p style="font-size:0.8rem; color:#666;">Temps dédié, structure, posture (assis, allongé, etc.)</p>
+            </div>
+            <div class="bucket" id="informal-bucket" style="border-color: var(--accent);">
+                <h4>Activités Informelles</h4>
+                <p style="font-size:0.8rem; color:#666;">Intégré au quotidien, routine, transition</p>
+            </div>
+        </div>
+        <button class="btn" onclick="checkSorting()">Vérifier le classement</button>
+        <div id="sorting-feedback" class="feedback-box"></div>
+
+        <hr style="margin: 2rem 0; border:0; border-top:1px solid #eee;">
+
+        <h3>Exercice 2 : Les Nuances de l'Attention</h3>
+        <p>Identifiez précisément de quel type d'activité il s'agit selon les définitions.</p>
+
+        <div class="quiz-question">
+            <p><strong>Scénario A :</strong> Vous êtes allongé sur le sol, immobile. Vous scannez mentalement votre corps des pieds à la tête pour ressentir chaque partie, sans bouger.</p>
+            <div class="quiz-options" id="scenario-options">
+                </div>
+            <div id="scenario-feedback" class="feedback-box"></div>
+        </div>
+    </section>
+
+    <section id="accompagnement">
+        <h2>🔷 4. Accompagnement du public</h2>
+        <p>Une fois ces distinctions vécues personnellement, vous pouvez accompagner un public (enfants, jeunes, adultes). Voici la progression logique :</p>
+        
+        <button class="accordion">1. Commencer par l'Informel (Monde Externe)</button>
+        <div class="panel">
+            <p>Il est plus facile de débuter par les sens (Type 5). Proposez d'écouter les bruits environnants, de regarder 3 couleurs dans la pièce, ou de sentir un objet. C'est moins menaçant que l'introspection directe.</p>
+        </div>
+
+        <button class="accordion">2. Introduire de courtes pauses conscientes</button>
+        <div class="panel">
+            <p>Utilisez les moments de transition (Type 6 - Monde Interne). "Comment est ma 'météo intérieure' maintenant ?" avant de commencer une activité.</p>
+        </div>
+
+        <button class="accordion">3. Vers le Formel</button>
+        <div class="panel">
+            <p>Proposez des temps dédiés (Assis ou Mouvement) uniquement quand le groupe est prêt à l'immobilité ou au mouvement lent. Commencez court (2-3 min) avant d'atteindre les 10-15 min nécessaires pour une pratique assise approfondie.</p>
+        </div>
+    </section>
+
+    <section class="validation" id="validation">
+        <h2>🔷 5. Validation des acquis</h2>
+        <p>Testez votre compréhension globale des mécanismes de la pleine attention étudiés dans cette fiche.</p>
+
+        <div id="final-quiz">
+            <div class="quiz-item">
+                <p><strong>1. Quelle notion désigne le fait de pouvoir observer ses pensées sans s'y identifier (changer son rapport à ses pensées) ?</strong></p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectFinal(this, 'wrong')">La Fusion cognitive</div>
+                    <div class="quiz-option" onclick="selectFinal(this, 'correct')">La Métacognition</div>
+                    <div class="quiz-option" onclick="selectFinal(this, 'wrong')">Le Mode (Ré)action</div>
+                </div>
+                <div class="feedback-final" style="display:none; margin-top:10px;">
+                    <strong>Réponse : La Métacognition.</strong><br>
+                    C'est la capacité à observer ses productions mentales (pensées, jugements) comme des événements passagers, sans "fusionner" avec elles.
+                </div>
+            </div>
+
+            <br>
+
+            <div class="quiz-item">
+                <p><strong>2. Pour renforcer l'autocompassion et le rapport à soi, quelle attitude est indispensable lors de l'observation ?</strong></p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectFinal(this, 'wrong')">L'analyse critique pour s'améliorer</div>
+                    <div class="quiz-option" onclick="selectFinal(this, 'wrong')">L'évitement expérientiel</div>
+                    <div class="quiz-option" onclick="selectFinal(this, 'correct')">La bienveillance et la neutralité</div>
+                </div>
+                <div class="feedback-final" style="display:none; margin-top:10px;">
+                    <strong>Réponse : La bienveillance et la neutralité.</strong><br>
+                    Accueillir l'expérience (agréable ou désagréable) sans la juger ni chercher à la modifier permet de développer une relation apaisée à soi-même.
+                </div>
+            </div>
+
+            <br>
+
+            <div class="quiz-item">
+                <p><strong>3. Une "Pleine attention en mouvement" (Type 2) implique :</strong></p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectFinal(this, 'correct')">D'orienter l'attention vers les sensations corporelles ressenties lors de l'exécution du mouvement.</div>
+                    <div class="quiz-option" onclick="selectFinal(this, 'wrong')">De penser à la destination ou au but du mouvement.</div>
+                    <div class="quiz-option" onclick="selectFinal(this, 'wrong')">De faire du sport pour se défouler (évacuation).</div>
+                </div>
+                <div class="feedback-final" style="display:none; margin-top:10px;">
+                    <strong>Réponse : Orienter l'attention vers les sensations.</strong><br>
+                    L'attention n'est pas accaparée par la réalisation, mais par la perception des sensations qui se produisent dans le corps à chaque instant.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="glossaire">
+        <h2>🔷 Glossaire des notions mobilisées</h2>
+        <div class="glossary-grid">
+            <div class="glossary-item">
+                <span class="glossary-term">Activités Formelles</span>
+                Temps d'entraînement dédiés (assis, mouvement, respiration, allongé) nécessitant un arrêt volontaire des activités courantes pour diriger son attention.
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Activités Informelles</span>
+                Pratiques de pleine attention intégrées au flux du quotidien (routine, transitions, moments de plaisir ou de stress) sans changer d'activité.
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Mode (Ré)action</span>
+                Mode de fonctionnement par défaut ("pilote automatique") où les actions et pensées s'enchaînent de façon impulsive ou habituelle, sans conscience volontaire.
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Mode Attention/Observation</span>
+                État volontaire où l'on accueille l'expérience sensible (interne ou externe) présente à l'instant, avec bienveillance.
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Métacognition</span>
+                Capacité à observer ses propres pensées et processus mentaux ("penser sur ses pensées") permettant de se détacher des représentations mentales.
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Fusion cognitive</span>
+                État où l'on est "absorbé" par ses pensées ou émotions, sans distance, prenant la pensée pour la réalité absolue (contraire de la métacognition).
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Acceptation expérientielle</span>
+                Capacité à s'ouvrir pleinement à son expérience émotionnelle présente, à l'opposé de l'évitement.
+            </div>
+            <div class="glossary-item">
+                <span class="glossary-term">Autocompassion</span>
+                Attitude de bonté et de bienveillance envers soi-même, notamment en situation d'épreuve ou d'échec, sans jugement.
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    // --- INTROSPECTION LOGIC ---
+    function saveIntrospection() {
+        const input1 = document.getElementById('autoPilotInput').value;
+        const input2 = document.getElementById('consciousInput').value;
+        if(input1.length > 5 && input2.length > 5) {
+            document.getElementById('saveFeedback').style.display = 'block';
+        } else {
+            alert("Prenez le temps de détailler un peu plus votre expérience.");
+        }
+    }
+
+    // --- ACCORDION LOGIC ---
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+        });
+    }
+
+    // --- EXERCISE 1: SORTING LOGIC ---
+    const sortingData = [
+        { id: 1, text: "Assis 15 min en observant son monde intérieur", type: "formal" },
+        { id: 2, text: "Se brosser les dents en sentant le goût (Routine)", type: "informal" },
+        { id: 3, text: "Scanner corporel allongé au sol", type: "formal" },
+        { id: 4, text: "Se demander 'comment je me sens' au réveil", type: "informal" },
+        { id: 5, text: "Marche lente en conscience des appuis", type: "formal" },
+        { id: 6, text: "Observer sa respiration pendant un moment de stress", type: "informal" }
+    ];
+
+    const sourceBucket = document.getElementById('source-bucket');
+    const formalBucket = document.getElementById('formal-bucket');
+    const informalBucket = document.getElementById('informal-bucket');
+    let selectedItem = null;
+
+    // Initialize items
+    function initSorting() {
+        sortingData.forEach(item => {
+            let div = document.createElement('div');
+            div.className = 'draggable-item';
+            div.textContent = item.text;
+            div.dataset.type = item.type;
+            div.dataset.id = item.id;
+            
+            // Simple click interaction for mobile/desktop compatibility without complex DnD API
+            div.onclick = function() {
+                if (this.parentElement.id !== 'source-bucket') return; // Already placed
+                
+                if (selectedItem) selectedItem.style.borderColor = '#ddd';
+                selectedItem = this;
+                this.style.borderColor = 'var(--accent)';
+            };
+            
+            sourceBucket.appendChild(div);
+        });
+    }
+
+    // Target bucket interaction
+    [formalBucket, informalBucket].forEach(bucket => {
+        bucket.onclick = function() {
+            if (selectedItem) {
+                this.appendChild(selectedItem);
+                selectedItem.style.borderColor = '#ddd';
+                selectedItem = null;
+            }
+        };
+    });
+
+    function checkSorting() {
+        let correctCount = 0;
+        let total = 0;
+        const feedback = document.getElementById('sorting-feedback');
+        
+        // Check Formal
+        Array.from(formalBucket.children).forEach(child => {
+            if(child.classList.contains('draggable-item')) {
+                total++;
+                if(child.dataset.type === 'formal') {
+                    child.classList.add('correct');
+                    correctCount++;
+                } else {
+                    child.classList.add('incorrect');
+                }
+            }
+        });
+
+        // Check Informal
+        Array.from(informalBucket.children).forEach(child => {
+            if(child.classList.contains('draggable-item')) {
+                total++;
+                if(child.dataset.type === 'informal') {
+                    child.classList.add('correct');
+                    correctCount++;
+                } else {
+                    child.classList.add('incorrect');
+                }
+            }
+        });
+
+        feedback.className = 'feedback-box visible ' + (correctCount === sortingData.length ? 'success' : 'error');
+        feedback.innerHTML = `<strong>Résultat :</strong> ${correctCount} / ${total} correctement classés.<br>
+        <em>Rappel : Le formel nécessite un temps d'arrêt dédié et une structure. L'informel s'intègre à l'action en cours.</em>`;
+    }
+
+    initSorting();
+
+    // --- EXERCISE 2: SCENARIO LOGIC ---
+    const scenarioOptions = [
+        { text: "Type 1 : Pleine attention en position assise", correct: false },
+        { text: "Type 2 : Pleine attention en mouvement", correct: false },
+        { text: "Type 4 : Pleine attention en position allongée", correct: true },
+        { text: "Type 6 : Activité informelle (Monde interne)", correct: false }
+    ];
+
+    const optionsContainer = document.getElementById('scenario-options');
+    scenarioOptions.forEach(opt => {
+        let div = document.createElement('div');
+        div.className = 'quiz-option';
+        div.textContent = opt.text;
+        div.onclick = function() {
+            // Reset
+            Array.from(optionsContainer.children).forEach(c => {
+                c.classList.remove('selected', 'correct-answer', 'wrong-answer');
+            });
+            
+            if(opt.correct) {
+                this.classList.add('correct-answer');
+                document.getElementById('scenario-feedback').className = 'feedback-box visible success';
+                document.getElementById('scenario-feedback').innerHTML = "<strong>Correct !</strong> C'est une activité formelle de Type 4. L'attention est dirigée vers le corps immobile, souvent décrite comme le 'body scan'.";
+            } else {
+                this.classList.add('wrong-answer');
+                document.getElementById('scenario-feedback').className = 'feedback-box visible error';
+                document.getElementById('scenario-feedback').innerHTML = "Ce n'est pas tout à fait ça. Relisez bien : la personne est immobile, au sol, et scanne son corps.";
+            }
+        };
+        optionsContainer.appendChild(div);
+    });
+
+    // --- FINAL QUIZ LOGIC ---
+    function selectFinal(element, type) {
+        // Find parent container
+        const parent = element.parentElement;
+        const feedback = parent.nextElementSibling;
+        
+        // Visual feedback on buttons
+        Array.from(parent.children).forEach(child => {
+            child.style.pointerEvents = 'none'; // Disable further clicks
+            if(child === element) {
+                if(type === 'correct') child.classList.add('correct-answer');
+                else child.classList.add('wrong-answer');
+            } else {
+                // Dim others
+                child.style.opacity = '0.5';
+            }
+        });
+
+        // Show explanation
+        feedback.style.display = 'block';
+        if(type === 'correct') {
+            feedback.style.color = '#155724';
+            feedback.style.backgroundColor = '#d4edda';
+            feedback.style.padding = '10px';
+            feedback.style.borderRadius = '5px';
+        } else {
+            feedback.style.color = '#721c24';
+            feedback.style.backgroundColor = '#f8d7da';
+            feedback.style.padding = '10px';
+            feedback.style.borderRadius = '5px';
+        }
+    }
+
+</script>
+
+</body>
+</html>

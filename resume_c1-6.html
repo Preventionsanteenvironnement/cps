@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche C1.6 : Renforcer sa Pleine Attention</title>
+    <style>
+        :root {
+            --primary: #2c5282; /* Bleu profond "Pleine attention" */
+            --secondary: #4299e1;
+            --accent: #ed8936;
+            --bg-light: #ebf8ff;
+            --text: #2d3748;
+            --white: #ffffff;
+            --success: #48bb78;
+            --error: #f56565;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #f7fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 30px 20px;
+            border-radius: 0 0 15px 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 2em; }
+        .subtitle { font-style: italic; opacity: 0.9; margin-top: 10px; }
+
+        section {
+            background: var(--white);
+            margin: 25px 0;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary);
+        }
+
+        h2 { color: var(--primary); border-bottom: 2px solid var(--bg-light); padding-bottom: 10px; }
+        h3 { color: var(--secondary); margin-top: 20px; }
+
+        /* Highlight Boxes */
+        .concept-box {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .introspection-box {
+            background-color: #fffaf0; /* Light orange tint */
+            border: 2px solid var(--accent);
+            padding: 20px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .introspection-tag {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        /* Interactive Elements */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            margin: 5px;
+        }
+
+        .btn:hover { background-color: var(--secondary); }
+        .btn:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .feedback.correct { background-color: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; }
+        .feedback.incorrect { background-color: #fed7d7; color: #742a2a; border: 1px solid #feb2b2; }
+
+        /* Classification Exercise Styles */
+        .classification-area {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .drop-zone {
+            flex: 1;
+            min-width: 250px;
+            border: 2px dashed var(--secondary);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            background: #fafbfc;
+        }
+        .drop-zone.active { background: #e2e8f0; border-color: var(--primary); }
+        .item-card {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #cbd5e0;
+            border-radius: 5px;
+            cursor: grab;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Quiz Styles */
+        .quiz-question { margin-bottom: 20px; }
+        .quiz-options label {
+            display: block;
+            background: var(--bg-light);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .quiz-options label:hover { background: #bee3f8; }
+        .quiz-options input { margin-right: 10px; }
+
+        /* Glossary */
+        dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; }
+        dt { font-weight: bold; color: var(--primary); }
+        dd { margin: 0; }
+
+        @media (max-width: 600px) {
+            .classification-area { flex-direction: column; }
+            dl { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Renforcer sa Pleine Attention</h1>
+    <div class="subtitle">Compétence Psychosociale C1.6</div>
+</header>
+
+<div class="container">
+
+    <section id="comprendre">
+        <h2>1. Comprendre la notion</h2>
+        
+        <p><strong>Définition conceptuelle :</strong> Renforcer sa pleine attention consiste à développer la capacité de percevoir, dans l'instant présent (« l'ici et maintenant »), ses pensées, émotions, envies, besoins et sensations. Cette compétence mobilise le <strong>Soi sujet-observateur</strong> : cette partie de nous capable d'observer notre monde intérieur (le Soi interne) tout comme le monde extérieur.</p>
+
+        <div class="concept-box">
+            <h3>Les 3 savoir-faire opérationnels</h3>
+            <ul>
+                <li><strong>Diriger volontairement son attention :</strong> Vers l'expérience sensible issue du monde externe (via les 5 sens) ou du monde interne (via les états psychiques).</li>
+                <li><strong>Observer et accueillir pleinement :</strong> Sans juger ni chercher à modifier l'expérience (qu'elle soit agréable, désagréable ou déstabilisante).</li>
+                <li><strong>Réaliser des activités de pleine attention :</strong>
+                    <ul>
+                        <li><em>Formelles :</em> Assis, en mouvement, respiration, scan corporel.</li>
+                        <li><em>Informelles :</em> Lors d'activités de routine, transitions, moments de stress.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <p><strong>Pourquoi ? (Les effets) :</strong> Cela augmente l'autocontrôle et réduit l'impulsivité. Cela améliore la concentration, l'apprentissage, la régulation émotionnelle (acceptation expérientielle) et favorise un rapport à soi plus bienveillant (autocompassion).</p>
+
+        <h3>💡 Analogie du quotidien</h3>
+        <p>Imaginez que vous êtes assis au bord d'une rivière. L'eau qui coule représente votre expérience (pensées, émotions, bruits environnants).<br>
+        Renforcer sa pleine attention, ce n'est pas essayer d'arrêter l'eau ou de plonger dedans pour se faire emporter. C'est <strong>s'asseoir sur la berge et regarder passer l'eau</strong>, en notant ce qui flotte (une feuille, une branche, de l'écume) sans sauter à l'eau pour l'attraper ou le repousser.</p>
+
+        <h3>Exemple professionnel</h3>
+        <p>Un éducateur est confronté à un jeune qui refuse violemment une consigne.
+        <br><strong>Sans pleine attention :</strong> Il réagit immédiatement par la colère (impulsivité), crie, et le conflit escalade.
+        <br><strong>Avec pleine attention :</strong> Il perçoit son cœur qui accélère et sa pensée "il se moque de moi" (Soi observateur). Il accueille cette irritation sans agir dessus. Cet espace de recul lui permet de choisir une réponse calme et ferme (autocontrôle et choix conscient).</p>
+    </section>
+
+    <section id="introspection" class="introspection-box">
+        <span class="introspection-tag">ÉTAPE OBLIGATOIRE</span>
+        <h2>2. Introspection du professionnel</h2>
+        <p>Les compétences psychosociales ne se transmettent pas théoriquement. Elles doivent être vécues. Avant d'accompagner autrui, observez votre propre fonctionnement.</p>
+        
+        <p><strong>Exercice "Météo Intérieure Instantanée"</strong><br>
+        Arrêtez votre lecture maintenant. Ne cherchez pas à analyser, contentez-vous d'observer ce qui est là, dans votre "Monde Interne".</p>
+
+        <div style="background: white; padding: 15px; border-radius: 8px;">
+            <p>Identifiez un élément présent <strong>maintenant</strong> pour chacune de ces catégories (citées dans le référentiel) :</p>
+            <form id="introspection-form" onsubmit="event.preventDefault(); validateIntrospection();">
+                <div style="margin-bottom: 10px;">
+                    <label><strong>Une Sensation</strong> (ex: tension épaule, chaleur...) :</label><br>
+                    <input type="text" style="width: 100%; padding: 8px;" placeholder="Je sens..." required>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label><strong>Une Cognition</strong> (une pensée qui traverse l'esprit) :</label><br>
+                    <input type="text" style="width: 100%; padding: 8px;" placeholder="Je pense que..." required>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label><strong>Une Émotion/Impression</strong> (agréable, désagréable, neutre) :</label><br>
+                    <input type="text" style="width: 100%; padding: 8px;" placeholder="Je me sens..." required>
+                </div>
+                <button type="submit" class="btn">Valider mon observation</button>
+            </form>
+            <div id="introspection-feedback" class="feedback">
+                <strong>Analyse :</strong> Vous venez d'activer votre <em>Soi sujet-observateur</em>. Vous avez mis "à distance" votre expérience interne pour la décrire au lieu de fusionner avec elle. C'est le cœur de la compétence.
+            </div>
+        </div>
+    </section>
+
+    <section id="activites">
+        <h2>3. Entraînement : Distinguer les mondes</h2>
+        <p>Pour diriger volontairement son attention, il faut savoir vers quoi la tourner. Le référentiel distingue l'expérience du <strong>Monde Externe</strong> (accessible par les 5 sens) et celle du <strong>Monde Interne</strong> (accessible par les 5 états psychiques).</p>
+        
+        <p><strong>Consigne :</strong> Classez les éléments suivants dans la bonne catégorie.</p>
+
+        <div id="game-container">
+            <div id="card-display" style="text-align: center; margin-bottom: 20px; font-size: 1.2em; font-weight: bold; padding: 20px; background: #fff; border: 2px solid var(--primary); border-radius: 10px;">
+                Cliquez sur "Commencer"
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 10px;">
+                <button class="btn" onclick="classify('interne')">C'est le Monde INTERNE</button>
+                <button class="btn" onclick="classify('externe')">C'est le Monde EXTERNE</button>
+            </div>
+            <div style="text-align: center; margin-top: 10px;">
+                <button class="btn" style="background-color: var(--accent);" onclick="startGame()">Commencer / Reset</button>
+            </div>
+            <div id="game-feedback" class="feedback" style="text-align: center;"></div>
+        </div>
+
+        <hr style="margin: 30px 0;">
+
+        <h3>Scénario : L'accueil sans jugement</h3>
+        <p><strong>Situation :</strong> Vous ressentez une bouffée de stress avant une réunion importante.</p>
+        <p>Quelle est l'attitude de "Pleine Attention" selon les conditions de réussite (bienveillance, neutralité) ?</p>
+        
+        <div class="quiz-options">
+            <label onclick="checkScenario(false, this)">
+                <input type="radio" name="scenario" disabled> 
+                "Je ne dois pas stresser, c'est ridicule. Je dois me calmer tout de suite."
+            </label>
+            <label onclick="checkScenario(true, this)">
+                <input type="radio" name="scenario" disabled>
+                "Je note que mon cœur bat vite et que j'ai une sensation de gorge serrée. C'est désagréable, mais c'est là. J'observe."
+            </label>
+            <label onclick="checkScenario(false, this)">
+                <input type="radio" name="scenario" disabled>
+                "C'est la faute de mes collègues qui me mettent la pression."
+            </label>
+        </div>
+        <div id="scenario-feedback" class="feedback"></div>
+
+    </section>
+
+    <section id="public">
+        <h2>4. Vers l'accompagnement (Optionnel)</h2>
+        <p>Une fois cette compétence expérimentée personnellement, comment l'accompagner ?</p>
+        <ul>
+            <li><strong>Par l'exemple :</strong> Si vous êtes agité et dispersé, vous ne pouvez pas demander la pleine attention. Incarnez le calme et l'observation.</li>
+            <li><strong>Par les rituels :</strong> Proposer des temps de "Météo intérieure" (comme dans l'exercice ci-dessus) aux moments de transition (début de cours, retour de récréation).</li>
+            <li><strong>Par la distinction :</strong> Aider le public à distinguer "ce qui se passe dehors" (bruits) de "ce qui se passe dedans" (émotions), pour réduire la confusion.</li>
+        </ul>
+    </section>
+
+    <section id="validation">
+        <h2>5. Validation des acquis</h2>
+        <p>Testez votre compréhension des mécanismes travaillés dans cette fiche.</p>
+
+        <div id="final-quiz">
+            </div>
+        <button class="btn" onclick="validateQuiz()">Vérifier mes réponses</button>
+        <div id="quiz-global-feedback" class="feedback"></div>
+    </section>
+
+    <section id="glossaire">
+        <h2>Glossaire des notions mobilisées</h2>
+        <dl>
+            <dt>Soi sujet-observateur</dt>
+            <dd>Faculté de l'individu à percevoir son propre monde intérieur (pensées, émotions) avec la même distance que s'il observait le monde extérieur.</dd>
+
+            <dt>Monde Interne</dt>
+            <dd>Ensemble des expériences subjectives accessibles par les états psychiques : cognitions (pensées), émotions, sensations corporelles, volitions (volontés) et impressions.</dd>
+
+            <dt>Monde Externe</dt>
+            <dd>Ensemble des expériences issues de l'environnement, accessibles grâce aux 5 sens (vision, audition, olfaction, odorat, toucher).</dd>
+
+            <dt>Acceptation expérientielle</dt>
+            <dd>Capacité à accueillir pleinement son expérience présente (émotionnelle ou sensorielle) sans chercher à l'éviter, la juger ou la modifier. C'est l'opposé de l'évitement expérientiel.</dd>
+
+            <dt>Activités formelles vs Informelles</dt>
+            <dd>Les activités <em>formelles</em> sont des temps dédiés (assis, respiration). Les activités <em>informelles</em> consistent à porter sa pleine attention lors d'actions du quotidien (routine, transition).</dd>
+        </dl>
+    </section>
+
+</div>
+
+<script>
+    /* --- LOGIQUE INTROSPECTION --- */
+    function validateIntrospection() {
+        const feedback = document.getElementById('introspection-feedback');
+        feedback.style.display = 'block';
+        feedback.className = 'feedback correct';
+    }
+
+    /* --- LOGIQUE JEU CLASSIFICATION --- */
+    const items = [
+        { text: "J'entends le bruit de la pluie", type: "externe", detail: "Audition (5 sens)" },
+        { text: "Je me sens triste", type: "interne", detail: "Émotion (État psychique)" },
+        { text: "Je vois un oiseau voler", type: "externe", detail: "Vision (5 sens)" },
+        { text: "J'ai la pensée : 'Je vais réussir'", type: "interne", detail: "Cognition (État psychique)" },
+        { text: "J'ai mal au ventre (nœud)", type: "interne", detail: "Sensation (État psychique)" },
+        { text: "Je sens l'odeur du café", type: "externe", detail: "Odorat (5 sens)" }
+    ];
+    
+    let currentItemIndex = 0;
+    let gameActive = false;
+
+    function startGame() {
+        currentItemIndex = 0;
+        gameActive = true;
+        document.getElementById('game-feedback').style.display = 'none';
+        showNextItem();
+    }
+
+    function showNextItem() {
+        if (currentItemIndex < items.length) {
+            document.getElementById('card-display').innerText = items[currentItemIndex].text;
+            document.getElementById('card-display').style.borderColor = "#2c5282";
+            document.getElementById('card-display').style.backgroundColor = "#fff";
+        } else {
+            document.getElementById('card-display').innerHTML = "<strong>Bravo ! Exercice terminé.</strong>";
+            gameActive = false;
+        }
+    }
+
+    function classify(choice) {
+        if (!gameActive) return;
+
+        const currentItem = items[currentItemIndex];
+        const feedbackEl = document.getElementById('game-feedback');
+        
+        if (choice === currentItem.type) {
+            feedbackEl.innerText = `Correct ! "${currentItem.text}" appartient au monde ${choice.toUpperCase()} (${currentItem.detail}).`;
+            feedbackEl.className = "feedback correct";
+            feedbackEl.style.display = 'block';
+            
+            // Visual feedback
+            document.getElementById('card-display').style.borderColor = "#48bb78";
+            document.getElementById('card-display').style.backgroundColor = "#f0fff4";
+
+            setTimeout(() => {
+                currentItemIndex++;
+                feedbackEl.style.display = 'none';
+                showNextItem();
+            }, 1500);
+        } else {
+            feedbackEl.innerText = `Erreur. "${currentItem.text}" relève du monde ${currentItem.type.toUpperCase()}. Réessayez.`;
+            feedbackEl.className = "feedback incorrect";
+            feedbackEl.style.display = 'block';
+        }
+    }
+
+    /* --- LOGIQUE SCÉNARIO --- */
+    function checkScenario(isCorrect, element) {
+        const feedback = document.getElementById('scenario-feedback');
+        feedback.style.display = 'block';
+        
+        // Reset styles
+        document.querySelectorAll('.quiz-options label').forEach(l => l.style.background = 'var(--bg-light)');
+
+        if (isCorrect) {
+            feedback.innerHTML = "<strong>Excellent.</strong> C'est la bonne attitude : observer et accueillir avec neutralité et curiosité, sans chercher à modifier l'expérience immédiate. Cela permet la régulation émotionnelle.";
+            feedback.className = "feedback correct";
+            element.style.background = "#c6f6d5";
+        } else {
+            feedback.innerHTML = "<strong>Attention.</strong> Cette réponse implique un jugement ou une tentative de contrôle/modification immédiate (évitement expérientiel). La pleine attention demande d'abord d'accueillir ce qui est là.";
+            feedback.className = "feedback incorrect";
+            element.style.background = "#fed7d7";
+        }
+        
+        // Re-enable inputs for retry if needed, visually indicated
+        setTimeout(() => {
+             document.querySelectorAll('input[name="scenario"]').forEach(i => i.disabled = false);
+        }, 500);
+    }
+    
+    // Enable radio buttons on load
+    document.addEventListener("DOMContentLoaded", () => {
+         document.querySelectorAll('input[name="scenario"]').forEach(i => i.disabled = false);
+    });
+
+
+    /* --- LOGIQUE QUIZ FINAL --- */
+    const quizQuestions = [
+        {
+            q: "Quelle partie de nous est mobilisée pour percevoir notre monde intérieur comme on percevrait l'environnement ?",
+            options: ["Le Soi critique", "Le Soi sujet-observateur", "L'impulsivité"],
+            correct: 1,
+            expl: "C'est le 'Soi sujet-observateur' qui permet cette mise à distance nécessaire pour ne pas être emporté par ses impulsions."
+        },
+        {
+            q: "Quel est un effet direct du renforcement de la pleine attention sur le comportement ?",
+            options: ["L'augmentation de l'impulsivité", "La suppression totale des émotions", "L'augmentation de l'autocontrôle et du choix"],
+            correct: 2,
+            expl: "En observant l'expérience sans réagir immédiatement, on réduit l'impulsivité et on augmente sa capacité de choix conscient (autocontrôle)."
+        },
+        {
+            q: "Que signifie 'l'acceptation expérientielle' nécessaire à la régulation émotionnelle ?",
+            options: ["Se résigner et abandonner", "Accueillir pleinement son ressenti présent sans le juger", "Chercher à modifier son émotion immédiatement"],
+            correct: 1,
+            expl: "L'acceptation expérientielle est le fait de s'ouvrir pleinement à son expérience (émotion, sensation) sans évitement ni jugement. C'est un préalable à la régulation."
+        }
+    ];
+
+    function renderQuiz() {
+        const container = document.getElementById('final-quiz');
+        let html = '';
+        quizQuestions.forEach((q, index) => {
+            html += `<div class="quiz-question">
+                <p><strong>Question ${index + 1} :</strong> ${q.q}</p>
+                <div class="quiz-options">
+                    ${q.options.map((opt, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}"> ${opt}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback-q${index}" class="feedback"></div>
+            </div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function validateQuiz() {
+        let score = 0;
+        quizQuestions.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-q${index}`);
+            
+            if (selected) {
+                const val = parseInt(selected.value);
+                if (val === q.correct) {
+                    score++;
+                    feedbackEl.className = "feedback correct";
+                    feedbackEl.innerHTML = `<strong>Correct !</strong> ${q.expl}`;
+                } else {
+                    feedbackEl.className = "feedback incorrect";
+                    feedbackEl.innerHTML = `<strong>Incorrect.</strong> ${q.expl}`;
+                }
+                feedbackEl.style.display = 'block';
+            } else {
+                feedbackEl.className = "feedback incorrect";
+                feedbackEl.innerHTML = "Veuillez sélectionner une réponse.";
+                feedbackEl.style.display = 'block';
+            }
+        });
+
+        const globalFeedback = document.getElementById('quiz-global-feedback');
+        globalFeedback.style.display = 'block';
+        if (score === quizQuestions.length) {
+            globalFeedback.className = "feedback correct";
+            globalFeedback.innerHTML = `<strong>Carton plein (${score}/${quizQuestions.length}) !</strong> Vous avez bien intégré les notions de Soi observateur, d'autocontrôle et d'acceptation.`;
+        } else {
+            globalFeedback.className = "feedback";
+            globalFeedback.innerHTML = `<strong>Résultat : ${score}/${quizQuestions.length}.</strong> Relisez les corrections pour bien consolider les notions.`;
+            globalFeedback.style.backgroundColor = "#e2e8f0";
+            globalFeedback.style.color = "#2d3748";
+        }
+    }
+
+    renderQuiz();
+
+</script>
+
+</body>
+</html>

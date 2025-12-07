@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C1.5 - Relation Bienveillante et Auto-évaluation</title>
+    <style>
+        :root {
+            --primary: #2e4053;    /* Bleu sombre professionnel */
+            --accent: #1abc9c;     /* Vert d'eau pour la bienveillance/santé */
+            --highlight: #f1c40f;  /* Jaune pour l'attention/focus */
+            --bg: #fdfefe;
+            --text: #34495e;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #ecf0f1;
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), #34495e);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
+        header p { opacity: 0.9; font-style: italic; margin-top: 10px; }
+
+        /* Sections */
+        section {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        h2 {
+            color: var(--accent);
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            font-size: 1.4rem;
+            margin-top: 0;
+        }
+        h3 { color: var(--primary); margin-top: 25px; }
+
+        /* Boxes */
+        .analogy-box {
+            background: #e8f6f3;
+            border: 1px solid #d0ece7;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+        }
+        .analogy-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+
+        .introspection-box {
+            background: #fef9e7;
+            border: 1px solid #f9e79f;
+            padding: 25px;
+            border-radius: var(--radius);
+            position: relative;
+        }
+        .introspection-tag {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--highlight);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* Interactive Elements */
+        .interactive-area {
+            background: #f4f6f7;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-top: 20px;
+        }
+
+        /* Sorting Game */
+        .draggable-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .draggable {
+            background: white;
+            padding: 10px 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 20px;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .draggable:hover { transform: translateY(-3px); border-color: var(--accent); }
+        .draggable.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+        .drop-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .drop-zone {
+            background: #e5e8e8;
+            border: 2px dashed #bdc3c7;
+            border-radius: var(--radius);
+            padding: 15px;
+            min-height: 150px;
+            text-align: center;
+        }
+        .drop-zone h4 { margin-top: 0; font-size: 1rem; color: var(--primary); }
+
+        /* Quiz */
+        .quiz-option {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quiz-option:hover { background: #f0f3f4; }
+        .quiz-option.correct { background: #d4efdf; border-color: var(--accent); color: #0b5345; }
+        .quiz-option.incorrect { background: #fadbd8; border-color: #e74c3c; color: #78281f; }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-size: 0.95rem;
+        }
+        .feedback.visible { display: block; }
+
+        /* Glossary */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .term-card {
+            background: #f8f9f9;
+            padding: 15px;
+            border-left: 4px solid var(--accent);
+        }
+        .term-title { font-weight: bold; color: var(--primary); display: block; margin-bottom: 5px; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            background: #f4f6f7;
+        }
+
+        @media (max-width: 600px) {
+            .drop-zones { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>C1.5 Relation à soi & Auto-évaluation</h1>
+        <p>Studio CPS – Fiches Pédagogiques Interactives</p>
+    </header>
+
+    <section>
+        <h2>1. Comprendre : De juge à observateur</h2>
+        <p>
+            Les documents mettent en évidence que notre relation à nous-mêmes est souvent source de tensions. Nous avons tendance à nous comparer à une norme ou aux autres, adoptant une posture <strong>critique</strong>. Cette "opposition à l'intérieur de soi" conduit à l'évitement et au malaise.
+        </p>
+        <p>
+            L'objectif de cette compétence est de remplacer cet <strong>auto-jugement biaisé</strong> par une <strong>auto-observation bienveillante</strong>. Il s'agit d'observer comment nous nous parlons et comment nous répondons à nos propres besoins (physiques et psychologiques).
+        </p>
+
+        <div class="analogy-box">
+            <span class="analogy-icon">📻</span>
+            <strong>L'analogie de la "Radio Mentale"</strong><br>
+            Imaginez que votre esprit est une radio. Souvent, elle est bloquée sur la station <em>"Critique FM"</em> (comparaison, blâme, rigidité). <br>
+            Développer cette compétence, c'est apprendre à changer de fréquence pour écouter <em>"Bienveillance Info"</em>. Sur cette chaîne, on ne nie pas les faits ("Je n'y arrive pas encore"), mais on change le ton ("Je fais de mon mieux et je progresse"). C'est ce que le texte appelle la <strong>défusion cognitive</strong> : ne plus croire aveuglément tout ce que la radio raconte.
+        </div>
+
+        <p><strong>Exemple professionnel (Éducation/Social) :</strong><br>
+        Un travailleur social fait face à un échec d'accompagnement.
+        <br>❌ <em>Mode Fusion (Juge) :</em> "Je suis incompétent, je n'ai pas l'autorité nécessaire." (Attitude figée, tension).
+        <br>✅ <em>Mode Défusion (Observateur) :</em> "Je remarque que je me sens frustré. J'ai fait de mon mieux avec les ressources disponibles. J'ai besoin de soutien pour analyser la situation." (Accueil, prise en compte des besoins).</p>
+    </section>
+
+    <section>
+        <h2>2. Introspection : Le miroir du discours interne</h2>
+        <div class="introspection-box">
+            <span class="introspection-tag">ÉTAPE OBLIGATOIRE</span>
+            <p>Le texte insiste : "Les CPS ne peuvent pas être transmises sans être vécues". Avant d'accompagner autrui, observez votre propre fonctionnement.</p>
+            
+            <p><strong>Exercice personnel (ne sera pas enregistré) :</strong></p>
+            <p>Pensez à une situation récente où vous vous êtes senti en difficulté professionnelle.</p>
+            <label style="display:block; margin-bottom:10px; font-weight:bold;">Quelle phrase critique vous êtes-vous dite ?</label>
+            <textarea style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; font-family:inherit;" rows="2" placeholder="Ex: Je suis trop lent, je ne suis pas à la hauteur..."></textarea>
+            
+            <div style="margin-top:15px;">
+                <p>Maintenant, appliquez les questions du référentiel :</p>
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li>👉 <em>Comment est-ce que je me parle ?</em> (Observez le ton)</li>
+                    <li>👉 <em>Comment est-ce que je prends soin de moi ?</em> (Identifiez le besoin caché)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Pratique : Fusion ou Défusion ?</h2>
+        <p>Le texte distingue deux mécanismes opposés. <br>
+        La <strong>Fusion cognitive</strong> (adhésion rigide aux croyances négatives) et la <strong>Défusion cognitive</strong> (capacité à observer ses pensées comme des croyances et non des faits).</p>
+        
+        <div class="interactive-area">
+            <p><strong>Consigne :</strong> Cliquez sur une pensée pour la sélectionner, puis cliquez sur la zone correspondante (Juge/Fusion ou Observateur/Défusion).</p>
+            
+            <div class="draggable-container" id="source-container">
+                </div>
+
+            <div class="drop-zones">
+                <div class="drop-zone" id="zone-fusion" onclick="moveToZone('fusion')">
+                    <h4>🔒 Mode "Juge / Fusion"</h4>
+                    <small>Rigidité, Comparaison, Blâme</small>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="drop-zone" id="zone-defusion" onclick="moveToZone('defusion')">
+                    <h4>🔓 Mode "Observateur / Défusion"</h4>
+                    <small>Accueil, Flexibilité, Besoin</small>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+            <div id="sort-feedback" class="feedback"></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Accompagner le public</h2>
+        <p>
+            Une fois que vous avez pratiqué cette "auto-observation" sur vous-même, vous pouvez l'utiliser avec vos usagers.
+        </p>
+        <ul>
+            <li><strong>Ne pas nier leur ressenti :</strong> S'ils disent "Je suis nul", ne répondez pas juste "Mais non".</li>
+            <li><strong>Questionner le discours :</strong> Aidez-les à observer leur "radio interne". <em>"Est-ce que cette pensée t'aide ou te bloque ?"</em></li>
+            <li><strong>Encourager l'autonomie :</strong> Le texte précise que se valider soi-même permet de "réduire notre dépendance à autrui".</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. Validation des acquis</h2>
+        
+        <div class="interactive-area">
+            <h3>Question finale</h3>
+            <p>Selon le document, pourquoi le "besoin de cohérence" peut-il être un obstacle à l'auto-évaluation positive ?</p>
+
+            <div class="quiz-option" onclick="checkQuiz(this, false)">
+                Parce qu'il nous pousse à demander l'avis des autres en permanence pour être sûr de nous.
+            </div>
+            <div class="quiz-option" onclick="checkQuiz(this, true)">
+                Parce qu'il nous incite à préserver notre vision actuelle de nous-mêmes (même négative) et favorise une attitude rigide.
+            </div>
+            <div class="quiz-option" onclick="checkQuiz(this, false)">
+                Parce qu'il nous empêche de voir nos défauts en créant une image faussement positive (sur-confiance).
+            </div>
+
+            <div id="quiz-feedback" class="feedback"></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>📚 Glossaire (basé sur l'exercice)</h2>
+        <div class="glossary-grid">
+            <div class="term-card">
+                <span class="term-title">Fusion cognitive</span>
+                Mécanisme qui renforce l'identification à nos représentations de soi (croyances) et rend difficile leur modification. On prend nos pensées pour des vérités absolues.
+            </div>
+            <div class="term-card">
+                <span class="term-title">Défusion cognitive</span>
+                Processus consistant à prendre conscience que nos représentations ne sont que des croyances (construites socialement) et qu'elles peuvent être transformées intentionnellement.
+            </div>
+            <div class="term-card">
+                <span class="term-title">Besoin de cohérence</span>
+                Besoin psychologique qui nous pousse à maintenir notre vision du monde et de nous-mêmes stable, créant parfois une résistance au changement (rigidité).
+            </div>
+            <div class="term-card">
+                <span class="term-title">Empowerment (Pouvoir d'agir)</span>
+                Capacité d'agir et confiance en ses ressources, renforcées par une estime de soi positive et non biaisée.
+            </div>
+            <div class="term-card">
+                <span class="term-title">Évitement expérientiel</span>
+                Mécanisme de fuite ou de rejet face à ce que nous ressentons (tensions, malaises), découlant d'une posture critique envers soi-même.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © CPS Studio 2025 - Contenu généré strictement à partir des extraits fournis.
+    </footer>
+</div>
+
+<script>
+    // DATA POUR LE JEU DE TRI
+    const items = [
+        { id: 1, text: "Je suis nul, les autres vont plus vite.", type: 'fusion', reason: "C'est une comparaison et un jugement global (étiquette)." },
+        { id: 2, text: "Je remarque que je suis fatigué aujourd'hui.", type: 'defusion', reason: "C'est une observation factuelle d'un état, sans jugement." },
+        { id: 3, text: "C'est toujours pareil avec moi, je ne changerai jamais.", type: 'fusion', reason: "Attitude rigide et arrêtée vis-à-vis de soi-même." },
+        { id: 4, text: "Je fais de mon mieux et je progresse à mon rythme.", type: 'defusion', reason: "Attitude d'accueil et d'acceptation (exemple du texte)." }
+    ];
+
+    let selectedItem = null;
+    const sourceContainer = document.getElementById('source-container');
+    const feedbackBox = document.getElementById('sort-feedback');
+
+    // INITIALISATION DU JEU
+    function initGame() {
+        items.forEach(item => {
+            const el = document.createElement('div');
+            el.className = 'draggable';
+            el.innerText = item.text;
+            el.onclick = () => selectItem(el, item);
+            sourceContainer.appendChild(el);
+        });
+    }
+
+    function selectItem(el, item) {
+        // Retirer la sélection précédente
+        document.querySelectorAll('.draggable').forEach(d => d.classList.remove('selected'));
+        // Sélectionner
+        el.classList.add('selected');
+        selectedItem = { element: el, data: item };
+        feedbackBox.style.display = 'none';
+    }
+
+    function moveToZone(zoneType) {
+        if (!selectedItem) return;
+
+        const isCorrect = selectedItem.data.type === zoneType;
+        const targetZone = document.getElementById(zoneType === 'fusion' ? 'zone-fusion' : 'zone-defusion').querySelector('.zone-content');
+
+        if (isCorrect) {
+            // Déplacement visuel
+            selectedItem.element.classList.remove('selected');
+            selectedItem.element.style.borderColor = 'var(--accent)';
+            selectedItem.element.style.background = '#e8f8f5';
+            selectedItem.element.onclick = null; // Désactiver le clic
+            targetZone.appendChild(selectedItem.element);
+            
+            // Feedback positif
+            feedbackBox.className = "feedback visible";
+            feedbackBox.style.background = "#d4efdf";
+            feedbackBox.style.color = "#0b5345";
+            feedbackBox.innerHTML = `<strong>Correct !</strong> ${selectedItem.data.reason}`;
+            
+            selectedItem = null;
+        } else {
+            // Feedback erreur
+            feedbackBox.className = "feedback visible";
+            feedbackBox.style.background = "#fadbd8";
+            feedbackBox.style.color = "#78281f";
+            feedbackBox.innerHTML = `<strong>Attention.</strong> Ce n'est pas la bonne catégorie. <br><em>Indice :</em> Le mode "Fusion" juge et fige, le mode "Défusion" observe et accueille.`;
+        }
+    }
+
+    // LOGIQUE DU QUIZ
+    function checkQuiz(element, isCorrect) {
+        const feedback = document.getElementById('quiz-feedback');
+        const options = document.querySelectorAll('.quiz-option');
+        
+        // Reset visuel
+        options.forEach(opt => {
+            opt.classList.remove('correct', 'incorrect');
+            opt.style.opacity = '0.7';
+        });
+        element.style.opacity = '1';
+
+        if (isCorrect) {
+            element.classList.add('correct');
+            feedback.className = "feedback visible";
+            feedback.style.background = "#d4efdf";
+            feedback.style.color = "#0b5345";
+            feedback.innerHTML = `
+                <strong>Bravo !</strong><br>
+                C'est bien le <strong>besoin de cohérence</strong> (mentionné dans la partie "Principale condition") qui crée cette rigidité. <br>
+                Le texte explique que nous cherchons naturellement à préserver notre vision de nous-mêmes, ce qui freine la remise en question nécessaire pour une auto-évaluation positive.
+            `;
+        } else {
+            element.classList.add('incorrect');
+            feedback.className = "feedback visible";
+            feedback.style.background = "#fadbd8";
+            feedback.style.color = "#78281f";
+            feedback.innerHTML = `
+                <strong>Ce n'est pas tout à fait ça.</strong><br>
+                Relisez la section sur la "condition importante". Le texte met en garde contre le <strong>besoin de cohérence</strong> qui nous pousse à adopter une "attitude rigide et arrêtée vis-à-vis de nous-mêmes", rendant le changement d'Image de Soi difficile.
+            `;
+        }
+    }
+
+    // Lancer le jeu au chargement
+    initGame();
+
+</script>
+
+</body>
+</html>

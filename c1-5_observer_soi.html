@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observer et Accueillir son Soi Interne</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #16a085; /* Vert apaisant pour l'acceptation */
+            --warning: #e74c3c; /* Rouge pour l'évitement */
+            --bg-light: #f4f6f7;
+            --text: #34495e;
+            --white: #ffffff;
+            --radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #ecf0f1;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-top: 40px;
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .box {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            border: 1px solid #bdc3c7;
+        }
+
+        .analogy {
+            background-color: #e8f8f5;
+            border-left: 4px solid #1abc9c;
+            padding: 15px;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        .pro-example {
+            background-color: #fdf2e9;
+            border-left: 4px solid #d35400;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        /* INTROSPECTION */
+        .introspection {
+            background: #fff;
+            border: 2px dashed var(--primary);
+            padding: 30px;
+            border-radius: var(--radius);
+            position: relative;
+        }
+
+        .badge-obligatoire {
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        /* INTERACTIVE EXERCISE */
+        .exercise-area {
+            background: #fdfefe;
+            border: 1px solid #d5d8dc;
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            min-height: 50px;
+        }
+
+        .card {
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            user-select: none;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
+        }
+
+        .card:hover { transform: translateY(-2px); }
+
+        .drop-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .zone {
+            border: 2px solid #ccc;
+            border-radius: var(--radius);
+            padding: 15px;
+            min-height: 150px;
+            transition: background 0.3s;
+        }
+
+        .zone h4 { margin-top: 0; }
+        
+        .zone-avoid { border-color: var(--warning); background-color: #fdedec; }
+        .zone-accept { border-color: var(--accent); background-color: #e8f8f5; }
+
+        /* QUIZ STYLES UPDATED */
+        .quiz-container { margin-top: 20px; }
+        
+        .quiz-item {
+            margin-bottom: 25px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 20px;
+        }
+
+        .quiz-option { 
+            display: block; 
+            padding: 12px; 
+            margin: 8px 0; 
+            background: #f8f9fa; 
+            border: 1px solid #ddd;
+            cursor: pointer; 
+            border-radius: 6px; 
+            transition: all 0.2s;
+        }
+        .quiz-option:hover { background: #e9ecef; }
+        
+        .quiz-option.correct { 
+            background: #d4edda !important; 
+            border-color: #c3e6cb; 
+            color: #155724; 
+            font-weight: bold;
+        }
+        
+        .quiz-option.incorrect { 
+            background: #f8d7da !important; 
+            border-color: #f5c6cb; 
+            color: #721c24; 
+            opacity: 0.7;
+        }
+        
+        .feedback-box {
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* GLOSSARY */
+        .glossary {
+            background: #f8f9f9;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+        
+        .glossary dt { font-weight: bold; color: var(--primary); margin-top: 10px;}
+        .glossary dd { margin-left: 0; margin-bottom: 10px; font-style: italic;}
+
+        @media (max-width: 600px) {
+            .drop-zones { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Observer et Accueillir son Soi Interne</h1>
+
+    <h2>🔷 1. Comprendre : Les 5 états et le piège de la lutte</h2>
+    
+    <div class="box">
+        <p>Le <strong>Soi interne</strong> regroupe tous les états produits à l'intérieur de soi. Le document identifie 5 productions internes perceptibles :</p>
+        <ul>
+            <li>🧠 <strong>Cognitions :</strong> Idées, pensées, croyances, souvenirs.</li>
+            <li>❤️ <strong>Émotions :</strong> Sentiments, affects, humeurs.</li>
+            <li>🌡️ <strong>Sensations corporelles :</strong> États produits par le corps.</li>
+            <li>🌫️ <strong>Impressions :</strong> États psychocorporels globaux et diffus.</li>
+            <li>⚡ <strong>Volitions / Conations :</strong> Impulsions, envies, désirs, besoins.</li>
+        </ul>
+
+        <p><strong>Le Problème : L'Évitement Expérientiel</strong><br>
+        C'est la tendance (souvent inconsciente) à vouloir fuir ou supprimer ces états internes lorsqu'ils sont désagréables (peur, pensée "je suis nul", malaise). C'est une lutte contre soi-même qui consomme de l'énergie et rigidifie nos actions, créant un "cercle vicieux".</p>
+
+        <p><strong>La Solution : L'Acceptation Expérientielle</strong><br>
+        Ce n'est pas de la résignation, mais une attitude volontaire d'ouverture. C'est accueillir l'expérience (positive ou négative) pour permettre au <strong>Soi sujet</strong> de réfléchir et d'agir en pleine conscience plutôt que de réagir par automatisme.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>💡 Analogie : Le Ballon sous l'eau</strong><br>
+        Imaginez que vos émotions négatives sont un ballon gonflable dans une piscine.
+        <br><strong>L'Évitement :</strong> Vous essayez de maintenir le ballon sous l'eau. Cela demande un effort constant, vous fatigue, et vous empêche de nager librement. Si vous relâchez, il saute violemment.
+        <br><strong>L'Acceptation :</strong> Vous laissez le ballon flotter à la surface. Il est là, vous le voyez, mais il ne vous empêche plus d'avancer.
+    </div>
+
+    <div class="pro-example">
+        <strong>🎓 Exemple Professionnel</strong><br>
+        <em>Situation :</em> Un éducateur se sent dépassé par un groupe.
+        <br>🔴 <strong>Évitement :</strong> Il pense "Il ne faut pas que je craque", supprime sa colère, se rigidifie, et finit par crier ou se désinvestir (coût psychologique élevé).
+        <br>🟢 <strong>Acceptation :</strong> Il observe : "Je ressens de la colère et une tension dans le ventre". Il accueille cet état sans le juger. Son <strong>Soi sujet</strong> reprend les commandes pour agir calmement selon ses valeurs professionnelles.
+    </div>
+
+    <h2>🔷 2. Introspection du Professionnel</h2>
+    
+    <div class="introspection">
+        <span class="badge-obligatoire">ÉTAPE OBLIGATOIRE</span>
+        <p>Avant d'accompagner les autres, observez votre propre météo intérieure. Les CPS ne se transmettent pas, elles se vivent.</p>
+        
+        <p><strong>Scanner du Soi Interne (Ici et Maintenant) :</strong></p>
+        
+        <div class="input-group">
+            <label>1. Cognition (Une pensée présente ?) :</label>
+            <textarea rows="1" placeholder="Ex: Je me dis que ce dossier est compliqué..."></textarea>
+        </div>
+        
+        <div class="input-group">
+            <label>2. Émotion & Sensation (Que ressentez-vous ?) :</label>
+            <textarea rows="1" placeholder="Ex: Légère anxiété, tension dans les épaules..."></textarea>
+        </div>
+        
+        <div class="input-group">
+            <label>3. Volition (Une impulsion ?) :</label>
+            <textarea rows="1" placeholder="Ex: Envie de faire une pause, envie de scroller..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label>4. Tendance à l'évitement ?</label>
+            <p style="font-size: 0.9em; font-style: italic;">Essayez-vous de chasser ces ressentis ou les laissez-vous être là ?</p>
+        </div>
+    </div>
+
+    <h2>🔷 3. Pratique : Lutte ou Ouverture ?</h2>
+    <p>Classez les réactions suivantes selon qu'elles relèvent de l'<strong>Évitement Expérientiel</strong> (Lutte) ou de l'<strong>Acceptation Expérientielle</strong> (Ouverture).</p>
+
+    <div class="exercise-area">
+        <div class="cards-container" id="source-cards"></div>
+
+        <div class="drop-zones">
+            <div class="zone zone-avoid" id="zone-avoid" onclick="handleZoneClick('avoid')">
+                <h4 style="color:var(--warning)">🚫 Évitement / Lutte</h4>
+                <p style="font-size:0.8em">Supprimer, maîtriser, distraire...</p>
+                <div class="zone-content"></div>
+            </div>
+            <div class="zone zone-accept" id="zone-accept" onclick="handleZoneClick('accept')">
+                <h4 style="color:var(--accent)">👐 Acceptation / Ouverture</h4>
+                <p style="font-size:0.8em">Observer, accueillir, choisir...</p>
+                <div class="zone-content"></div>
+            </div>
+        </div>
+        <p id="exercise-feedback" style="font-weight:bold; min-height:24px; margin-top:10px;"></p>
+        <button onclick="resetExercise()" style="padding:8px 16px; cursor:pointer; background:var(--primary); color:white; border:none; border-radius:4px;">Recommencer</button>
+    </div>
+
+    <h2>🔷 4. Accompagnement (Le Soi Sujet aux commandes)</h2>
+    <div class="box">
+        <p>L'objectif n'est pas de forcer le public à "aller bien", mais de les aider à :</p>
+        <ol>
+            <li><strong>Identifier</strong> les 5 états internes (mettre des mots sur les "cognitions", "volitions", etc.).</li>
+            <li><strong>Repérer</strong> les stratégies d'évitement coûteuses (agressivité, consommation de substances, rumination).</li>
+            <li><strong>Pratiquer</strong> l'accueil bienveillant pour redonner le pouvoir d'agir au <strong>Soi sujet</strong> (l'observateur conscient).</li>
+        </ol>
+        <p><em>Rappel : L'acceptation n'est ni de la passivité, ni de la résignation. C'est une action volontaire.</em></p>
+    </div>
+
+    <h2>🔷 5. Validation des acquis</h2>
+    <div class="quiz-container">
+        
+        <div class="quiz-item">
+            <p><strong>1. Parmi ces éléments, lequel est une "Volition" (ou Conation) ?</strong></p>
+            <div class="quiz-option" onclick="checkQuiz(this, true, 'q1')">Une impulsion ou une envie soudaine.</div>
+            <div class="quiz-option" onclick="checkQuiz(this, false, 'q1')">Un souvenir d'enfance.</div>
+            <div class="quiz-option" onclick="checkQuiz(this, false, 'q1')">Une douleur au ventre.</div>
+            
+            <div id="feedback-q1" class="feedback-box">
+                <strong>Réponse correcte : Une impulsion ou une envie.</strong><br>
+                Les volitions (ou conations) désignent les besoins, envies, impulsions et désirs. Les souvenirs sont des cognitions, et la douleur est une sensation corporelle.
+            </div>
+        </div>
+
+        <div class="quiz-item">
+            <p><strong>2. Qu'est-ce que "l'évitement expérientiel" ?</strong></p>
+            <div class="quiz-option" onclick="checkQuiz(this, false, 'q2')">Une technique de méditation avancée.</div>
+            <div class="quiz-option" onclick="checkQuiz(this, true, 'q2')">La tendance à vouloir supprimer ou fuir ses expériences intérieures désagréables.</div>
+            <div class="quiz-option" onclick="checkQuiz(this, false, 'q2')">La capacité à éviter les dangers physiques réels.</div>
+
+            <div id="feedback-q2" class="feedback-box">
+                <strong>Exact.</strong><br>
+                C'est une lutte contre soi-même (souvent inconsciente) pour ne pas ressentir ce qui nous dérange. Ce processus rigidifie le comportement et consomme beaucoup d'énergie psychique.
+            </div>
+        </div>
+
+        <div class="quiz-item">
+            <p><strong>3. L'acceptation expérientielle signifie :</strong></p>
+            <div class="quiz-option" onclick="checkQuiz(this, false, 'q3')">Se résigner et ne rien faire.</div>
+            <div class="quiz-option" onclick="checkQuiz(this, true, 'q3')">Entrer volontairement en contact avec son expérience pour agir en connaissance de cause.</div>
+            
+            <div id="feedback-q3" class="feedback-box">
+                <strong>Correct !</strong><br>
+                Ce n'est pas de la résignation. C'est une action d'ouverture volontaire qui redonne la liberté d'agir au Soi Sujet, au lieu de réagir par automatisme d'évitement.
+            </div>
+        </div>
+
+    </div>
+
+    <div class="glossary">
+        <h3>📚 Glossaire</h3>
+        <dl>
+            <dt>Soi interne</dt>
+            <dd>Ensemble des productions intérieures perceptibles : Cognitions, Émotions, Sensations, Impressions, Volitions.</dd>
+            
+            <dt>Volitions / Conations</dt>
+            <dd>Forces internes qui tendent à l'action : impulsions, envies, désirs, besoins.</dd>
+            
+            <dt>Évitement expérientiel</dt>
+            <dd>Tendance (souvent inconsciente) à fuir ou contrôler ses états internes (pensées, émotions), générant souffrance et rigidité.</dd>
+            
+            <dt>Acceptation expérientielle</dt>
+            <dd>Attitude volontaire d'ouverture et d'accueil de ses expériences privées (agréables ou non), sans chercher à les modifier.</dd>
+        </dl>
+    </div>
+</div>
+
+<script>
+    /* --- LOGIQUE EXERCICE INTERACTIF --- */
+    const itemsData = [
+        { text: "Supprimer la pensée", type: "avoid" },
+        { text: "Observer avec bienveillance", type: "accept" },
+        { text: "Boire pour oublier", type: "avoid" },
+        { text: "Noter ce que je ressens", type: "accept" },
+        { text: "Se distraire à tout prix", type: "avoid" },
+        { text: "Agir avec ses émotions", type: "accept" }
+    ];
+
+    let selectedItem = null;
+
+    function initExercise() {
+        const container = document.getElementById('source-cards');
+        const zoneAvoid = document.querySelector('#zone-avoid .zone-content');
+        const zoneAccept = document.querySelector('#zone-accept .zone-content');
+        
+        container.innerHTML = '';
+        zoneAvoid.innerHTML = '';
+        zoneAccept.innerHTML = '';
+        document.getElementById('exercise-feedback').innerText = '';
+
+        itemsData.sort(() => Math.random() - 0.5);
+
+        itemsData.forEach(item => {
+            const el = document.createElement('div');
+            el.className = 'card';
+            el.innerText = item.text;
+            el.dataset.type = item.type;
+            el.onclick = (e) => {
+                e.stopPropagation();
+                selectCard(el);
+            };
+            container.appendChild(el);
+        });
+    }
+
+    function selectCard(el) {
+        if (selectedItem) {
+            selectedItem.style.border = "none";
+        }
+        selectedItem = el;
+        el.style.border = "2px solid #fff";
+        el.style.boxShadow = "0 0 0 2px var(--primary)";
+        document.getElementById('exercise-feedback').innerText = "Carte sélectionnée. Cliquez maintenant sur la zone (Lutte ou Ouverture).";
+    }
+
+    function handleZoneClick(zoneType) {
+        if (!selectedItem) return;
+
+        const correctType = selectedItem.dataset.type;
+        const feedback = document.getElementById('exercise-feedback');
+
+        if (correctType === zoneType) {
+            const targetZone = document.querySelector(`#zone-${zoneType} .zone-content`);
+            selectedItem.style.border = "none";
+            selectedItem.style.boxShadow = "none";
+            selectedItem.style.cursor = "default";
+            selectedItem.onclick = null;
+            targetZone.appendChild(selectedItem);
+            
+            feedback.innerText = "Correct !";
+            feedback.style.color = "var(--accent)";
+            selectedItem = null;
+
+            if (document.getElementById('source-cards').children.length === 0) {
+                feedback.innerText = "Bravo ! Vous avez bien distingué les deux dynamiques.";
+            }
+        } else {
+            feedback.innerText = "Erreur. Regardez bien la définition.";
+            feedback.style.color = "var(--warning)";
+        }
+    }
+
+    function resetExercise() {
+        initExercise();
+    }
+
+    /* --- LOGIQUE QUIZ CORRIGÉE --- */
+    function checkQuiz(element, isCorrect, feedbackId) {
+        const parent = element.parentElement;
+        const options = parent.getElementsByClassName('quiz-option');
+        const feedbackEl = document.getElementById('feedback-' + feedbackId);
+        
+        // 1. Désactiver les clics multiples
+        for(let opt of options) {
+            opt.onclick = null; 
+            opt.style.cursor = 'default';
+            opt.style.opacity = '0.6';
+        }
+        element.style.opacity = '1';
+
+        // 2. Gestion visuelle
+        if (isCorrect) {
+            element.classList.add('correct');
+            feedbackEl.style.backgroundColor = '#d4edda';
+            feedbackEl.style.color = '#155724';
+        } else {
+            element.classList.add('incorrect');
+            feedbackEl.style.backgroundColor = '#f8d7da';
+            feedbackEl.style.color = '#721c24';
+            
+            // Montrer la bonne réponse
+            for(let opt of options) {
+                if (opt.outerHTML.includes("true")) {
+                    opt.classList.add('correct');
+                    opt.style.opacity = '1';
+                }
+            }
+        }
+        
+        // 3. Afficher le feedback
+        feedbackEl.style.display = 'block';
+    }
+
+    window.onload = initExercise;
+</script>
+
+</body>
+</html>

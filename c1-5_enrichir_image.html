@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS C1.5 : S'auto-évaluer positivement</title>
+    <style>
+        :root {
+            --primary: #2c3e50; /* Bleu nuit pour le texte principal */
+            --accent: #27ae60;  /* Vert pour la bienveillance et la réussite */
+            --light-bg: #f9fbfd;
+            --card-bg: #ffffff;
+            --highlight: #e8f8f5;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        /* En-tête */
+        header {
+            background: linear-gradient(135deg, var(--primary), #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 { margin: 0; font-size: 1.8rem; }
+        header p { margin-top: 10px; opacity: 0.9; font-style: italic; }
+
+        /* Sections */
+        section {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h2 {
+            color: var(--accent);
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            margin-top: 0;
+        }
+
+        h3 { color: #2980b9; margin-top: 25px; }
+
+        /* Boites de contenu */
+        .concept-box {
+            background-color: var(--highlight);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #d5dbdb;
+        }
+
+        .analogy {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* Introspection */
+        .introspection-zone {
+            background-color: #eaf2f8;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 1px dashed #3498db;
+        }
+
+        .introspection-zone textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+
+        /* Exercices Interactifs */
+        .interactive-card {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover { background-color: #1e8449; }
+
+        /* Selecteur de forces */
+        .strength-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .strength-item {
+            background: #f8f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .strength-item:hover { transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .strength-item.selected { background-color: var(--accent); color: white; border-color: var(--accent); }
+
+        /* Quiz & Feedback */
+        .quiz-option {
+            padding: 15px;
+            margin: 10px 0;
+            background: #f4f6f7;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .quiz-option:hover { background: #e8e8e8; }
+        
+        .feedback-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+        }
+        .feedback-success { background-color: #d4edda; color: #155724; }
+        .feedback-error { background-color: #f8d7da; color: #721c24; }
+
+        /* Glossaire */
+        dl { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        dt { font-weight: bold; color: var(--accent); }
+        dd { margin: 0; font-size: 0.95rem; color: #555; }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            padding: 20px;
+            background-color: #ecf0f1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>S'auto-évaluer positivement et sans biais</h1>
+        <p>Studio CPS – Fiche Pédagogique C1.5</p>
+    </header>
+
+    <section id="comprendre">
+        <h2>1. Comprendre la notion</h2>
+        <p>
+            L'auto-évaluation positive ne consiste pas à se vanter, mais à développer une <strong>relation bienveillante et constructive avec soi-même</strong>. 
+            Souvent, nous sommes piégés par un "juge intérieur" qui compare notre image à des normes ou aux autres, créant tension et malaise (évitement expérientiel).
+        </p>
+        <p>
+            Cette compétence vise à passer d'une posture critique (blâme) à une posture d'<strong>observation</strong> et d'<strong>accueil</strong>. Elle repose sur la reconnaissance de ses <strong>forces personnelles</strong> et de ses qualités humaines, ancrées dans des faits réels.
+        </p>
+
+        <div class="analogy">
+            <strong>💡 L'analogie du miroir :</strong><br>
+            Imaginez que vous vous regardez dans un miroir déformant (votre "Besoin de cohérence") qui fige une image négative de vous. <br>
+            La compétence consiste à nettoyer ce miroir pour voir la réalité objective : non seulement vos défauts, mais surtout vos <strong>24 forces de caractère</strong> et vos compétences réelles. C'est accepter de changer son Image de Soi grâce à la <strong>flexibilité</strong>.
+        </div>
+
+        <div class="concept-box">
+            <strong>Exemple professionnel :</strong><br>
+            Un éducateur pense : <em>"Je n'ai pas su gérer ce conflit, je suis incompétent"</em> (Jugement global, biaisé, figé).<br>
+            <strong>Version auto-évaluation positive (C1.5) :</strong> <em>"Je n'ai pas réussi à apaiser le conflit immédiatement, mais j'ai fait preuve de <strong>persévérance</strong> (Force n°7) et d'<strong>honnêteté</strong> (Force n°8) en reconnaissant mes limites. Je peux progresser."</em>
+        </div>
+    </section>
+
+    <section id="introspection">
+        <h2>2. Introspection du professionnel</h2>
+        <p style="font-weight: bold; color: #e74c3c;">⚠️ Étape indispensable : D'abord soi, ensuite le public.</p>
+        <p>Le référentiel souligne que "l'opposition à l'intérieur de soi" conduit à l'évitement. Pour accompagner les autres, vous devez d'abord observer votre propre discours interne.</p>
+
+        <div class="introspection-zone">
+            <h3>🔍 Mon Auto-Observation</h3>
+            <p>Prenez un instant pour répondre mentalement ou par écrit aux questions tirées du document :</p>
+            
+            <label>1. Quel est mon discours interne au quotidien ? (Les mots que je m'adresse)</label>
+            <textarea placeholder="Ex: 'Tu es trop lent', 'Tu dois faire mieux' ou 'C'est bien, tu avances'..." rows="2"></textarea>
+
+            <label>2. Comment est-ce que je prends soin de moi et de mes besoins (physiques et psychologiques) ?</label>
+            <textarea placeholder="Ex: Est-ce que je m'accorde le droit à l'erreur ? Est-ce que je reconnais mes réussites ?" rows="2"></textarea>
+
+            <p style="font-size: 0.9rem; margin-top: 10px; font-style: italic;">
+                "Observer comment nous nous considérons au quotidien est rendu possible par un questionnement au quotidien."
+            </p>
+        </div>
+    </section>
+
+    <section id="pratique">
+        <h2>3. Pratique : Ancrer ses forces</h2>
+        <p>Le document précise qu'il existe <strong>24 forces de caractère</strong> (classification scientifique). Pour enrichir votre image de soi, vous devez identifier ces forces et les <strong>ancrer dans la réalité</strong> (des faits vus ou vécus).</p>
+
+        <div class="interactive-card">
+            <h3>Exercice : Le détecteur de forces</h3>
+            <p>Sélectionnez <strong>UNE</strong> force parmi cette liste (issue du Tableau 1 du référentiel) que vous avez mobilisée cette semaine.</p>
+            
+            <div id="strengthList" class="strength-grid">
+                </div>
+
+            <div id="strengthAnchor" style="display:none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+                <p><strong>Vous avez choisi : <span id="selectedStrengthName" style="color:var(--accent); font-weight:bold;"></span></strong></p>
+                <p>Selon la consigne du texte : <em>"Pour que ce processus soit constructif, il est important de l'ancrer dans la réalité en reliant nos représentations à des faits."</em></p>
+                <p>Complétez cette phrase pour valider l'exercice :</p>
+                <div style="background: #f9f9f9; padding: 10px; border-radius: 4px;">
+                    "J'ai fait preuve de cette force quand j'ai..." <input type="text" id="actionInput" placeholder="décrivez une action précise..." style="width: 60%; padding: 5px;">
+                </div>
+                <button class="btn" onclick="validateExercise()">Valider mon ancrage</button>
+                <div id="exFeedback" class="feedback-box"></div>
+            </div>
+        </div>
+
+        <div class="interactive-card">
+            <h3>Réflexion : Les effets bénéfiques</h3>
+            <p>Le texte liste 3 effets majeurs. Cliquez sur les éléments ci-dessous pour révéler pourquoi c'est important selon le document.</p>
+            <details>
+                <summary style="cursor:pointer; font-weight:bold;">Estime de soi & Pouvoir d'agir</summary>
+                <p style="padding:10px; background:#f4f4f4;">En reconnaissant ce qui fonctionne, on développe notre sentiment d'<strong>auto-efficacité</strong> et notre <strong>empowerment</strong>.</p>
+            </details>
+            <details style="margin-top:10px;">
+                <summary style="cursor:pointer; font-weight:bold;">Autonomie & Bien-être</summary>
+                <p style="padding:10px; background:#f4f4f4;">Se reconnaître soi-même permet de se distancier du regard de l'autre et de réduire la <strong>dépendance à autrui</strong>.</p>
+            </details>
+             <details style="margin-top:10px;">
+                <summary style="cursor:pointer; font-weight:bold;">Relations aux autres</summary>
+                <p style="padding:10px; background:#f4f4f4;">Notre relation aux autres dépend de notre relation à soi. Une relation apaisée avec soi rend la relation aux autres plus <strong>ouverte et apaisée</strong>.</p>
+            </details>
+        </div>
+    </section>
+
+    <section id="public">
+        <h2>4. Vers le public</h2>
+        <p>Une fois l'exercice fait pour vous-même :</p>
+        <p>
+            Vous pouvez accompagner vos bénéficiaires à identifier leurs propres <strong>compétences personnelles</strong> (créatives, sociales, intellectuelles...) en les aidant à observer leurs comportements quotidiens.
+            L'objectif est de les aider à "construire une image de soi plus riche et plus objective", loin des jugements scolaires ou sociaux passés.
+        </p>
+    </section>
+
+    <section id="validation">
+        <h2>5. Quiz de validation</h2>
+        <p>Vérifions votre compréhension fine des mécanismes abordés.</p>
+
+        <div class="interactive-card">
+            <p><strong>Selon les documents, quel mécanisme psychologique "renforce l'identification aux représentations de soi" et rend difficile le changement d'image de soi (rigidité) ?</strong></p>
+            
+            <div class="quiz-option" onclick="checkAnswer(1)">
+                A. L'auto-observation bienveillante
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(2)">
+                B. La fusion cognitive et le besoin de cohérence
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(3)">
+                C. Le sentiment d'auto-efficacité
+            </div>
+
+            <div id="quizFeedback" class="feedback-box"></div>
+        </div>
+    </section>
+
+    <section id="glossaire">
+        <h2>📚 Glossaire des notions travaillées</h2>
+        <dl>
+            <dt>Forces personnelles (ou Forces de caractère)</dt>
+            <dd>Aspects positifs de la personnalité (façon de penser, ressentir, agir) étudiés scientifiquement. Il en existe 24 (ex: courage, gratitude, créativité).</dd>
+
+            <dt>Besoin de cohérence</dt>
+            <dd>Tendance naturelle qui nous pousse à préserver notre vision de nous-mêmes (même négative) et à adopter une attitude rigide, freinant la remise en question.</dd>
+
+            <dt>Auto-efficacité (Sentiment d')</dt>
+            <dd>Confiance en ses ressources et capacités d'agir, renforcée par une estime de soi positive.</dd>
+
+            <dt>Évitement expérientiel</dt>
+            <dd>Mécanisme découlant d'une posture critique et de rejet vis-à-vis de ce que nous ressentons intérieurement.</dd>
+
+            <dt>Image de soi</dt>
+            <dd>Représentation que nous avons de nous-mêmes, souvent biaisée par des jugements passés, qu'il s'agit d'enrichir et de rendre plus objective.</dd>
+        </dl>
+    </section>
+
+    <footer>
+        © CPS Studio 2025 - Fiche générée à partir des extraits du référentiel.
+    </footer>
+</div>
+
+<script>
+    // Données issues du Tableau 1 (Image 4)
+    const forces = [
+        "Créativité", "Curiosité", "Discernement/Pensée critique", "Amour de l'étude", "Sagesse",
+        "Courage", "Assiduité/Persévérance", "Honnêteté", "Joie de vivre", "Capacité d'aimer",
+        "Gentillesse", "Intelligence sociale", "Travail d'équipe", "Impartialité/Justice", "Leadership",
+        "Pardon", "Modestie/Humilité", "Prudence", "Maîtrise de soi", "Reconnaissance de la beauté",
+        "Gratitude", "Espoir/Optimisme", "Humour", "Spiritualité/Sens"
+    ];
+
+    const grid = document.getElementById('strengthList');
+    const anchorSection = document.getElementById('strengthAnchor');
+    const strengthNameSpan = document.getElementById('selectedStrengthName');
+    let selectedBtn = null;
+
+    // Génération de la grille de forces
+    forces.forEach(force => {
+        const div = document.createElement('div');
+        div.className = 'strength-item';
+        div.innerText = force;
+        div.onclick = function() {
+            // Gestion de la sélection visuelle
+            if(selectedBtn) selectedBtn.classList.remove('selected');
+            div.classList.add('selected');
+            selectedBtn = div;
+
+            // Affichage de la zone d'ancrage
+            strengthNameSpan.innerText = force;
+            anchorSection.style.display = 'block';
+            
+            // Scroll doux vers la zone
+            anchorSection.scrollIntoView({behavior: "smooth"});
+        };
+        grid.appendChild(div);
+    });
+
+    // Validation de l'exercice 1
+    function validateExercise() {
+        const input = document.getElementById('actionInput').value;
+        const feedback = document.getElementById('exFeedback');
+
+        if(input.length < 5) {
+            feedback.className = 'feedback-box feedback-error';
+            feedback.innerHTML = "<strong>Incomplet :</strong> Pour valider la compétence, vous devez citer un fait ou comportement spécifique (ex: 'j'ai osé dire non', 'j'ai aidé un collègue').";
+            feedback.style.display = 'block';
+        } else {
+            feedback.className = 'feedback-box feedback-success';
+            feedback.innerHTML = "<strong>Bravo !</strong> Vous venez de pratiquer l'auto-évaluation positive : <br>1. Identification d'une qualité (Force) <br>2. Ancrage dans la réalité (Fait). <br>C'est ainsi qu'on enrichit son image de soi objectivement.";
+            feedback.style.display = 'block';
+        }
+    }
+
+    // Validation du Quiz
+    function checkAnswer(answerId) {
+        const feedback = document.getElementById('quizFeedback');
+        
+        if (answerId === 2) {
+            feedback.className = 'feedback-box feedback-success';
+            feedback.innerHTML = `
+                <strong>Bonne réponse !</strong><br>
+                Le texte (Image 2) explique que le <strong>besoin de cohérence</strong> et la <strong>fusion cognitive</strong> nous figent dans nos croyances. 
+                La solution proposée est la <em>flexibilité</em> et la <em>défusion cognitive</em>.
+            `;
+        } else if (answerId === 1) {
+            feedback.className = 'feedback-box feedback-error';
+            feedback.innerHTML = `
+                <strong>Incorrect.</strong><br>
+                L'auto-observation bienveillante est la solution (le but à atteindre), pas le mécanisme qui bloque le changement. Le blocage vient du besoin de cohérence.
+            `;
+        } else {
+            feedback.className = 'feedback-box feedback-error';
+            feedback.innerHTML = `
+                <strong>Incorrect.</strong><br>
+                Le sentiment d'auto-efficacité est un <em>effet bénéfique</em> (résultat) d'une bonne auto-évaluation, pas le mécanisme de blocage.
+            `;
+        }
+        feedback.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
