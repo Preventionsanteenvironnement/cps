@@ -73,17 +73,16 @@
         /* --- BADGE NOUVEAU --- */
         .badge-new {
             color: #d32f2f; 
-            font-size: 0.75em; 
+            font-size: 0.65em; /* Petit texte */
             font-weight: 900; 
             text-transform: uppercase; 
-            margin-left: 0; /* Ajusté car géré par le gap du parent */
             letter-spacing: 0.5px;
-            animation: pulse 1s infinite alternate; 
-            vertical-align: middle;
+            animation: pulse 0.8s infinite alternate; /* Clignotement */
+            display: inline-block;
         }
         @keyframes pulse { 
-            0% { opacity: 1; } 
-            100% { opacity: 0.3; } 
+            0% { opacity: 1; transform: scale(1); } 
+            100% { opacity: 0.5; transform: scale(0.95); } 
         }
 
         main { padding: 0 20px 40px 20px; flex: 1; }
@@ -111,7 +110,14 @@
         .savoir-text { flex: 1; margin-bottom: 8px; font-size: 0.95em; line-height: 1.4; color: #333; font-weight: 400; display: flex; gap: 10px; }
         .savoir-number { font-weight: bold; color: #6a1b9a; min-width: 20px; }
 
-        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-left: 30px; align-items: center; }
+        /* Modification du groupe bouton pour aligner le texte à côté */
+        .btn-group { 
+            display: flex; 
+            align-items: center; /* Aligne verticalement au centre */
+            gap: 10px; /* Espace entre le bouton et le texte */
+            flex-wrap: nowrap; /* Empêche le retour à la ligne */
+            margin-left: 30px; 
+        }
         
         .btn-explore { 
             text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; font-weight: bold; transition: 0.2s; 
@@ -172,7 +178,7 @@
         <strong>3. Synthétiser</strong> les acquis grâce aux fiches "L'essentiel à retenir".</p>
         
         <div class="intro-note">
-            Les modules marqués <span class="badge-new">NOUVEAU</span> sont disponibles. Les autres sont en cours de construction.
+            Les modules marqués <span class="badge-new" style="color:#d32f2f">NOUVEAU</span> sont disponibles. Les autres sont en cours de construction.
         </div>
     </div>
 
