@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche CPS : Prosocialité Élargie et Gratitude</title>
+    <style>
+        :root {
+            --primary: #ad1457; /* Rose profond pour la compassion/cœur */
+            --secondary: #d81b60;
+            --accent: #f8bbd0;
+            --light: #fce4ec;
+            --text: #37474f;
+            --white: #ffffff;
+            --success: #43a047;
+            --error: #e53935;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #fff8e1; /* Fond chaud */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 1.8rem; letter-spacing: 0.5px; }
+        h2 { color: var(--primary); border-left: 5px solid var(--secondary); padding-left: 1rem; margin-top: 2.5rem; }
+        h3 { color: #880e4f; margin-top: 1.5rem; font-weight: 600; }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .analogy {
+            background-color: #e0f2f1;
+            border: 1px solid #b2dfdb;
+            color: #00695c;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--primary);
+            background-color: var(--light);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Introspection Section */
+        .introspection-box {
+            background-color: #fff3e0;
+            border: 2px dashed #ffb74d;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        /* Interactive Elements */
+        .selector-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .selectable-item {
+            background: var(--white);
+            border: 2px solid #ccc;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s;
+        }
+        
+        .selectable-item.selected {
+            border-color: var(--primary);
+            background-color: var(--light);
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .scenario-box {
+            background: #fafafa;
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .btn-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 1rem;
+        }
+        .btn-action:hover { background: var(--secondary); }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 500;
+        }
+        .feedback.correct { background-color: #c8e6c9; color: #1b5e20; border: 1px solid #a5d6a7; display: block; }
+        .feedback.incorrect { background-color: #ffcdd2; color: #c62828; border: 1px solid #ef9a9a; display: block; }
+
+        /* Quiz Styles */
+        .quiz-option {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            background: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s;
+        }
+        .quiz-option:hover { background: var(--light); }
+
+        .glossary-term {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #37474f;
+            color: #cfd8dc;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Prosocialité Élargie & Gratitude</h1>
+    <p>Étendre l'entraide au-delà des proches et cultiver la reconnaissance</p>
+</header>
+
+<div class="container">
+
+    <section>
+        <h2>1. Comprendre la notion</h2>
+        <div class="card">
+            <h3>Le défi de la distance sociale</h3>
+            <p>Il est naturel d'aider son propre groupe (famille, amis). Cependant, le document souligne que pour étendre ces comportements à des personnes plus éloignées (inconnus, autres groupes), il faut activer deux leviers cognitifs et émotionnels :</p>
+            <ul>
+                <li><strong>Le sentiment d'humanité commune :</strong> Prendre conscience que, malgré les différences, nous partageons des traits communs et des besoins fondamentaux (survie, équilibre) avec tous les humains.</li>
+                <li><strong>La compassion :</strong> Une capacité complexe qui permet de s'intéresser à la souffrance de l'autre et d'agir pour la diminuer.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Le pouvoir de la Gratitude (Reconnaissance)</h3>
+            <p>La reconnaissance n'est pas juste une formule de politesse. C'est un puissant moteur social. L'expression de la gratitude crée un <span class="highlight">cercle vertueux</span> : elle augmente les comportements prosociaux chez celui qui reçoit le merci, mais aussi chez celui qui le donne.</p>
+        </div>
+
+        <div class="card analogy">
+            <h3>💡 Analogie : L'Effet Ricochet</h3>
+            <p>Imaginez que l'aide est un caillou jeté dans l'eau.</p>
+            <p>Aider un proche, c'est facile, c'est le point d'impact. Mais pour que les ondes aillent plus loin (vers les inconnus), il faut une énergie supplémentaire : c'est le <strong>sentiment d'humanité commune</strong> (l'eau est la même pour tous). </p>
+            <p>La <strong>gratitude</strong>, elle, agit comme un rebond : elle redonne de l'énergie à l'onde pour qu'elle continue de se propager et revienne même vers l'émetteur.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Introspection du professionnel</h2>
+        <div class="introspection-box">
+            <p>⚠️ <strong>Expérimentation personnelle :</strong> Avant d'enseigner la compassion ou la gratitude, explorez vos propres freins.</p>
+            
+            <h3>Exercice : Mon cercle de compassion</h3>
+            <p>Lisez les affirmations suivantes et demandez-vous honnêtement si vous ressentez une barrière interne :</p>
+            
+            <div style="margin-left: 20px;">
+                <label style="display:block; margin-bottom:10px;">
+                    <input type="checkbox"> Je ressens facilement de la peine pour un ami en difficulté.
+                </label>
+                <label style="display:block; margin-bottom:10px;">
+                    <input type="checkbox"> Je ressens de la préoccupation pour un collègue que je connais peu.
+                </label>
+                <label style="display:block; margin-bottom:10px;">
+                    <input type="checkbox"> Je tolère les sentiments inconfortables que me procure la vue de la souffrance d'un inconnu.
+                </label>
+            </div>
+
+            <p><em>Réflexion :</em> Le texte mentionne que la compassion nécessite de <strong>"tolérer des sentiments inconfortables"</strong>. Souvent, nous n'aidons pas les personnes éloignées car leur souffrance nous met mal à l'aise et nous préférons détourner le regard. Identifier cet inconfort est le premier pas.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. S'entraîner (Mise en pratique)</h2>
+
+        <div class="card">
+            <h3>Activité 1 : Les ingrédients de la Compassion</h3>
+            <p>Le document liste précisément <strong>5 éléments distincts</strong> qui composent la compassion. Retrouvez-les parmi cette liste de propositions (Cliquez pour sélectionner les 5 bons).</p>
+
+            <div class="selector-container" id="compassion-list">
+                <div class="selectable-item" onclick="toggleItem(this)">Reconnaissance de la souffrance</div>
+                <div class="selectable-item" onclick="toggleItem(this)">Pitié condescendante</div>
+                <div class="selectable-item" onclick="toggleItem(this)">Compréhension du caractère universel de la souffrance</div>
+                <div class="selectable-item" onclick="toggleItem(this)">Jugement moral</div>
+                <div class="selectable-item" onclick="toggleItem(this)">Sentiment de préoccupation pour autrui</div>
+                <div class="selectable-item" onclick="toggleItem(this)">Tolérance aux sentiments inconfortables</div>
+                <div class="selectable-item" onclick="toggleItem(this)">Besoin de reconnaissance</div>
+                <div class="selectable-item" onclick="toggleItem(this)">Motivation à agir pour diminuer la souffrance</div>
+            </div>
+
+            <button class="btn-action" onclick="checkCompassion()">Valider ma composition</button>
+            <div id="compassion-feedback" class="feedback"></div>
+        </div>
+
+        <div class="card">
+            <h3>Activité 2 : Le Cercle Vertueux de la Gratitude</h3>
+            <p><strong>Contexte :</strong> Un collègue d'un autre service vous a aidé à débloquer un dossier complexe, alors qu'il n'y était pas obligé.</p>
+            <p>Quelle réaction permet d'activer le "cercle vertueux" décrit dans le texte ?</p>
+
+            <div class="scenario-box">
+                <button class="quiz-option" onclick="checkGratitude(1)">Vous lui dites simplement "Merci" dans le couloir en passant.</button>
+                <button class="quiz-option" onclick="checkGratitude(2)">Vous prenez le temps de lui exprimer votre reconnaissance en soulignant à quel point son aide a été utile pour vous.</button>
+                <button class="quiz-option" onclick="checkGratitude(3)">Vous lui achetez un cadeau coûteux pour effacer votre dette envers lui.</button>
+            </div>
+            <div id="gratitude-feedback" class="feedback"></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Accompagner un public</h2>
+        <div class="card" style="border-left-color: #8e24aa;">
+            <h3>De la théorie à la "Routine Prosociale"</h3>
+            <p>Pour construire une identité personnelle qui intègre la prosocialité dès le plus jeune âge, le texte suggère des supports concrets :</p>
+            <ul>
+                <li><strong>Le tableau de gratitude :</strong> Un support partagé où chacun peut écrire ou dessiner une reconnaissance envers un autre.</li>
+                <li><strong>La lettre de gratitude :</strong> Rédiger un message spécifique à quelqu'un.</li>
+            </ul>
+            <p>👉 <em>L'objectif est de transformer une émotion passagère en une "routine" observable.</em></p>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Validation des acquis</h2>
+        <div class="card">
+            <p>Vérifions votre compréhension des mécanismes clés.</p>
+            
+            <div id="final-quiz">
+                <div class="quiz-item">
+                    <p><strong>1. Qu'est-ce qui facilite l'aide envers des personnes "éloignées socialement" (inconnus) ?</strong></p>
+                    <button class="quiz-option" onclick="validateQuiz(1, 'a')">A. L'obligation morale et la loi.</button>
+                    <button class="quiz-option" onclick="validateQuiz(1, 'b')">B. Le sentiment d'humanité commune et la conscience des besoins partagés.</button>
+                    <button class="quiz-option" onclick="validateQuiz(1, 'c')">C. L'espoir de recevoir une récompense financière.</button>
+                    <div id="q1-fb" class="feedback"></div>
+                </div>
+
+                <div class="quiz-item" style="margin-top: 20px;">
+                    <p><strong>2. Quel est l'effet prouvé de l'expression de la gratitude ?</strong></p>
+                    <button class="quiz-option" onclick="validateQuiz(2, 'a')">A. Elle rend la personne qui reçoit le merci plus prosociale, mais n'a pas d'effet sur celui qui remercie.</button>
+                    <button class="quiz-option" onclick="validateQuiz(2, 'b')">B. Elle augmente les comportements prosociaux (coopératifs et altruistes) chez les deux protagonistes.</button>
+                    <button class="quiz-option" onclick="validateQuiz(2, 'c')">C. Elle crée une dette sociale inconfortable.</button>
+                    <div id="q2-fb" class="feedback"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Glossaire des notions travaillées</h2>
+        <div class="card" style="background-color: #f3e5f5;">
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px;">
+                    <span class="glossary-term">Humanité commune :</span> Sentiment de proximité basé sur la conscience que tous les humains partagent des traits et des besoins physiques/psychologiques identiques, facilitant l'aide au-delà de ses proches.
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <span class="glossary-term">Compassion :</span> Sentiment complexe comprenant 5 éléments (reconnaissance de la souffrance, universalité, préoccupation, tolérance à l'inconfort, motivation à agir) permettant d'aider autrui.
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <span class="glossary-term">Gratitude (Reconnaissance) :</span> Sentiment éprouvé lorsqu'on prend conscience des intentions favorables d'autrui à son égard. Son expression renforce la cohésion sociale.
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <span class="glossary-term">Cercle vertueux :</span> Dynamique positive où l'expression de la gratitude encourage de nouveaux comportements prosociaux, créant un climat social soutenant.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>Créé par CPS Studio - Basé exclusivement sur l'extrait "Mettre en œuvre des comportements prosociaux au-delà de ses proches".</p>
+    </footer>
+
+</div>
+
+<script>
+    // --- EXERCICE 1: COMPASSION SELECTOR ---
+    function toggleItem(element) {
+        element.classList.toggle('selected');
+    }
+
+    function checkCompassion() {
+        const selectedItems = document.querySelectorAll('.selectable-item.selected');
+        const correctTexts = [
+            "Reconnaissance de la souffrance",
+            "Compréhension du caractère universel de la souffrance",
+            "Sentiment de préoccupation pour autrui",
+            "Tolérance aux sentiments inconfortables",
+            "Motivation à agir pour diminuer la souffrance"
+        ];
+
+        let score = 0;
+        let errors = 0;
+
+        selectedItems.forEach(item => {
+            if (correctTexts.includes(item.innerText)) {
+                score++;
+            } else {
+                errors++;
+            }
+        });
+
+        const feedback = document.getElementById('compassion-feedback');
+        if (score === 5 && errors === 0 && selectedItems.length === 5) {
+            feedback.className = 'feedback correct';
+            feedback.innerHTML = "<strong>Parfait !</strong> Vous avez identifié les 5 piliers. Notez bien que la 'Pitié' n'en fait pas partie (elle implique une distance/supériorité) et que la 'Tolérance à l'inconfort' est cruciale.";
+        } else {
+            feedback.className = 'feedback incorrect';
+            feedback.innerHTML = "Ce n'est pas tout à fait ça. Il y a 5 éléments précis à trouver. Attention aux intrus comme la pitié ou le jugement. Réessayez.";
+        }
+    }
+
+    // --- EXERCICE 2: GRATITUDE SCENARIO ---
+    function checkGratitude(choice) {
+        const fb = document.getElementById('gratitude-feedback');
+        
+        if (choice === 2) {
+            fb.className = 'feedback correct';
+            fb.innerHTML = "<strong>Exactement.</strong> En conscientisant et en exprimant clairement la gratitude, vous renforcez le lien social, votre propre bien-être et celui de votre collègue. C'est le cercle vertueux décrit.";
+        } else if (choice === 1) {
+            fb.className = 'feedback incorrect';
+            fb.innerHTML = "C'est poli, mais mécanique. Le texte parle de 'conscientisation' et d'expression véritable pour augmenter les comportements prosociaux et le sentiment de lien social.";
+        } else {
+            fb.className = 'feedback incorrect';
+            fb.innerHTML = "Non. La gratitude n'est pas une transaction commerciale ('payer une dette'), c'est un sentiment de connexion et de reconnaissance de l'intention de l'autre.";
+        }
+    }
+
+    // --- QUIZ LOGIC ---
+    function validateQuiz(q, answer) {
+        const fb = document.getElementById(`q${q}-fb`);
+        if (q === 1) {
+            if (answer === 'b') {
+                fb.className = 'feedback correct';
+                fb.innerHTML = "Correct ! C'est la clé pour dépasser le cercle restreint des proches : voir en l'autre un humain partageant les mêmes besoins.";
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = "Faux. Le texte ne parle pas de loi ou d'argent, mais de connexion à l'humanité et aux besoins partagés.";
+            }
+        }
+        if (q === 2) {
+            if (answer === 'b') {
+                fb.className = 'feedback correct';
+                fb.innerHTML = "Tout à fait. La gratitude a un effet bilatéral : elle encourage l'altruisme chez celui qui la reçoit ET chez celui qui l'exprime.";
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = "Non, l'effet est mutuel (bilatéral) et positif pour les deux parties.";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
