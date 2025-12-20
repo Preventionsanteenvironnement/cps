@@ -1,364 +1,91 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Le Triangle Pédagogique - Mobile</title>
-    <style>
-        :root {
-            --c-savoir: #2563eb;
-            --c-enseignant: #dc2626;
-            --c-apprenant: #16a34a;
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --highlight: #f59e0b;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triangle pédagogique</title>
 
-        * { box-sizing: border-box; }
+<style>
+body{
+  margin:0;
+  padding:0;
+  font-family:Arial, sans-serif;
+  background:#ffffff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh; /* Prend tout l'écran */
-            overflow: hidden; /* Empêche le scroll global bizarre */
-        }
+.triangle-wrap{
+  width:100%;
+  max-width:900px;
+  padding:16px;
+  box-sizing:border-box;
+}
 
-        /* --- HEADER COMPACT --- */
-        header {
-            background: white; 
-            padding: 10px 15px; 
-            border-bottom: 1px solid #e2e8f0;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            height: 50px; /* Hauteur fixe petite */
-            flex-shrink: 0;
-            z-index: 100;
-        }
-        h1 { 
-            margin: 0; 
-            font-size: 0.95rem; /* Plus petit sur mobile */
-            color: #0f172a; 
-            font-weight: 800; 
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .btn-nav {
-            background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155;
-            padding: 6px 12px; border-radius: 6px; font-weight: 600; cursor: pointer;
-            font-size: 0.8rem; white-space: nowrap;
-        }
-        .btn-nav.active { background: var(--text); color: white; border-color: var(--text); }
+svg#triangleSvg{
+  width:100%;
+  height:auto;
+  max-height:60vh;
+  display:block;
+  margin:0 auto;
+}
 
-        /* --- CONTENEUR --- */
-        .container { 
-            display: flex; 
-            flex-direction: column; /* Vertical sur mobile par défaut */
-            flex: 1; 
-            overflow: hidden; 
-            position: relative; 
-        }
+h2{
+  margin:16px;
+  text-align:center;
+}
 
-        /* --- ZONE VISUELLE (TRIANGLE) --- */
-        .visual-zone {
-            background: white; 
-            border-bottom: 1px solid #e2e8f0;
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            /* MOBILE : Hauteur dynamique (35% de l'écran) */
-            height: 35vh; 
-            flex-shrink: 0;
-            z-index: 10;
-        }
-        svg { 
-            width: 100%; 
-            height: 100%; 
-            max-height: 350px; 
-            user-select: none; 
-            overflow: visible; 
-        }
+.section{
+  max-width:900px;
+  padding:16px;
+  box-sizing:border-box;
+}
 
-        /* --- ZONE TEXTE (SCROLLABLE) --- */
-        .content-zone {
-            background: #f8fafc; 
-            overflow-y: auto; /* Scroll ici */
-            padding: 20px;
-            flex: 1; /* Prend le reste de la place */
-            -webkit-overflow-scrolling: touch; /* Scroll doux sur iPhone */
-            padding-bottom: 50px; /* Marge en bas pour ne pas couper */
-        }
-
-        /* --- ELEMENTS SVG GROSSIS --- */
-        .process-line { stroke: #e2e8f0; stroke-width: 18; transition: all 0.3s; } /* Lignes plus épaisses */
-        .process-line.active { stroke: var(--highlight) !important; stroke-width: 22; }
-
-        .pole { transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .pole circle { fill: white; stroke-width: 4; r: 42; transition: all 0.3s; } /* Cercles plus gros */
-        .pole text { 
-            font-weight: bold; text-anchor: middle; font-family: sans-serif; pointer-events: none; 
-            font-size: 14px; /* Texte plus gros */
-        }
-
-        .pole[data-id="savoir"] circle { stroke: var(--c-savoir); }
-        .pole[data-id="prof"] circle { stroke: var(--c-enseignant); }
-        .pole[data-id="eleve"] circle { stroke: var(--c-apprenant); }
-
-        .pole.mort circle { fill: #f1f5f9; stroke: #94a3b8 !important; stroke-dasharray: 5; opacity: 1; }
-        .pole.mort text { fill: #64748b; opacity: 0.6; }
-        
-        .mort-badge { 
-            opacity: 0; font-size: 16px; font-weight: 900; fill: #ef4444; 
-            text-anchor: middle; transition: opacity 0.5s 0.3s; 
-            paint-order: stroke; stroke: white; stroke-width: 3px; /* Contour blanc pour lisibilité */
-        }
-        .pole.mort .mort-badge { opacity: 1; }
-
-        .center-label { pointer-events: none; text-transform: uppercase; font-size: 12px; }
-
-        /* --- CARTE INFO --- */
-        .view-section { display: none; animation: fadeIn 0.4s; }
-        .view-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card-header { margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-        .tag-process { 
-            display: inline-block; background: var(--highlight); color: white; 
-            padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; 
-            font-weight: 800; text-transform: uppercase; margin-bottom: 5px;
-        }
-        .situation-title { font-size: 1.4rem; margin: 0; color: #0f172a; line-height: 1.2; }
-        
-        .block-text { margin-bottom: 20px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
-        .block-label { font-size: 0.8rem; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;}
-        .desc-text { font-size: 1rem; line-height: 1.5; color: #334155; margin: 0; }
-
-        .box-mort { background: #f1f5f9; border-left: 5px solid #94a3b8; }
-        .box-fou { background: #fef2f2; border-left: 5px solid #ef4444; color: #7f1d1d; }
-        .box-tip { background: #f0fdf4; border-left: 5px solid #16a34a; color: #14532d; }
-
-        /* --- MODAL INTRO --- */
-        #intro-modal {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.98); z-index: 2000;
-            display: flex; justify-content: center; align-items: center; padding: 20px;
-        }
-        .intro-card { background: white; width: 100%; max-width: 500px; padding: 30px; border-radius: 12px; text-align: center; }
-        .btn-start {
-            background: var(--c-savoir); color: white; border: none; padding: 15px; width: 100%;
-            font-size: 1.1rem; border-radius: 8px; cursor: pointer; margin-top: 20px; font-weight: bold;
-        }
-
-        /* --- RESPONSIVE TABLETTE/DESKTOP --- */
-        @media (min-width: 900px) {
-            .container { flex-direction: row; }
-            .visual-zone { width: 45%; height: auto; border-right: 1px solid #e2e8f0; border-bottom: none; }
-            .content-zone { width: 55%; padding: 40px; }
-            h1 { font-size: 1.2rem; }
-        }
-    </style>
+@media (max-width:480px){
+  svg#triangleSvg{
+    max-height:50vh;
+  }
+}
+</style>
 </head>
+
 <body>
 
-    <div id="intro-modal">
-        <div class="intro-card">
-            <h2 style="color:#2563eb; margin-top:0;">Le Triangle Pédagogique</h2>
-            <p style="color:#64748b;">(Jean Houssaye)</p>
-            <div style="text-align:left; background:#f8fafc; padding:15px; border-radius:8px; margin:20px 0; font-size:0.95rem;">
-                <p style="margin:0 0 10px 0;"><strong>Règle du jeu :</strong></p>
-                <p style="margin:0;">Quand deux acteurs sont reliés, le troisième est exclu. C'est <strong>"Le Mort"</strong>.</p>
-            </div>
-            <button class="btn-start" onclick="document.getElementById('intro-modal').style.display='none'">Commencer</button>
-        </div>
-    </div>
+<div class="triangle-wrap">
+<svg id="triangleSvg" viewBox="0 0 800 720" preserveAspectRatio="xMidYMid meet">
 
-    <header>
-        <h1>Triangle Pédagogique</h1>
-        <button id="btn-switch" class="btn-nav" onclick="toggleView()">Bilan & Quiz</button>
-    </header>
+  <!-- Triangle -->
+  <polygon points="400,80 80,620 720,620" fill="none" stroke="#e0e3ea" stroke-width="28"/>
 
-    <div class="container">
-        <div class="visual-zone">
-            <svg viewBox="0 0 400 360">
-                <text x="200" y="195" class="center-label" text-anchor="middle" fill="#cbd5e1" font-weight="bold">TRIANGLE (HOUSSAYE)</text>
+  <!-- Axe Enseigner -->
+  <line x1="400" y1="80" x2="80" y2="620" stroke="#f0a93b" stroke-width="28"/>
 
-                <line x1="200" y1="50" x2="60" y2="300" class="process-line" id="line-enseigner" onclick="activate('enseigner')" />
-                <line x1="60" y1="300" x2="340" y2="300" class="process-line" id="line-former" onclick="activate('former')" />
-                <line x1="340" y1="300" x2="200" y2="50" class="process-line" id="line-apprendre" onclick="activate('apprendre')" />
-                
-                <text x="100" y="160" fill="#94a3b8" font-size="14" transform="rotate(-60 100,160)" pointer-events="none">ENSEIGNER</text>
-                <text x="200" y="335" fill="#94a3b8" font-size="14" text-anchor="middle" pointer-events="none">FORMER</text>
-                <text x="300" y="160" fill="#94a3b8" font-size="14" transform="rotate(60 300,160)" pointer-events="none">APPRENDRE</text>
+  <!-- Textes sommets -->
+  <text x="400" y="50" text-anchor="middle" font-size="32" font-weight="bold">SAVOIR</text>
+  <text x="60" y="650" text-anchor="start" font-size="32" font-weight="bold">PROF</text>
+  <text x="740" y="650" text-anchor="end" font-size="32" font-weight="bold">ÉLÈVE</text>
 
-                <g class="pole" id="pole-savoir" data-id="savoir" transform="translate(200, 50)">
-                    <circle /><text dy="5">SAVOIR</text><text class="mort-badge" dy="-55">MORT</text>
-                </g>
-                <g class="pole" id="pole-prof" data-id="prof" transform="translate(60, 300)">
-                    <circle /><text dy="5">PROF</text><text class="mort-badge" dy="60">MORT</text>
-                </g>
-                <g class="pole" id="pole-eleve" data-id="eleve" transform="translate(340, 300)">
-                    <circle /><text dy="5">ÉLÈVE</text><text class="mort-badge" dy="60">MORT</text>
-                </g>
-            </svg>
-        </div>
+  <!-- Textes axes -->
+  <text x="210" y="350" transform="rotate(-60 210 350)" font-size="26" fill="#9aa3b2">ENSEIGNER</text>
+  <text x="590" y="350" transform="rotate(60 590 350)" font-size="26" fill="#9aa3b2">APPRENDRE</text>
+  <text x="400" y="680" text-anchor="middle" font-size="26" fill="#9aa3b2">FORMER</text>
 
-        <div class="content-zone">
-            
-            <div id="view-explore" class="view-section active">
-                <div id="empty-state" style="text-align:center; color:#94a3b8; margin-top:20px;">
-                    <div style="font-size:2.5rem; margin-bottom:10px;">👆</div>
-                    <p style="font-size:1.1rem;">Touchez un côté du triangle.</p>
-                </div>
+  <!-- Centre -->
+  <text x="400" y="360" text-anchor="middle" font-size="34" fill="#9aa3b2">ÉLÈVE</text>
+  <text x="400" y="410" text-anchor="middle" font-size="30" fill="#6b7280">EXCLU (MORT)</text>
 
-                <div id="info-content" style="display:none">
-                    <div class="card-header">
-                        <span class="tag-process" id="txt-process">Processus</span>
-                        <h2 class="situation-title" id="txt-title">Titre</h2>
-                        <div style="color:#64748b; font-size:0.9rem;" id="txt-subtitle">Relation</div>
-                    </div>
+</svg>
+</div>
 
-                    <div class="block-text">
-                        <p class="desc-text" id="txt-desc">Description...</p>
-                        <p style="margin-top:10px; font-style:italic; color:#475569; font-size:0.9rem;">
-                            Ex : <span id="txt-ex">...</span>
-                        </p>
-                    </div>
+<div class="section">
+<h2>L’Apprentissage</h2>
+<p>
+Dans ce schéma, l’élève est placé en réception.  
+La relation privilégiée est <strong>ÉLÈVE ↔ SAVOIR</strong>.  
+L’enseignant est en retrait, médiateur du savoir.
+</p>
+</div>
 
-                    <div class="box-mort block-text">
-                        <div class="block-label">☠️ LE MORT (AU CENTRE)</div>
-                        <div style="font-size:1.1rem; font-weight:bold; color:#1e293b;" id="txt-mort-who">LE XXX</div>
-                        <p style="font-size:0.9rem; margin-top:5px;" id="txt-mort-why">Pourquoi...</p>
-                    </div>
-
-                    <div class="box-fou block-text">
-                        <div class="block-label">🤡 LE RISQUE DU FOU</div>
-                        <p class="desc-text" id="txt-fou">...</p>
-                    </div>
-
-                    <div class="box-tip block-text">
-                        <div class="block-label">💡 CONSEIL</div>
-                        <p class="desc-text" id="txt-tip">...</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="view-quiz" class="view-section">
-                <h2 style="margin-top:0;">Quiz Rapide</h2>
-                
-                <div class="block-text">
-                    <strong>1. Le cours d'histoire avance pas...</strong>
-                    <p style="font-size:0.9rem;">Tout le monde discute, c'est sympa mais vide. Qui est le Mort ?</p>
-                    <button class="btn-quiz" onclick="check(this, true, 'Oui ! Le Savoir est mort.')">Le Savoir</button>
-                    <button class="btn-quiz" onclick="check(this, false, 'Non, le prof est là.')">Le Prof</button>
-                    <div class="feedback"></div>
-                </div>
-
-                <div class="block-text">
-                    <strong>2. Travail de groupe en autonomie</strong>
-                    <p style="font-size:0.9rem;">Vous ne faites rien, vous observez. Quel processus ?</p>
-                    <button class="btn-quiz" onclick="check(this, true, 'Bravo. Processus Apprendre.')">Apprendre</button>
-                    <button class="btn-quiz" onclick="check(this, false, 'Non.')">Enseigner</button>
-                    <div class="feedback"></div>
-                </div>
-                
-                 <div style="background:#fffbeb; padding:15px; border-radius:8px; border:1px solid #fcd34d;">
-                    <strong style="color:#92400e;">À retenir :</strong>
-                    <ul style="padding-left:20px; color:#78350f; font-size:0.9rem; margin-bottom:0;">
-                        <li>Il faut toujours un "Mort".</li>
-                        <li>Le "Fou", c'est le Mort qui se venge.</li>
-                        <li>Il faut changer de posture régulièrement.</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        const content = {
-            enseigner: {
-                process: "ENSEIGNER", title: "L'Instruction", subtitle: "Prof ↔ Savoir",
-                desc: "Transmission verticale. Vous êtes l'expert, vous expliquez.",
-                ex: "Cours magistral, exposé au tableau.",
-                mort: "L'ÉLÈVE", mortWhy: "Il doit se taire et écouter pour recevoir l'info.",
-                fou: "Il s'ennuie, rêve ou chahute pour exister.",
-                tip: "Efficace mais pas trop longtemps. Alternez !"
-            },
-            former: {
-                process: "FORMER", title: "L'Animation", subtitle: "Prof ↔ Élève",
-                desc: "On privilégie la relation humaine et la méthode.",
-                ex: "Débat, gestion de conflit, discussion.",
-                mort: "LE SAVOIR", mortWhy: "Le programme est mis en pause.",
-                fou: "Cours 'sympa' mais vide. Séduction pédagogique.",
-                tip: "Bien pour le climat, mais revenez au savoir."
-            },
-            apprendre: {
-                process: "APPRENDRE", title: "L'Apprentissage", subtitle: "Élève ↔ Savoir",
-                desc: "L'élève construit son savoir seul ou en groupe.",
-                ex: "TP, Exercices, Recherches.",
-                mort: "LE PROF", mortWhy: "Vous devez vous effacer (lâcher prise).",
-                fou: "Vous intervenez trop et donnez les réponses.",
-                tip: "Soyez une ressource silencieuse."
-            }
-        };
-
-        const svgCenters = {
-            center: {x: 200, y: 195},
-            savoir: {x: 200, y: 50},
-            prof: {x: 60, y: 300},
-            eleve: {x: 340, y: 300}
-        };
-
-        function activate(key) {
-             if(document.getElementById('view-explore').style.display === 'none') toggleView();
-
-            document.querySelectorAll('.process-line').forEach(l => l.classList.remove('active'));
-            document.getElementById('line-'+key).classList.add('active');
-            
-            resetPoles();
-
-            let mortID = '';
-            if(key === 'enseigner') mortID = 'pole-eleve';
-            if(key === 'former') mortID = 'pole-savoir';
-            if(key === 'apprendre') mortID = 'pole-prof';
-
-            const mortEl = document.getElementById(mortID);
-            mortEl.classList.add('mort');
-            
-            // Animation déplacement
-            const start = svgCenters[mortID.replace('pole-', '')];
-            const end = svgCenters.center;
-            mortEl.style.transform = `translate(${end.x}px, ${end.y}px)`;
-
-            const d = content[key];
-            document.getElementById('empty-state').style.display = 'none';
-            document.getElementById('info-content').style.display = 'block';
-            
-            document.getElementById('txt-process').textContent = d.process;
-            document.getElementById('txt-title').textContent = d.title;
-            document.getElementById('txt-subtitle').textContent = d.subtitle;
-            document.getElementById('txt-desc').textContent = d.desc;
-            document.getElementById('txt-ex').textContent = d.ex;
-            document.getElementById('txt-mort-who').textContent = d.mort;
-            document.getElementById('txt-mort-why').textContent = d.mortWhy;
-            document.getElementById('txt-fou').textContent = d.fou;
-            document.getElementById('txt-tip').textContent = d.tip;
-        }
-
-        function resetPoles() {
-            document.getElementById('pole-savoir').style.transform = `translate(${svgCenters.savoir.x}px, ${svgCenters.savoir.y}px)`;
-            document.getElementById('pole-prof').style.transform = `translate(${svgCenters.prof.x}px, ${svgCenters.prof.y}px)`;
-            document.getElementById('pole-eleve').style.transform = `translate(${svgCenters.eleve.x}px, ${svgCenters.eleve.y}px)`;
-            document.querySelectorAll('.pole').forEach(p => p.classList.remove('mort'));
-        }
-
-        function toggleView() {
-            const explore = document.getElementById('view-explore');
-            const quiz = document.getElementById('view-quiz');
-            const btn = document.getElementById('btn-switch');
+</body>
+</html>
