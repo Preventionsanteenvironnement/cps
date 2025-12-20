@@ -6,9 +6,9 @@
     <title>Dominique Bucheton - L'Agir Enseignant</title>
     <style>
         :root {
-            --c-gestes: #7c3aed;    /* Violet Profond */
-            --c-prof: #c2410c;      /* Orange Brûlé */
-            --c-eleve: #15803d;     /* Vert Sapin */
+            --c-gestes: #7c3aed;
+            --c-prof: #c2410c;
+            --c-eleve: #15803d;
             --bg: #f8fafc;
             --text: #0f172a;
             --border: #e2e8f0;
@@ -29,105 +29,86 @@
             overflow: hidden;
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER OPTIMISÉ POUR MOBILE --- */
         header {
-            background: var(--surface); padding: 0 20px; border-bottom: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-            height: 65px; flex-shrink: 0; z-index: 100;
+            background: var(--surface); 
+            padding: 10px 15px; 
+            border-bottom: 1px solid var(--border);
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            min-height: 60px; 
+            flex-shrink: 0; 
+            z-index: 100;
         }
-        h1 { margin: 0; font-size: 1.1rem; color: #1e293b; font-weight: 800; }
-        .subtitle-header { font-size: 0.8rem; color: #64748b; display: block; font-weight: normal; }
+        h1 { margin: 0; font-size: 1rem; color: #1e293b; font-weight: 800; line-height: 1.1; }
+        .subtitle-header { font-size: 0.75rem; color: #64748b; display: block; font-weight: normal; }
         
         .btn-nav {
             background: #0f172a; color: white; border: none;
-            padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;
-            transition: all 0.2s;
+            padding: 8px 12px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.75rem;
+            transition: all 0.2s; flex-shrink: 0; margin-left: 10px;
         }
         .btn-nav.active { background: #f59e0b; }
 
-        /* --- CONTAINER --- */
         .container { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
 
         /* --- ZONE VISUELLE --- */
         .visual-zone {
             background: var(--surface); border-bottom: 1px solid var(--border);
-            height: 40vh; flex-shrink: 0; position: relative;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            height: 45vh; flex-shrink: 0; position: relative;
+            display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
+            padding-top: 10px;
         }
         
-        .tabs { display: flex; gap: 8px; margin-top: 10px; z-index: 10; }
+        .tabs { display: flex; gap: 5px; margin-bottom: 15px; z-index: 10; flex-wrap: wrap; justify-content: center; }
         .tab-btn {
-            border: none; background: #f1f5f9; padding: 8px 14px; border-radius: 20px;
-            font-size: 0.8rem; font-weight: 700; color: #64748b; cursor: pointer;
+            border: none; background: #f1f5f9; padding: 6px 10px; border-radius: 8px;
+            font-size: 0.7rem; font-weight: 700; color: #64748b; cursor: pointer;
             transition: all 0.2s; border: 1px solid transparent;
         }
         .tab-btn.active { color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
 
-        svg { width: 100%; height: 100%; max-height: 350px; overflow: visible; user-select: none; }
+        svg { width: 100%; height: 100%; max-height: 320px; overflow: visible; user-select: none; }
 
-        .hub-center { fill: white; stroke-width: 2; }
-        .hub-text { font-size: 10px; text-anchor: middle; font-weight: 900; fill: #94a3b8; pointer-events: none; letter-spacing: 1px;}
-        
-        .connection-line { stroke: #e2e8f0; stroke-width: 2; }
-        
+        .connection-line { stroke: #e2e8f0; stroke-width: 1.5; }
         .node-group { cursor: pointer; }
         .node-bg { fill: white; stroke-width: 2; transition: all 0.3s; }
-        .node-text { font-size: 10px; font-weight: 800; text-anchor: middle; fill: #64748b; pointer-events: none; }
-
-        .node-group.selected .node-bg { stroke-width: 0; } 
+        .node-text { font-size: 9px; font-weight: 800; text-anchor: middle; fill: #64748b; pointer-events: none; }
         .node-group.selected .node-text { fill: white; }
 
         /* --- CONTENT ZONE --- */
         .content-zone {
-            background: var(--bg); flex: 1; overflow-y: auto; padding: 25px;
+            background: var(--bg); flex: 1; overflow-y: auto; padding: 20px;
             scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
         }
-
         .view-section { display: none; animation: fadeIn 0.4s; }
         .view-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* FICHES DENSES */
-        .card-tag {
-            display: inline-block; padding: 5px 10px; border-radius: 4px; 
-            font-size: 0.7rem; font-weight: 800; text-transform: uppercase; 
-            color: white; margin-bottom: 12px;
-        }
-        .main-title { font-size: 1.6rem; margin: 0; color: #0f172a; font-weight: 800; }
-        .sub-concept { font-size: 1rem; color: #64748b; font-style: italic; margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;}
-
-        .section-label { font-size: 0.85rem; font-weight: 800; color: #475569; text-transform: uppercase; margin: 25px 0 10px 0; display: flex; align-items: center; gap: 8px;}
+        .card-tag { display: inline-block; padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: white; margin-bottom: 12px; }
+        .main-title { font-size: 1.4rem; margin: 0; color: #0f172a; font-weight: 800; }
+        .sub-concept { font-size: 0.95rem; color: #64748b; font-style: italic; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;}
+        .section-label { font-size: 0.8rem; font-weight: 800; color: #475569; text-transform: uppercase; margin: 20px 0 10px 0; display: flex; align-items: center; gap: 8px;}
         .section-label::before { content: ''; display: block; width: 4px; height: 14px; background: #cbd5e1; }
-
-        .text-block {
-            background: white; padding: 20px; border-radius: 12px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02); border: 1px solid #e2e8f0;
-            line-height: 1.7; color: #334155; font-size: 1rem; text-align: justify;
-        }
-
-        .tip-box {
-            background: #f0fdf4; border-left: 5px solid #16a34a; 
-            padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px;
-            color: #14532d; font-size: 0.95rem;
-        }
+        .text-block { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; line-height: 1.6; color: #334155; font-size: 0.95rem; text-align: justify; }
+        .tip-box { background: #f0fdf4; border-left: 5px solid #16a34a; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px; color: #14532d; font-size: 0.9rem; }
 
         /* QUIZ */
         .quiz-card { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border); }
-        .quiz-q { font-weight: 800; font-size: 1.1rem; margin-bottom: 15px; display: block; }
-        .quiz-opt { width: 100%; padding: 14px; margin-bottom: 10px; border: 2px solid #f1f5f9; border-radius: 8px; background: #f8fafc; text-align: left; font-weight: 600; cursor: pointer; transition: 0.2s; }
-        .quiz-opt:active { background: #e2e8f0; }
-        .quiz-opt.correct { background: #dcfce7; border-color: #22c55e; color: #166534; }
-        .quiz-opt.wrong { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
-        .feedback { display: none; margin-top: 12px; font-weight: bold; border-radius: 8px; padding: 10px; }
+        .quiz-q { font-weight: 800; font-size: 1rem; margin-bottom: 10px; display: block; }
+        .quiz-opt { width: 100%; padding: 12px; margin-bottom: 8px; border: 2px solid #f1f5f9; border-radius: 8px; background: #f8fafc; text-align: left; font-weight: 600; cursor: pointer; font-size: 0.9rem; }
+        .feedback { display: none; margin-top: 12px; font-weight: bold; border-radius: 8px; padding: 10px; font-size: 0.9rem; }
 
-        /* MODAL */
         #intro-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.98); z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .intro-box { background: white; padding: 35px; border-radius: 16px; max-width: 550px; text-align: center; }
+        .intro-box { background: white; padding: 25px; border-radius: 16px; max-width: 500px; text-align: center; }
 
         @media (min-width: 900px) {
+            h1 { font-size: 1.2rem; }
             .container { flex-direction: row; }
-            .visual-zone { width: 45%; height: auto; border-right: 1px solid var(--border); border-bottom: none; }
-            .content-zone { width: 55%; padding: 50px; }
+            .visual-zone { width: 40%; height: auto; border-right: 1px solid var(--border); border-bottom: none; padding-top: 40px;}
+            .content-zone { width: 60%; padding: 40px; }
+            .tabs { margin-bottom: 30px; }
         }
     </style>
 </head>
@@ -135,16 +116,16 @@
 
     <div id="intro-modal">
         <div class="intro-box">
-            <h1 style="margin:0; font-size:1.8rem;">L'Agir Enseignant</h1>
-            <p style="color:#64748b; font-weight:bold; margin-bottom:25px;">Modèle de Dominique Bucheton</p>
-            <div style="text-align:left; background:#f8fafc; padding:20px; border-radius:12px; font-size:1rem; line-height:1.6; border:1px solid #e2e8f0;">
-                <p>Ce modèle explore la complexité de l'enseignement à travers :</p>
+            <h1 style="margin:0; font-size:1.6rem;">L'Agir Enseignant</h1>
+            <p style="color:#64748b; font-weight:bold; margin-bottom:20px;">Modèle de Dominique Bucheton</p>
+            <div style="text-align:left; background:#f8fafc; padding:15px; border-radius:12px; font-size:0.9rem; line-height:1.5; border:1px solid #e2e8f0;">
+                <p>Analyse de la complexité enseignante :</p>
                 <ul style="padding-left:20px;">
-                    <li><strong>Le Multi-agenda :</strong> Les 5 préoccupations constantes.</li>
-                    <li><strong>Les Postures :</strong> Les manières de "penser-dire-faire" du professeur et de l'élève.</li>
+                    <li><strong>Le Multi-agenda :</strong> Les 5 préoccupations.</li>
+                    <li><strong>Les Postures :</strong> "Penser-dire-faire" du prof et de l'élève.</li>
                 </ul>
             </div>
-            <button onclick="document.getElementById('intro-modal').style.display='none'" style="background:#0f172a; color:white; width:100%; padding:18px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; margin-top:20px; font-size:1.1rem;">Entrer dans l'analyse</button>
+            <button onclick="document.getElementById('intro-modal').style.display='none'" style="background:#0f172a; color:white; width:100%; padding:15px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; margin-top:20px; font-size:1rem;">Démarrer l'analyse</button>
         </div>
     </div>
 
@@ -153,7 +134,7 @@
             <h1>L'Agir Enseignant</h1>
             <span class="subtitle-header">Analyse Dominique Bucheton</span>
         </div>
-        <button id="nav-btn" class="btn-nav" onclick="toggleView()">S'exercer & Bilan</button>
+        <button id="nav-btn" class="btn-nav" onclick="toggleView()">Exercices</button>
     </header>
 
     <div class="container">
@@ -164,36 +145,28 @@
                 <button class="tab-btn" id="tab-eleve" onclick="setMode('eleve')">Postures Élève</button>
             </div>
             <svg viewBox="0 0 400 320" id="main-svg">
-                <circle cx="200" cy="160" r="45" fill="none" stroke="#f1f5f9" stroke-width="2" />
-                <text x="200" y="165" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="900" id="hub-label">L'AGIR</text>
+                <rect x="160" y="140" width="80" height="40" rx="8" id="hub-rect" fill="none" stroke="#f1f5f9" stroke-width="2" />
+                <text x="200" y="165" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="900" id="hub-label">L'AGIR</text>
                 <g id="nodes-container"></g>
             </svg>
         </div>
 
         <div class="content-zone" id="scroll-target">
-            
             <div id="view-explore" class="view-section active">
-                <div id="empty-state" style="text-align:center; color:#94a3b8; margin-top:50px;">
-                    <div style="font-size:3rem; opacity:0.3;">🎓</div>
-                    <p style="font-weight:700;">Sélectionnez un concept sur le schéma</p>
-                    <p style="font-size:0.9rem;">Découvrez la définition théorique et les enjeux pédagogiques.</p>
+                <div id="empty-state" style="text-align:center; color:#94a3b8; margin-top:30px;">
+                    <div style="font-size:2.5rem; opacity:0.3;">🎓</div>
+                    <p style="font-weight:700;">Cliquez sur un élément du schéma</p>
                 </div>
 
                 <div id="content-display" style="display:none;">
                     <span class="card-tag" id="c-tag"></span>
                     <h2 class="main-title" id="c-title"></h2>
                     <div class="sub-concept" id="c-sub"></div>
-
-                    <div class="section-label">Définition & Enjeux théoriques</div>
+                    <div class="section-label">Définition & Enjeux</div>
                     <div class="text-block" id="c-def"></div>
-
                     <div class="section-label">Analyse de l'Agir</div>
                     <div class="text-block" id="c-analysis"></div>
-
-                    <div class="tip-box">
-                        <strong style="display:block; margin-bottom:5px;">💡 Geste professionnel & Conseil :</strong>
-                        <span id="c-tip"></span>
-                    </div>
+                    <div class="tip-box"><span id="c-tip"></span></div>
                     <div style="height:60px;"></div>
                 </div>
             </div>
@@ -202,73 +175,45 @@
                 <h2 style="margin-top:0;">Mises en pratique</h2>
                 <div class="quiz-card">
                     <span class="quiz-q">1. L'élève se lance sans réfléchir...</span>
-                    <p style="color:#64748b; font-size:0.9rem;">Un élève attaque l'exercice de maths immédiatement sans avoir fini de lire les consignes.</p>
-                    <button class="quiz-opt" onclick="check(this, true, 'Correct ! C\'est la posture première : l\'élan initial sans recul réflexif.')">Posture Première</button>
-                    <button class="quiz-opt" onclick="check(this, false, 'Non. La posture scolaire est plus conventionnelle et appliquée.')">Posture Scolaire</button>
+                    <button class="quiz-opt" onclick="check(this, true, 'Correct ! C\'est la posture première.')">Posture Première</button>
+                    <button class="quiz-opt" onclick="check(this, false, 'Non.')">Posture Scolaire</button>
                     <div class="feedback"></div>
                 </div>
-
                 <div class="quiz-card">
                     <span class="quiz-q">2. Faire le lien...</span>
-                    <p style="color:#64748b; font-size:0.9rem;">En début de séance, le professeur demande : \"Quel rapport voyez-vous avec ce que nous avons fait la semaine dernière ?\"</p>
-                    <button class="quiz-opt" onclick="check(this, true, 'Bravo ! Le Tissage consiste à assurer la continuité et la cohérence des savoirs.')">Geste de Tissage</button>
-                    <button class="quiz-opt" onclick="check(this, false, 'Non. L\'étayage concerne l\'aide ponctuelle sur la tâche.')">Geste d\'Étayage</button>
+                    <button class="quiz-opt" onclick="check(this, true, 'Bravo ! C\'est le Tissage.')">Geste de Tissage</button>
+                    <button class="quiz-opt" onclick="check(this, false, 'Non.')">Geste d\'Étayage</button>
                     <div class="feedback"></div>
-                </div>
-
-                <div class="quiz-card">
-                    <span class="quiz-q">3. Trop d'aide ?</span>
-                    <p style="color:#64748b; font-size:0.9rem;">Voulant aller vite, l'enseignant finit par donner la réponse à un élève qui hésite au tableau.</p>
-                    <button class="quiz-opt" onclick="check(this, true, 'Exact. On parle de contre-étayage ou sur-étayage : l\'élève est déresponsabilisé.')">Posture de Contre-Étayage</button>
-                    <button class="quiz-opt" onclick="check(this, false, 'Non. L\'accompagnement laisse l\'élève chercher avec un soutien latéral.')">Posture d\'Accompagnement</button>
-                    <div class="feedback"></div>
-                </div>
-
-                <div style="background:#fffbeb; padding:20px; border-radius:12px; border:1px solid #fcd34d; margin-top:30px;">
-                    <h3 style="margin-top:0; color:#92400e; font-size:1.1rem;">📌 Mémo : L'éthique Bucheton</h3>
-                    <p style="color:#78350f; font-size:0.95rem; line-height:1.6; margin-bottom:0;">
-                        Aucune posture n'est "bonne" ou "mauvaise" en soi. L'expertise consiste à <strong>varier les postures</strong> et à ajuster ses gestes en permanence selon les besoins des élèves et les objets de savoir.
-                    </p>
                 </div>
                 <div style="height:60px;"></div>
             </div>
-
         </div>
     </div>
 
     <script>
         const data = {
-            gestes: {
-                color: "#7c3aed", label: "MULTI-AGENDA",
-                items: [
-                    { t: "Pilotage", s: "Conduite de la classe", d: "Le pilotage concerne l'organisation spatio-temporelle de la leçon. L'enseignant orchestre le rythme, l'enchaînement des tâches et les dispositifs. Il veille à la progression synchronisée du groupe.", a: "Le pilotage peut être serré (directif) ou souple (autonome). L'enjeu est de ne pas se laisser déborder par la gestion du temps au détriment du savoir.", i: "Partagez les contraintes de temps avec les élèves pour favoriser leur auto-régulation." },
-                    { t: "Tissage", s: "Mise en lien des savoirs", d: "Le tissage consiste à faire des liens entre la tâche présente et les acquis antérieurs, le vécu des élèves ou les autres disciplines. Il donne du sens et de la cohérence à l'école.", a: "Bucheton souligne qu'on ne peut pas ignorer le 'déjà-là' de l'élève. Tisser, c'est respecter le savoir de l'élève et l'ancrer dans la durée.", i: "Utilisez systématiquement des rappels et des ponts avec le quotidien des élèves." },
-                    { t: "Atmosphère", s: "Dimension affective", d: "Gérer l'atmosphère, c'est installer un climat de sécurité intellectuelle et morale. L'élève doit oser participer et se tromper sans crainte du jugement.", a: "La classe doit être un espace de confiance. Un climat serein est le pré-requis indispensable aux fonctions cognitives.", i: "Dédramatisez l'erreur : accueillez-la comme un levier d'apprentissage." },
-                    { t: "Étayage", s: "Soutien à l'apprentissage", d: "Inspiré de Bruner, l'étayage regroupe les aides (indices, reformulations, démonstrations) permettant à l'élève de progresser dans sa zone proximale de développement.", a: "Le défi est le dosage. Un étayage judicieux maintient l'engagement de l'élève tout en le laissant acteur de sa recherche.", i: "Évitez le sur-étayage (faire à la place). Laissez l'élève franchir l'obstacle seul." },
-                    { t: "Savoir", s: "Visée didactique", d: "Cette préoccupation concerne le contenu même : choisir quel savoir focaliser, le formuler clairement et l'adapter aux besoins de la classe.", a: "L'enseignant doit s'assurer que l'activité mène bien à un apprentissage réel et structuré, et non à une simple 'occupation' des élèves.", i: "Explicitez l'objet de savoir en fin de séance pour stabiliser les connaissances." }
-                ]
-            },
-            prof: {
-                color: "#c2410c", label: "POSTURES PROF",
-                items: [
-                    { t: "Contrôle", s: "Pilotage directif", d: "L'enseignant cadre strictement la situation. Il pilote de façon serrée l'avancée des tâches et cherche à faire progresser tout le monde en synchronie.", a: "Nécessaire pour poser le cadre, mais risque d'étouffer l'initiative si elle dure trop longtemps.", i: "Sachez sortir de cette posture pour laisser place à l'activité autonome des élèves." },
-                    { t: "Accompagnement", s: "Soutien latéral", d: "L'enseignant intervient à la marge, par une aide ponctuelle. Il laisse les élèves chercher, discuter et expérimenter par eux-mêmes.", a: "C'est la posture qui 'ouvre le temps'. Le professeur écoute plus qu'il ne parle et régule finement.", i: "Circulez dans les rangs et adoptez une écoute active des stratégies d'élèves." },
-                    { t: "Lâcher-Prise", s: "Confiance & Autonomie", d: "Le maître délègue la responsabilité du travail aux élèves et les autorise à expérimenter librement les chemins qu'ils souhaitent.", a: "C'est une marque de confiance qui favorise l'apprentissage par essai-erreur. Indispensable pour l'autonomie.", i: "Proposez des tâches de recherche ouverte où l'élève est seul maître de sa méthode." },
-                    { t: "Enseignement", s: "Transmission & Synthèse", d: "L'enseignant structure le savoir, explicite les notions et fait la démonstration de ce que l'élève ne peut pas encore faire seul.", a: "Indispensable pour l'institutionnalisation. C'est le moment où l'expert garantit la rigueur scientifique.", i: "Intervenez après une phase de recherche pour nommer et fixer les concepts." },
-                    { t: "Magicien", s: "Captation affective", d: "Le professeur utilise le jeu, le récit ou l'humour pour capter l'intérêt immédiat. Le savoir reste souvent implicite à ce stade.", a: "Excellent levier de motivation initiale, mais doit être suivi d'une phase de structuration plus formelle.", i: "Utilisez cette posture pour lancer un défi ou accrocher les élèves sur un sujet complexe." },
-                    { t: "Contre-Étayage", s: "Sur-étayage abusif", d: "Voulant éviter l'erreur ou aller vite, l'enseignant finit par faire à la place de l'élève ou donner la réponse trop tôt.", a: "C'est une posture qui déresponsabilise l'élève et bloque l'apprentissage. C'est souvent un réflexe d'enseignant anxieux.", i: "Laissez le temps de la réflexion. Ne court-circuitez pas le tâtonnement de l'élève." }
-                ]
-            },
-            eleve: {
-                color: "#15803d", label: "POSTURES ÉLÈVE",
-                items: [
-                    { t: "Scolaire", s: "Conformisme aux règles", d: "L'élève cherche à appliquer scrupuleusement les consignes pour satisfaire l'enseignant, sans forcément s'approprier le sens.", a: "Garantit une certaine réussite, mais peut manquer d'engagement intellectuel profond et d'autonomie.", i: "Poussez l'élève vers la posture réflexive en lui demandant de justifier ses choix." },
-                    { t: "Première", s: "Élan spontané", d: "L'élève se lance tête baissée dans l'action sans planifier ni prendre de recul. Il agit selon son intuition immédiate.", a: "Une posture d'entrée dans la tâche. Elle montre ses limites dès que la complexité augmente.", i: "Encouragez l'élan, mais demandez une relecture calme avant la validation finale." },
-                    { t: "Ludique", s: "Détournement créatif", d: "L'élève détourne la tâche de son but scolaire pour y introduire du jeu, de la créativité ou un défi personnel.", a: "Révèle de l'initiative et de l'assurance. C'est un signe de réappropriation du travail.", i: "Valorisez l'originalité tout en recadrant doucement sur l'objectif d'apprentissage." },
-                    { t: "Réflexive", s: "Prise de recul", d: "L'élève analyse ce qu'il vient de faire, comprend comment il a appris et identifie ses propres stratégies. (Secondarisation).", a: "C'est la posture visée par l'école. Elle permet la métacognition et le transfert des savoirs.", i: "Provoquez cette posture par des bilans : 'Qu'as-tu compris sur ta manière d'apprendre ?'." },
-                    { t: "Refus", s: "Rejet ou retrait", d: "L'élève refuse de faire ou d'apprendre. Cela peut être de l'opposition active ou un isolement silencieux.", a: "Signal de souffrance ou d'incompétence ressentie. Exige de travailler sur l'atmosphère et la confiance.", i: "Ne braquez pas. Travaillez d'abord sur la dimension affective et le sens de la tâche." }
-                ]
-            }
+            gestes: { color: "#7c3aed", label: "MULTI-AGENDA", items: [
+                { t: "Pilotage", s: "Conduite de la classe", d: "Organisation spatio-temporelle de la leçon. L'enseignant orchestre le rythme et les tâches.", a: "Le pilotage peut être serré ou souple. L'enjeu est de ne pas se laisser déborder par le temps.", i: "Partagez les contraintes de temps avec les élèves." },
+                { t: "Tissage", s: "Mise en lien des savoirs", d: "Faire des liens entre la tâche présente, les acquis antérieurs et le vécu des élèves.", a: "Donne du sens à l'école en ancrant le savoir dans la durée.", i: "Utilisez des rappels réguliers du cours précédent." },
+                { t: "Atmosphère", s: "Dimension affective", d: "Installation d'un climat de sécurité intellectuelle. L'élève doit oser se tromper.", a: "Un climat serein est le pré-requis indispensable aux fonctions cognitives.", i: "Dédramatisez l'erreur : accueillez-la comme un levier." },
+                { t: "Étayage", s: "Soutien à l'apprentissage", d: "Aides (indices, reformulations) permettant de progresser dans la zone proximale de développement.", a: "Le défi est le dosage : maintenir l'engagement sans faire à la place.", i: "Évitez le sur-étayage." },
+                { t: "Savoir", s: "Visée didactique", d: "Cœur du contenu : choisir quel savoir focaliser et l'adapter à la classe.", a: "S'assurer que l'activité mène bien à un apprentissage réel et structuré.", i: "Explicitez l'objet de savoir en fin de séance." }
+            ]},
+            prof: { color: "#c2410c", label: "POSTURES PROF", items: [
+                { t: "Contrôle", s: "Pilotage directif", d: "L'enseignant cadre strictement la situation pour faire progresser tout le monde en synchronie.", a: "Nécessaire pour le cadre, mais risque d'étouffer l'initiative.", i: "Sachez sortir de cette posture pour l'autonomie." },
+                { t: "Accompagnement", s: "Soutien latéral", d: "Intervention à la marge. Le professeur écoute et régule finement.", a: "C'est la posture qui 'ouvre le temps' pour l'élève.", i: "Adoptez une écoute active des stratégies d'élèves." },
+                { t: "Lâcher-Prise", s: "Confiance & Autonomie", d: "Délégation de la responsabilité. Autorisation d'expérimenter librement.", a: "Favorise l'apprentissage par essai-erreur.", i: "Proposez des tâches de recherche ouverte." },
+                { t: "Enseignement", s: "Transmission & Synthèse", d: "Structuration du savoir. Explicitation des notions complexes.", a: "Moment crucial de l'institutionnalisation.", i: "Intervenez après la recherche pour fixer les concepts." },
+                { t: "Magicien", s: "Captation affective", d: "Utilisation du jeu ou du récit pour capter l'intérêt immédiat.", a: "Excellent levier de motivation initiale.", i: "Utilisez-le pour lancer un défi stimulant." },
+                { t: "Contre-Étayage", s: "Sur-étayage abusif", d: "Faire à la place de l'élève pour aller plus vite.", a: "Déresponsabilise l'élève et bloque l'apprentissage.", i: "Laissez le temps de la réflexion." }
+            ]},
+            eleve: { color: "#15803d", label: "POSTURES ÉLÈVE", items: [
+                { t: "Scolaire", s: "Conformisme", d: "Application scrupuleuse des consignes pour satisfaire l'enseignant.", a: "Garantit une réussite formelle, mais manque parfois de profondeur.", i: "Poussez l'élève à justifier ses choix." },
+                { t: "Première", s: "Élan spontané", d: "L'élève se lance tête baisée sans planifier ni prendre de recul.", a: "Posture d'entrée dans la tâche, limitée face à la complexité.", i: "Demandez une relecture avant la validation." },
+                { t: "Ludique", s: "Détournement", d: "Détournement de la tâche pour y introduire du jeu ou un défi personnel.", a: "Signe de réappropriation du travail par l'élève.", i: "Valorisez l'originalité tout en recadrant l'objectif." },
+                { t: "Réflexive", s: "Prise de recul", d: "Analyse de son propre travail. Compréhension des stratégies utilisées.", a: "C'est la posture visée par l'école (métacognition).", i: "Demandez : 'Qu'as-tu compris sur ta méthode ?'." },
+                { t: "Refus", s: "Rejet ou retrait", d: "Refus de faire ou d'apprendre. Opposition ou silence.", a: "Signal de souffrance ou d'incompétence ressentie.", i: "Travaillez d'abord sur la confiance." }
+            ]}
         };
 
         let currentMode = 'gestes';
@@ -276,18 +221,15 @@
         function setMode(m) {
             currentMode = m;
             const config = data[m];
-            
             document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('active');
-                b.style.backgroundColor = "#f1f5f9"; b.style.color = "#64748b";
+                b.classList.remove('active'); b.style.backgroundColor = "#f1f5f9"; b.style.color = "#64748b";
             });
             const active = document.getElementById('tab-'+m);
-            active.classList.add('active');
-            active.style.backgroundColor = config.color; active.style.color = "white";
+            active.classList.add('active'); active.style.backgroundColor = config.color; active.style.color = "white";
 
             document.getElementById('hub-label').textContent = config.label;
             document.getElementById('hub-label').style.fill = config.color;
-            document.getElementById('hub-label').parentElement.querySelector('circle').setAttribute('stroke', config.color);
+            document.getElementById('hub-rect').setAttribute('stroke', config.color);
 
             renderWheel(config.items, config.color);
             document.getElementById('empty-state').style.display = 'block';
@@ -297,7 +239,7 @@
         function renderWheel(items, color) {
             const container = document.getElementById('nodes-container');
             container.innerHTML = '';
-            const cx = 200, cy = 160, r = 100;
+            const cx = 200, cy = 165, r = 110;
 
             items.forEach((it, i) => {
                 const angle = (i * (360 / items.length) - 90) * (Math.PI / 180);
@@ -312,17 +254,20 @@
                 line.setAttribute("class", "connection-line");
                 container.appendChild(line);
 
-                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                circle.setAttribute("cx", x); circle.setAttribute("cy", y); circle.setAttribute("r", 32);
-                circle.setAttribute("class", "node-bg"); circle.setAttribute("stroke", color);
-                g.appendChild(circle);
+                // RECTANGLES À LA PLACE DES CERCLES
+                const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                const w = 84, h = 30;
+                rect.setAttribute("x", x - w/2); rect.setAttribute("y", y - h/2);
+                rect.setAttribute("width", w); rect.setAttribute("height", h);
+                rect.setAttribute("rx", "6");
+                rect.setAttribute("class", "node-bg"); rect.setAttribute("stroke", color);
+                g.appendChild(rect);
 
                 const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
                 text.setAttribute("x", x); text.setAttribute("y", y + 4);
                 text.setAttribute("class", "node-text");
-                let lbl = it.t.replace("Le ", "").replace("L'", "").replace("Posture de ", "").replace("Posture d'", "").split(" ")[0].toUpperCase();
-                if(lbl === "OBJETS") lbl = "SAVOIR";
-                text.textContent = lbl.substring(0,9);
+                // On affiche le texte entier maintenant
+                text.textContent = it.t.toUpperCase();
                 g.appendChild(text);
 
                 container.appendChild(g);
@@ -331,28 +276,27 @@
 
         function selectNode(it, el, color) {
             document.querySelectorAll('.node-group').forEach(g => {
-                g.classList.remove('selected');
-                g.querySelector('circle').style.fill = 'white';
+                g.querySelector('rect').style.fill = 'white';
                 g.querySelector('text').style.fill = '#64748b';
             });
-            el.classList.add('selected');
-            el.querySelector('circle').style.fill = color;
+            el.querySelector('rect').style.fill = color;
             el.querySelector('text').style.fill = 'white';
-
             document.getElementById('empty-state').style.display = 'none';
             const disp = document.getElementById('content-display');
             disp.style.display = 'block';
-
-            const tag = document.getElementById('c-tag');
-            tag.textContent = data[currentMode].label;
-            tag.style.backgroundColor = color;
+            document.getElementById('c-tag').textContent = data[currentMode].label;
+            document.getElementById('c-tag').style.backgroundColor = color;
             document.getElementById('c-title').textContent = it.t;
             document.getElementById('c-sub').textContent = it.s;
             document.getElementById('c-def').innerHTML = it.d;
             document.getElementById('c-analysis').innerHTML = it.a;
-            document.getElementById('c-tip').innerHTML = it.i;
-
-            if(window.innerWidth < 900) document.getElementById('scroll-target').scrollTo({top: 0, behavior: 'smooth'});
+            document.getElementById('c-tip').innerHTML = "<strong>Conseil : </strong>" + it.i;
+            if(window.innerWidth < 900) {
+                // Petit délai pour laisser le contenu s'afficher avant de scroller
+                setTimeout(() => {
+                    document.getElementById('scroll-target').scrollTo({top: 0, behavior: 'smooth'});
+                }, 50);
+            }
         }
 
         function toggleView() {
@@ -361,20 +305,15 @@
             const btn = document.getElementById('nav-btn');
             if(exp.classList.contains('active')) {
                 exp.classList.remove('active'); qiz.classList.add('active');
-                btn.textContent = "Retour Modèle"; btn.classList.add('active');
-                document.querySelector('.visual-zone').style.opacity = "0.3";
-                document.querySelector('.visual-zone').style.pointerEvents = "none";
+                btn.textContent = "Retour";
             } else {
                 qiz.classList.remove('active'); exp.classList.add('active');
-                btn.textContent = "S'exercer & Bilan"; btn.classList.remove('active');
-                document.querySelector('.visual-zone').style.opacity = "1";
-                document.querySelector('.visual-zone').style.pointerEvents = "auto";
+                btn.textContent = "Exercices";
             }
         }
 
         function check(btn, ok, msg) {
             const fb = btn.parentElement.querySelector('.feedback');
-            btn.parentElement.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
             btn.className = ok ? 'quiz-opt correct' : 'quiz-opt wrong';
             fb.style.display = 'block'; fb.textContent = msg; fb.style.color = ok ? '#166534' : '#991b1b';
         }
