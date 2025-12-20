@@ -1,91 +1,366 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Triangle pédagogique</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Le Triangle Pédagogique - Jean Houssaye</title>
+    <style>
+        :root {
+            --c-savoir: #2563eb;    /* Bleu */
+            --c-enseignant: #dc2626; /* Rouge */
+            --c-apprenant: #16a34a;  /* Vert */
+            --bg: #f1f5f9;
+            --text: #1e293b;
+            --highlight: #f59e0b;
+        }
 
-<style>
-body{
-  margin:0;
-  padding:0;
-  font-family:Arial, sans-serif;
-  background:#ffffff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
+        * { box-sizing: border-box; }
 
-.triangle-wrap{
-  width:100%;
-  max-width:900px;
-  padding:16px;
-  box-sizing:border-box;
-}
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            /* On enlève le height: 100vh pour laisser le scroll naturel sur mobile */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-svg#triangleSvg{
-  width:100%;
-  height:auto;
-  max-height:60vh;
-  display:block;
-  margin:0 auto;
-}
+        /* --- HEADER --- */
+        header {
+            background: white; padding: 10px 15px; border-bottom: 1px solid #e2e8f0;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        h1 { margin: 0; font-size: 1rem; font-weight: 800; color: #0f172a; }
+        
+        .btn-nav {
+            background: transparent; border: 1px solid #cbd5e1; color: #475569;
+            padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 600;
+        }
+        .btn-nav.active { background: var(--text); color: white; border-color: var(--text); }
 
-h2{
-  margin:16px;
-  text-align:center;
-}
+        /* --- LAYOUT PRINCIPAL --- */
+        .main-wrapper {
+            display: flex;
+            flex: 1;
+            /* Par défaut (Mobile) : colonne verticale simple */
+            flex-direction: column; 
+        }
 
-.section{
-  max-width:900px;
-  padding:16px;
-  box-sizing:border-box;
-}
+        /* ZONE VISUELLE (Le Triangle) */
+        .visual-zone {
+            background: white;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #e2e8f0;
+            /* Fixe une hauteur max sur mobile pour garder de la place pour le texte */
+            flex-shrink: 0; 
+        }
 
-@media (max-width:480px){
-  svg#triangleSvg{
-    max-height:50vh;
-  }
-}
-</style>
+        svg {
+            width: 100%;
+            height: auto;
+            max-width: 500px; /* Limite la largeur sur PC */
+            max-height: 40vh; /* Sur mobile, le triangle ne prendra jamais plus de 40% de la hauteur */
+            overflow: visible;
+        }
+
+        /* BOUTONS DE COMMANDE (Spécial Mobile) */
+        .mobile-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 500px;
+            justify-content: center;
+        }
+        .btn-control {
+            flex: 1;
+            padding: 10px 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            opacity: 0.8;
+            transition: transform 0.1s;
+        }
+        .btn-control:active { transform: scale(0.95); }
+        .btn-control.active { opacity: 1; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transform: scale(1.05); }
+
+        /* ZONE DE CONTENU (Texte) */
+        .content-zone {
+            flex: 1;
+            padding: 20px;
+            background: #f8fafc;
+            max-width: 800px;
+            margin: 0 auto; /* Centre le texte sur grand écran */
+            width: 100%;
+        }
+
+        /* --- STYLES SVG --- */
+        .process-line { stroke: #e2e8f0; stroke-width: 14; transition: all 0.3s; cursor: pointer; }
+        .process-line:hover { stroke: #cbd5e1; }
+        .process-line.active { stroke: var(--highlight) !important; stroke-width: 18; }
+
+        .pole { transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .pole circle { fill: white; stroke-width: 4; r: 38; transition: all 0.3s; }
+        .pole text { font-weight: bold; text-anchor: middle; font-family: sans-serif; pointer-events: none; font-size: 14px; }
+        
+        .pole[data-id="savoir"] circle { stroke: var(--c-savoir); }
+        .pole[data-id="prof"] circle { stroke: var(--c-enseignant); }
+        .pole[data-id="eleve"] circle { stroke: var(--c-apprenant); }
+
+        /* État MORT */
+        .pole.mort circle { fill: #f1f5f9; stroke: #94a3b8 !important; stroke-dasharray: 5; }
+        .pole.mort text { fill: #64748b; opacity: 0.5; }
+        .mort-badge { opacity: 0; font-size: 14px; font-weight: 900; fill: #ef4444; text-anchor: middle; transition: opacity 0.5s 0.3s; }
+        .pole.mort .mort-badge { opacity: 1; }
+
+        /* --- BLOCS TEXTE --- */
+        .view-section { display: none; animation: fadeIn 0.4s; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card-header { border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 20px; }
+        .tag-process { display: inline-block; background: var(--highlight); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
+        h2 { margin: 5px 0 0 0; color: #0f172a; line-height: 1.2; }
+        
+        .box { padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5; }
+        .box-white { background: white; border: 1px solid #e2e8f0; }
+        .box-mort { background: #f1f5f9; border-left: 4px solid #94a3b8; }
+        .box-fou { background: #fef2f2; border-left: 4px solid #ef4444; color: #7f1d1d; }
+        .box-tip { background: #f0fdf4; border-left: 4px solid #16a34a; color: #14532d; }
+
+        /* --- QUIZ --- */
+        .quiz-item { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .btn-quiz { display: block; width: 100%; padding: 12px; margin: 8px 0; text-align: left; background: white; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; }
+        .btn-quiz.correct { background: #dcfce7; border-color: #16a34a; color: #166534; }
+        .btn-quiz.wrong { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+        .feedback { display: none; padding: 10px; border-radius: 4px; font-weight: bold; margin-top: 10px; }
+
+        /* --- RESPONSIVE DESKTOP (PC) --- */
+        @media (min-width: 900px) {
+            body { height: 100vh; overflow: hidden; } /* Sur PC on bloque le scroll global */
+            .main-wrapper { flex-direction: row; height: 100%; } /* On passe en côte-à-côte */
+            
+            .visual-zone { 
+                flex: 1; 
+                height: 100%; 
+                border-right: 1px solid #e2e8f0; 
+                border-bottom: none;
+                max-height: none; /* On retire la limite de hauteur mobile */
+            }
+            
+            .content-zone { flex: 1; overflow-y: auto; padding: 40px; }
+            
+            /* On cache les boutons télécommande sur PC, car on peut cliquer sur le SVG */
+            .mobile-controls { display: none; }
+            svg { max-height: 80%; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="triangle-wrap">
-<svg id="triangleSvg" viewBox="0 0 800 720" preserveAspectRatio="xMidYMid meet">
+    <header>
+        <h1>Le Triangle Pédagogique</h1>
+        <button id="btn-switch" class="btn-nav" onclick="toggleView()">Exercices</button>
+    </header>
 
-  <!-- Triangle -->
-  <polygon points="400,80 80,620 720,620" fill="none" stroke="#e0e3ea" stroke-width="28"/>
+    <div class="main-wrapper">
+        <div class="visual-zone">
+            <svg viewBox="-20 -20 440 380" preserveAspectRatio="xMidYMid meet">
+                <line x1="200" y1="50" x2="60" y2="300" class="process-line" id="line-enseigner" onclick="activate('enseigner')" />
+                <line x1="60" y1="300" x2="340" y2="300" class="process-line" id="line-former" onclick="activate('former')" />
+                <line x1="340" y1="300" x2="200" y2="50" class="process-line" id="line-apprendre" onclick="activate('apprendre')" />
+                
+                <text x="110" y="160" fill="#94a3b8" transform="rotate(-60 110,160)" pointer-events="none">ENSEIGNER</text>
+                <text x="200" y="325" fill="#94a3b8" text-anchor="middle" pointer-events="none">FORMER</text>
+                <text x="290" y="160" fill="#94a3b8" transform="rotate(60 290,160)" pointer-events="none">APPRENDRE</text>
 
-  <!-- Axe Enseigner -->
-  <line x1="400" y1="80" x2="80" y2="620" stroke="#f0a93b" stroke-width="28"/>
+                <g class="pole" id="pole-savoir" transform="translate(200, 50)">
+                    <circle />
+                    <text dy="5">SAVOIR</text>
+                    <text class="mort-badge" dy="-50">MORT</text>
+                </g>
+                <g class="pole" id="pole-prof" transform="translate(60, 300)">
+                    <circle />
+                    <text dy="5">PROF</text>
+                    <text class="mort-badge" dy="55">MORT</text>
+                </g>
+                <g class="pole" id="pole-eleve" transform="translate(340, 300)">
+                    <circle />
+                    <text dy="5">ÉLÈVE</text>
+                    <text class="mort-badge" dy="55">MORT</text>
+                </g>
+            </svg>
 
-  <!-- Textes sommets -->
-  <text x="400" y="50" text-anchor="middle" font-size="32" font-weight="bold">SAVOIR</text>
-  <text x="60" y="650" text-anchor="start" font-size="32" font-weight="bold">PROF</text>
-  <text x="740" y="650" text-anchor="end" font-size="32" font-weight="bold">ÉLÈVE</text>
+            <div class="mobile-controls">
+                <button class="btn-control" style="background: var(--c-enseignant)" onclick="activate('enseigner')">Enseigner</button>
+                <button class="btn-control" style="background: var(--c-apprenant)" onclick="activate('former')">Former</button>
+                <button class="btn-control" style="background: var(--c-savoir)" onclick="activate('apprendre')">Apprendre</button>
+            </div>
+        </div>
 
-  <!-- Textes axes -->
-  <text x="210" y="350" transform="rotate(-60 210 350)" font-size="26" fill="#9aa3b2">ENSEIGNER</text>
-  <text x="590" y="350" transform="rotate(60 590 350)" font-size="26" fill="#9aa3b2">APPRENDRE</text>
-  <text x="400" y="680" text-anchor="middle" font-size="26" fill="#9aa3b2">FORMER</text>
+        <div class="content-zone">
+            
+            <div id="view-explore" class="view-section active">
+                <div id="empty-state" style="text-align:center; color:#94a3b8; padding-top:20px;">
+                    <p>Appuyez sur un bouton ci-dessus pour comprendre la mécanique.</p>
+                </div>
 
-  <!-- Centre -->
-  <text x="400" y="360" text-anchor="middle" font-size="34" fill="#9aa3b2">ÉLÈVE</text>
-  <text x="400" y="410" text-anchor="middle" font-size="30" fill="#6b7280">EXCLU (MORT)</text>
+                <div id="info-content" style="display:none">
+                    <div class="card-header">
+                        <span class="tag-process" id="txt-process">Processus</span>
+                        <h2 id="txt-title">Titre</h2>
+                        <div style="color:#64748b; margin-top:5px;" id="txt-subtitle">Relation</div>
+                    </div>
 
-</svg>
-</div>
+                    <div class="box box-white">
+                        <p style="margin-top:0;"><strong>Le Contexte :</strong> <span id="txt-desc">...</span></p>
+                        <p style="margin-bottom:0; color:#475569; font-style:italic;">Ex: <span id="txt-ex">...</span></p>
+                    </div>
 
-<div class="section">
-<h2>L’Apprentissage</h2>
-<p>
-Dans ce schéma, l’élève est placé en réception.  
-La relation privilégiée est <strong>ÉLÈVE ↔ SAVOIR</strong>.  
-L’enseignant est en retrait, médiateur du savoir.
-</p>
-</div>
+                    <div class="box box-mort">
+                        <div style="font-weight:800; text-transform:uppercase; font-size:0.8rem; margin-bottom:5px;">☠️ Le Mort (L'Exclu)</div>
+                        <div style="font-size:1.1rem; font-weight:bold; margin-bottom:5px;" id="txt-mort-who">LE XXX</div>
+                        <span id="txt-mort-why">Pourquoi...</span>
+                    </div>
 
+                    <div class="box box-fou">
+                        <div style="font-weight:800; text-transform:uppercase; font-size:0.8rem; margin-bottom:5px;">🤡 Le Risque du Fou</div>
+                        <span id="txt-fou">...</span>
+                    </div>
+
+                    <div class="box box-tip">
+                        <div style="font-weight:800; text-transform:uppercase; font-size:0.8rem; margin-bottom:5px;">💡 Conseil</div>
+                        <span id="txt-tip">...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-quiz" class="view-section">
+                <h2>Exercices</h2>
+                <p style="color:#64748b;">Qui est le mort dans ces situations ?</p>
+
+                <div class="quiz-item">
+                    <strong>1. Cours Magistral</strong>
+                    <p style="font-size:0.9rem;">Le prof parle, les élèves écoutent.</p>
+                    <button class="btn-quiz" onclick="check(this, false, 'Non. Le prof est actif.')">Le Prof</button>
+                    <button class="btn-quiz" onclick="check(this, true, 'Oui ! L\'élève est passif (mort).')">L'Élève</button>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="quiz-item">
+                    <strong>2. Travaux de groupe</strong>
+                    <p style="font-size:0.9rem;">Les élèves cherchent, le prof observe.</p>
+                    <button class="btn-quiz" onclick="check(this, true, 'Bravo. Le prof doit s\'effacer.')">Le Prof</button>
+                    <button class="btn-quiz" onclick="check(this, false, 'Non. Le savoir est au centre.')">Le Savoir</button>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const content = {
+            enseigner: {
+                process: "Enseigner", title: "L'Instruction", subtitle: "Prof ↔ Savoir",
+                desc: "Transmission verticale. Le maître explique, l'élève reçoit.",
+                ex: "Cours magistral, conférence.",
+                mort: "L'ÉLÈVE",
+                mortWhy: "Il doit se taire pour recevoir. Il est mis entre parenthèses.",
+                fou: "L'élève s'ennuie et chahute pour montrer qu'il existe.",
+                tip: "Efficace pour transmettre, mais ne doit pas durer trop longtemps."
+            },
+            former: {
+                process: "Former", title: "L'Animation", subtitle: "Prof ↔ Élève",
+                desc: "On privilégie la relation et la méthode plutôt que le contenu pur.",
+                ex: "Débat, vie de classe, médiation.",
+                mort: "LE SAVOIR",
+                mortWhy: "Le programme strict passe au second plan.",
+                fou: "Le cours devient une discussion de salon, vide de contenu.",
+                tip: "Utile pour le climat de classe, attention à la dérive affective."
+            },
+            apprendre: {
+                process: "Apprendre", title: "L'Apprentissage", subtitle: "Élève ↔ Savoir",
+                desc: "L'élève construit son savoir face à la tâche.",
+                ex: "TP, recherches, exercices.",
+                mort: "LE PROF",
+                mortWhy: "Vous devez accepter d'être inutile pour qu'il apprenne.",
+                fou: "Le prof intervient tout le temps et empêche l'élève de réfléchir.",
+                tip: "Taisez-vous ! Observez sans intervenir immédiatement."
+            }
+        };
+
+        const centers = { center: {x: 200, y: 190}, savoir: {x: 200, y: 50}, prof: {x: 60, y: 300}, eleve: {x: 340, y: 300} };
+
+        function activate(key) {
+            // Reset UI
+            document.querySelectorAll('.process-line').forEach(l => l.classList.remove('active'));
+            document.getElementById('line-'+key).classList.add('active');
+            
+            // Highlight Button
+            document.querySelectorAll('.btn-control').forEach(b => b.classList.remove('active'));
+            // Astuce pour trouver le bouton correspondant au click SVG ou bouton
+            const btnIndex = key === 'enseigner' ? 0 : key === 'former' ? 1 : 2;
+            document.querySelectorAll('.btn-control')[btnIndex].classList.add('active');
+
+            // Reset SVG Positions
+            document.getElementById('pole-savoir').style.transform = `translate(${centers.savoir.x}px, ${centers.savoir.y}px)`;
+            document.getElementById('pole-prof').style.transform = `translate(${centers.prof.x}px, ${centers.prof.y}px)`;
+            document.getElementById('pole-eleve').style.transform = `translate(${centers.eleve.x}px, ${centers.eleve.y}px)`;
+            document.querySelectorAll('.pole').forEach(p => p.classList.remove('mort'));
+
+            // Animation Mort
+            let mortID = key === 'enseigner' ? 'pole-eleve' : key === 'former' ? 'pole-savoir' : 'pole-prof';
+            const mortEl = document.getElementById(mortID);
+            mortEl.classList.add('mort');
+            mortEl.style.transform = `translate(${centers.center.x}px, ${centers.center.y}px)`;
+
+            // Update Text
+            const d = content[key];
+            document.getElementById('empty-state').style.display = 'none';
+            document.getElementById('info-content').style.display = 'block';
+            document.getElementById('txt-process').textContent = d.process;
+            document.getElementById('txt-title').textContent = d.title;
+            document.getElementById('txt-subtitle').textContent = d.subtitle;
+            document.getElementById('txt-desc').textContent = d.desc;
+            document.getElementById('txt-ex').textContent = d.ex;
+            document.getElementById('txt-mort-who').textContent = d.mort;
+            document.getElementById('txt-mort-why').textContent = d.mortWhy;
+            document.getElementById('txt-fou').textContent = d.fou;
+            document.getElementById('txt-tip').textContent = d.tip;
+        }
+
+        function toggleView() {
+            const explore = document.getElementById('view-explore');
+            const quiz = document.getElementById('view-quiz');
+            const btn = document.getElementById('btn-switch');
+            
+            if(explore.classList.contains('active')) {
+                explore.classList.remove('active'); quiz.classList.add('active');
+                btn.textContent = "Retour"; btn.classList.add('active');
+            } else {
+                quiz.classList.remove('active'); explore.classList.add('active');
+                btn.textContent = "Exercices"; btn.classList.remove('active');
+            }
+        }
+
+        function check(btn, ok, msg) {
+            const fb = btn.parentElement.querySelector('.feedback');
+            btn.parentElement.querySelectorAll('button').forEach(b => b.disabled = true);
+            fb.style.display = 'block'; fb.textContent = msg;
+            if(ok) { btn.classList.add('correct'); fb.style.background = '#dcfce7'; fb.style.color = '#166534'; }
+            else { btn.classList.add('wrong'); fb.style.background = '#fee2e2'; fb.style.color = '#991b1b'; }
+        }
+    </script>
 </body>
 </html>
