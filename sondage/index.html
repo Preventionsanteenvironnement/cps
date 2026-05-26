@@ -490,13 +490,117 @@
     border-left: 4px solid #ffc107;
   }
 
-  /* ====== RESPONSIVE ====== */
+  /* ====== RESPONSIVE — TABLETTE & GROS MOBILE ====== */
+  @media (max-width: 768px) {
+    body { padding: 0 0 80px 0; }
+    .section { margin: 14px 14px; padding: 22px 16px; }
+    .intro { margin: 16px 14px; padding: 22px 18px; }
+  }
+
+  /* ====== RESPONSIVE — MOBILE STANDARD (iPhone 13/14, Pixel, Samsung) ====== */
   @media (max-width: 600px) {
-    header h1 { font-size: 1.35em; }
+    header { padding: 28px 16px 22px; border-radius: 0 0 22px 22px; }
+    header h1 { font-size: 1.25em; line-height: 1.25; }
+    header .sous { font-size: 1.15em; }
+    .intro { padding: 20px 16px; }
+    .intro h2 { font-size: 1.08em; }
+    .intro p { font-size: 0.92em; }
+    .section { margin: 12px 12px; padding: 20px 14px; border-radius: 16px; }
+    .section-emoji { font-size: 1.8em; }
+    .section-title { font-size: 1.1em; }
+    .section-tag { font-size: 0.66em; }
+    .section-subtitle { font-size: 1em; }
+    .qlabel { font-size: 0.94em; }
+
+    /* Smileys : compactés mais lisibles */
+    .smiley-scale { gap: 4px; }
+    .smiley-scale label { padding: 9px 2px; border-radius: 10px; }
     .smiley-scale label .face { font-size: 1.55em; }
-    .smiley-scale label .lib { font-size: 0.62em; }
-    .star-scale label { font-size: 1.55em; }
-    .visual-cards { grid-template-columns: repeat(2, 1fr); }
+    .smiley-scale label .lib { font-size: 0.6em; line-height: 1.1; }
+
+    /* Étoiles : plus petites + wrap natif */
+    .star-scale label { font-size: 1.55em; padding: 3px 1px; }
+    .star-legend { display: block; width: 100%; margin: 4px 0 0; font-size: 0.9em; }
+
+    /* Chips */
+    .chip-cloud { gap: 6px; }
+    .chip-cloud label { padding: 9px 12px; font-size: 0.88em; border-radius: 18px; }
+
+    /* Cards verticales */
+    .card-list label { padding: 11px 12px; font-size: 0.9em; }
+
+    /* Ateliers */
+    .atelier { padding: 12px 13px; gap: 11px; font-size: 0.92em; }
+    .atelier .rank { width: 30px; height: 30px; font-size: 0.92em; }
+
+    /* Visual cards : 2 par ligne */
+    .visual-cards { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .visual-cards label { padding: 12px 8px; border-radius: 12px; }
+    .visual-cards label .vc-emoji { font-size: 1.45em; }
+    .visual-cards label .vc-text { font-size: 0.8em; line-height: 1.25; }
+    .visual-cards-vertical { grid-template-columns: 1fr; }
+    .visual-cards-vertical label { padding: 11px 14px; }
+
+    /* Chat bubbles + textareas */
+    .chat-bubble { font-size: 1em; padding: 12px 14px; }
+    textarea { padding: 12px 14px; font-size: 0.93em; }
+
+    /* Bouton submit */
+    .submit-btn { margin: 24px 14px 0; padding: 16px; font-size: 1.02em; width: calc(100% - 28px); }
+
+    /* Progress dots : plus petits */
+    .progress-bar-container { padding: 10px 14px; }
+    .dots { gap: 3px; }
+    .dot { width: 12px; height: 5px; }
+
+    /* Vote info */
+    .vote-info { font-size: 0.85em; padding: 10px 12px; }
+
+    /* Section "done" check */
+    .section.done::after { width: 26px; height: 26px; font-size: 0.85em; top: 14px; right: 14px; }
+  }
+
+  /* ====== RESPONSIVE — PETIT MOBILE (iPhone SE, anciens Android, ~360px) ====== */
+  @media (max-width: 380px) {
+    header h1 { font-size: 1.1em; }
+    .section { margin: 10px 10px; padding: 18px 12px; }
+    .section-emoji { font-size: 1.55em; }
+    .section-title { font-size: 1em; }
+
+    /* Smileys ultra-compacts */
+    .smiley-scale { gap: 3px; }
+    .smiley-scale label { padding: 7px 1px; }
+    .smiley-scale label .face { font-size: 1.35em; }
+    .smiley-scale label .lib { font-size: 0.54em; }
+
+    /* Étoiles */
+    .star-scale label { font-size: 1.4em; }
+
+    /* Chips */
+    .chip-cloud label { font-size: 0.83em; padding: 8px 10px; }
+
+    /* Visual cards : 1 ligne de 2 reste OK même à 320px (≈140px par carte) */
+    .visual-cards label .vc-emoji { font-size: 1.3em; }
+    .visual-cards label .vc-text { font-size: 0.74em; }
+
+    /* Dots */
+    .dot { width: 10px; height: 4px; }
+    .progress-text { font-size: 0.72em; }
+  }
+
+  /* ====== RESPONSIVE — ULTRA-PETIT (320px, vieux téléphones, mode zoom) ====== */
+  @media (max-width: 340px) {
+    .smiley-scale label .lib { display: none; } /* libellés masqués si vraiment trop étroit */
+    .smiley-scale label { padding: 8px 1px; }
+    .smiley-scale label .face { font-size: 1.5em; }
+    .star-scale label { font-size: 1.25em; }
+    .visual-cards { grid-template-columns: 1fr; }
+    .chip-cloud label { font-size: 0.8em; padding: 7px 9px; }
+  }
+
+  /* ====== ACCESSIBILITÉ : motion reduction ====== */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   }
 </style>
 </head>
