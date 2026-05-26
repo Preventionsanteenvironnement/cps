@@ -599,5 +599,7 @@ para("Va dans le Cockpit PSE, ouvre 'Sondage CPS', clique sur le bouton '📥 Im
 para("Colle le JSON et valide. La réponse est ajoutée aux statistiques de la classe.")
 para("")
 
-doc.save('/Users/brahms/Documents/GitHub/cps/sondage/Bilan_competences_accessible.docx')
-print("✅ Word généré : Bilan_competences_accessible.docx")
+import os
+out = os.path.expanduser("~/Documents/Bilan_competences_accessible.docx")
+doc.save(out)
+print(f"✅ Word généré (local, hors GitHub) : {out}")
