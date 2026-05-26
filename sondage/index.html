@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sondage — Atelier Communication CPS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Roboto', sans-serif;
+    max-width: 820px;
+    margin: 0 auto;
+    background: #f8f9fa;
+    color: #333;
+    padding: 0 0 60px 0;
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, #4a148c, #8e24aa);
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 20px rgba(74,20,140,0.2);
+  }
+  header h1 { margin: 0; font-size: 1.6em; font-weight: 900; letter-spacing: -0.5px; }
+  header p { margin: 10px 0 0; opacity: 0.95; font-size: 0.95em; }
+  .intro {
+    background: #fff;
+    padding: 22px;
+    margin: 20px;
+    border-radius: 12px;
+    border-left: 6px solid #8e24aa;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .intro h2 { margin: 0 0 10px 0; color: #4a148c; font-size: 1.15em; }
+  .intro p { margin: 6px 0; font-size: 0.95em; }
+  .intro .anon {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #1b5e20;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  .section {
+    background: #fff;
+    margin: 16px 20px;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    animation: fadeIn 0.4s ease-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section-title {
+    color: #4a148c;
+    font-size: 1.2em;
+    font-weight: 900;
+    margin: 0 0 6px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .section-subtitle { color: #777; font-size: 0.9em; margin: 0 0 18px 0; font-style: italic; }
+  .question { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px dashed #eee; }
+  .question:last-child { border-bottom: none; }
+  .question-label { font-weight: 500; margin-bottom: 10px; display: block; font-size: 0.98em; }
+  .echelle {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  .echelle label {
+    flex: 1 1 50px;
+    min-width: 50px;
+    text-align: center;
+    background: #f5f5f5;
+    padding: 10px 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9em;
+    transition: all 0.15s;
+    border: 2px solid transparent;
+    user-select: none;
+  }
+  .echelle label:hover { background: #ede7f6; }
+  .echelle input[type="radio"] { display: none; }
+  .echelle input[type="radio"]:checked + span { color: #fff; }
+  .echelle label:has(input:checked) { background: #8e24aa; color: #fff; border-color: #4a148c; transform: scale(1.05); }
+  .echelle-legend { display: flex; justify-content: space-between; color: #888; font-size: 0.78em; margin-top: 4px; padding: 0 4px; }
+  .checkboxes { display: grid; gap: 8px; }
+  .checkboxes label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    background: #fafafa;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.15s;
+    font-size: 0.93em;
+  }
+  .checkboxes label:hover { background: #f3e5f5; }
+  .checkboxes input[type="checkbox"] { margin-top: 2px; transform: scale(1.2); accent-color: #8e24aa; flex-shrink: 0; }
+  .checkboxes label:has(input:checked) { background: #f3e5f5; border-color: #8e24aa; font-weight: 500; }
+  .ateliers-grid { display: grid; gap: 10px; }
+  .atelier {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #fafafa;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.95em;
+    position: relative;
+  }
+  .atelier:hover { background: #ede7f6; }
+  .atelier.selected { background: linear-gradient(135deg, #ede7f6, #f3e5f5); border-color: #8e24aa; }
+  .atelier .rank {
+    width: 30px; height: 30px;
+    background: #ddd;
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.95em;
+    flex-shrink: 0;
+  }
+  .atelier.selected .rank { background: #8e24aa; }
+  .atelier .label { flex: 1; }
+  .vote-info {
+    background: #fff3e0;
+    color: #e65100;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.88em;
+    margin-bottom: 14px;
+    text-align: center;
+    font-weight: 500;
+  }
+  .vote-info.complete { background: #e8f5e9; color: #1b5e20; }
+  textarea, input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95em;
+    resize: vertical;
+    transition: border 0.15s;
+  }
+  textarea:focus, input[type="text"]:focus { outline: none; border-color: #8e24aa; }
+  .radio-group { display: flex; flex-wrap: wrap; gap: 8px; }
+  .radio-group label {
+    flex: 1 1 calc(50% - 4px);
+    min-width: 140px;
+    padding: 10px 14px;
+    background: #fafafa;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.9em;
+    transition: all 0.15s;
+  }
+  .radio-group label:has(input:checked) { background: #8e24aa; color: #fff; border-color: #4a148c; }
+  .radio-group input[type="radio"] { display: none; }
+  .submit-btn {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 30px 20px 0;
+    padding: 18px;
+    background: linear-gradient(135deg, #4a148c, #8e24aa);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(74,20,140,0.3);
+    transition: transform 0.15s;
+    font-family: inherit;
+  }
+  .submit-btn:hover { transform: translateY(-2px); }
+  .submit-btn:disabled { background: #aaa; cursor: not-allowed; transform: none; box-shadow: none; }
+  .progress {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .progress-bar {
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #4a148c, #8e24aa); width: 0%; transition: width 0.3s; }
+  .progress-text { font-size: 0.85em; color: #666; margin-top: 6px; text-align: center; }
+  .merci-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(74,20,140,0.96);
+    color: #fff;
+    z-index: 1000;
+    align-items: center; justify-content: center;
+    padding: 30px;
+    text-align: center;
+    animation: fadeIn 0.4s ease-out;
+  }
+  .merci-overlay.show { display: flex; }
+  .merci-overlay h2 { font-size: 2em; margin: 0 0 16px; }
+  .merci-overlay p { font-size: 1.1em; max-width: 500px; line-height: 1.6; }
+  .merci-overlay .check { font-size: 5em; margin-bottom: 20px; animation: pop 0.5s ease-out; }
+  @keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
+  .error-msg {
+    background: #ffebee;
+    color: #b71c1c;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 16px 20px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.3em; }
+    .echelle label { font-size: 0.85em; padding: 8px 2px; }
+    .radio-group label { flex: 1 1 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📊 Sondage — Atelier Communication</h1>
+  <p>Compétences Psychosociales · Terminale Bac Pro</p>
+</header>
+
+<div class="progress">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText">0 % rempli</div>
+</div>
+
+<div class="intro">
+  <h2>👋 Avant les ateliers, j'ai besoin de toi.</h2>
+  <p>On va mettre en place <strong>18 heures d'ateliers</strong> sur la communication. Pour que ça serve vraiment, j'ai besoin de savoir <strong>ce qui te poserait problème dans la vraie vie</strong> et <strong>ce que tu veux apprendre en priorité</strong>.</p>
+  <p>Réponds franchement, il n'y a pas de bonne ou mauvaise réponse. Ça prend environ <strong>5 à 7 minutes</strong>.</p>
+  <span class="anon">🔒 100 % anonyme — aucune trace de qui a répondu</span>
+</div>
+
+<form id="sondageForm">
+
+<!-- ========== SECTION A : AUTO-ÉVALUATION ========== -->
+<div class="section">
+  <div class="section-title">A · Où j'en suis aujourd'hui</div>
+  <div class="section-subtitle">Pour chaque phrase, situe-toi de 1 (pas du tout) à 5 (très à l'aise).</div>
+
+  <div class="question">
+    <span class="question-label">A1 · Je sais exprimer mes idées clairement à l'oral.</span>
+    <div class="echelle" data-name="a1">
+      <label><input type="radio" name="a1" value="1"><span>1</span></label>
+      <label><input type="radio" name="a1" value="2"><span>2</span></label>
+      <label><input type="radio" name="a1" value="3"><span>3</span></label>
+      <label><input type="radio" name="a1" value="4"><span>4</span></label>
+      <label><input type="radio" name="a1" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">A2 · Je sais écouter sans interrompre, même quand je ne suis pas d'accord.</span>
+    <div class="echelle" data-name="a2">
+      <label><input type="radio" name="a2" value="1"><span>1</span></label>
+      <label><input type="radio" name="a2" value="2"><span>2</span></label>
+      <label><input type="radio" name="a2" value="3"><span>3</span></label>
+      <label><input type="radio" name="a2" value="4"><span>4</span></label>
+      <label><input type="radio" name="a2" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">A3 · Je sais dire non sans agresser ni me sentir mal après.</span>
+    <div class="echelle" data-name="a3">
+      <label><input type="radio" name="a3" value="1"><span>1</span></label>
+      <label><input type="radio" name="a3" value="2"><span>2</span></label>
+      <label><input type="radio" name="a3" value="3"><span>3</span></label>
+      <label><input type="radio" name="a3" value="4"><span>4</span></label>
+      <label><input type="radio" name="a3" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">A4 · Je sais demander de l'aide quand j'en ai besoin.</span>
+    <div class="echelle" data-name="a4">
+      <label><input type="radio" name="a4" value="1"><span>1</span></label>
+      <label><input type="radio" name="a4" value="2"><span>2</span></label>
+      <label><input type="radio" name="a4" value="3"><span>3</span></label>
+      <label><input type="radio" name="a4" value="4"><span>4</span></label>
+      <label><input type="radio" name="a4" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">A5 · Je sais gérer un désaccord sans m'énerver.</span>
+    <div class="echelle" data-name="a5">
+      <label><input type="radio" name="a5" value="1"><span>1</span></label>
+      <label><input type="radio" name="a5" value="2"><span>2</span></label>
+      <label><input type="radio" name="a5" value="3"><span>3</span></label>
+      <label><input type="radio" name="a5" value="4"><span>4</span></label>
+      <label><input type="radio" name="a5" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">A6 · Je me sens à l'aise pour parler devant la classe ou un groupe.</span>
+    <div class="echelle" data-name="a6">
+      <label><input type="radio" name="a6" value="1"><span>1</span></label>
+      <label><input type="radio" name="a6" value="2"><span>2</span></label>
+      <label><input type="radio" name="a6" value="3"><span>3</span></label>
+      <label><input type="radio" name="a6" value="4"><span>4</span></label>
+      <label><input type="radio" name="a6" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">A7 · Je sais reformuler ce que l'autre m'a dit pour vérifier que j'ai compris.</span>
+    <div class="echelle" data-name="a7">
+      <label><input type="radio" name="a7" value="1"><span>1</span></label>
+      <label><input type="radio" name="a7" value="2"><span>2</span></label>
+      <label><input type="radio" name="a7" value="3"><span>3</span></label>
+      <label><input type="radio" name="a7" value="4"><span>4</span></label>
+      <label><input type="radio" name="a7" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">A8 · Je repère mes émotions sur le moment, pendant que je parle.</span>
+    <div class="echelle" data-name="a8">
+      <label><input type="radio" name="a8" value="1"><span>1</span></label>
+      <label><input type="radio" name="a8" value="2"><span>2</span></label>
+      <label><input type="radio" name="a8" value="3"><span>3</span></label>
+      <label><input type="radio" name="a8" value="4"><span>4</span></label>
+      <label><input type="radio" name="a8" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">A9 · Je sais m'adresser à un adulte (prof, tuteur de stage, recruteur).</span>
+    <div class="echelle" data-name="a9">
+      <label><input type="radio" name="a9" value="1"><span>1</span></label>
+      <label><input type="radio" name="a9" value="2"><span>2</span></label>
+      <label><input type="radio" name="a9" value="3"><span>3</span></label>
+      <label><input type="radio" name="a9" value="4"><span>4</span></label>
+      <label><input type="radio" name="a9" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">A10 · Je sais adapter ma façon de parler selon la situation (amis / famille / pro).</span>
+    <div class="echelle" data-name="a10">
+      <label><input type="radio" name="a10" value="1"><span>1</span></label>
+      <label><input type="radio" name="a10" value="2"><span>2</span></label>
+      <label><input type="radio" name="a10" value="3"><span>3</span></label>
+      <label><input type="radio" name="a10" value="4"><span>4</span></label>
+      <label><input type="radio" name="a10" value="5"><span>5</span></label>
+    </div>
+    <div class="echelle-legend"><span>Pas du tout</span><span>Très à l'aise</span></div>
+  </div>
+</div>
+
+<!-- ========== SECTION B : DIFFICULTÉS VÉCUES ========== -->
+<div class="section">
+  <div class="section-title">B · Ce qui me pose vraiment problème</div>
+  <div class="section-subtitle">Coche toutes les situations qui te ressemblent (même un peu).</div>
+  <div class="checkboxes" id="difficultes">
+    <label><input type="checkbox" name="diff" value="b1"><span>Quand je dois prendre la parole devant un groupe, je <strong>bloque</strong>, je rougis, je tremble.</span></label>
+    <label><input type="checkbox" name="diff" value="b2"><span>Quand quelqu'un m'énerve, je <strong>m'emporte</strong> et je le regrette après.</span></label>
+    <label><input type="checkbox" name="diff" value="b3"><span>Quand je ne suis pas d'accord avec un prof / adulte, je <strong>me tais</strong>.</span></label>
+    <label><input type="checkbox" name="diff" value="b4"><span>Quand mes potes m'entraînent à faire un truc, je <strong>n'ose pas refuser</strong>.</span></label>
+    <label><input type="checkbox" name="diff" value="b5"><span>En entretien (PFMP, embauche), je <strong>perds mes mots</strong>.</span></label>
+    <label><input type="checkbox" name="diff" value="b6"><span>Quand on me critique, je <strong>me ferme</strong> ou je <strong>contre-attaque</strong>.</span></label>
+    <label><input type="checkbox" name="diff" value="b7"><span>Je me sens <strong>jugé(e)</strong> dès que j'ouvre la bouche.</span></label>
+    <label><input type="checkbox" name="diff" value="b8"><span>Je n'arrive pas à <strong>dire ce que je ressens</strong> vraiment.</span></label>
+    <label><input type="checkbox" name="diff" value="b9"><span>Je <strong>coupe la parole</strong> sans m'en rendre compte.</span></label>
+    <label><input type="checkbox" name="diff" value="b10"><span>Je dis <strong>ce que les autres veulent entendre</strong>, pas ce que je pense.</span></label>
+    <label><input type="checkbox" name="diff" value="b11"><span>Mon <strong>langage de tous les jours</strong> me pose problème en stage / au travail.</span></label>
+    <label><input type="checkbox" name="diff" value="b12"><span>J'ai du mal à <strong>comprendre ce qu'on veut me dire à demi-mot</strong> (sous-entendus).</span></label>
+    <label><input type="checkbox" name="diff" value="b13"><span>Je <strong>n'arrive pas à regarder dans les yeux</strong> quand je parle.</span></label>
+    <label><input type="checkbox" name="diff" value="b14"><span>Au téléphone, je suis <strong>encore plus mal à l'aise</strong> qu'en face à face.</span></label>
+    <label><input type="checkbox" name="diff" value="b15"><span>J'envoie des messages écrits (SMS, mails) qui sont <strong>mal pris</strong>.</span></label>
+    <label><input type="checkbox" name="diff" value="b16"><span>Quand je suis <strong>stressé(e)</strong>, je ne sais plus parler.</span></label>
+  </div>
+</div>
+
+<!-- ========== SECTION C : VOTE ATELIERS ========== -->
+<div class="section">
+  <div class="section-title">C · Sur quoi je veux travailler en priorité</div>
+  <div class="section-subtitle">Clique sur les <strong>5 ateliers</strong> qui t'intéressent le plus, dans l'ordre. Le 1<sup>er</sup> clic = priorité n°1.</div>
+  <div class="vote-info" id="voteInfo">👉 Sélectionne 5 ateliers (0 / 5)</div>
+  <div class="ateliers-grid" id="ateliers">
+    <div class="atelier" data-id="c1"><div class="rank">·</div><div class="label">🗣️ <strong>Prendre la parole devant un groupe</strong> (gérer le trac, la voix, la posture)</div></div>
+    <div class="atelier" data-id="c2"><div class="rank">·</div><div class="label">👂 <strong>Écouter pour vraiment comprendre</strong> (écoute active, reformulation)</div></div>
+    <div class="atelier" data-id="c3"><div class="rank">·</div><div class="label">🙅 <strong>Dire non sans casser la relation</strong> (assertivité, oser refuser)</div></div>
+    <div class="atelier" data-id="c4"><div class="rank">·</div><div class="label">⚔️ <strong>Gérer un conflit sans s'énerver</strong> (désamorcer, négocier)</div></div>
+    <div class="atelier" data-id="c5"><div class="rank">·</div><div class="label">💼 <strong>Communiquer en milieu pro</strong> (entretien, stage, employeur)</div></div>
+    <div class="atelier" data-id="c6"><div class="rank">·</div><div class="label">🎭 <strong>Adapter mon langage</strong> selon les situations (codes sociaux)</div></div>
+    <div class="atelier" data-id="c7"><div class="rank">·</div><div class="label">💬 <strong>Faire passer un message clair</strong> (message-je, demande directe)</div></div>
+    <div class="atelier" data-id="c8"><div class="rank">·</div><div class="label">🤝 <strong>Convaincre sans manipuler</strong> (argumenter, négocier honnêtement)</div></div>
+    <div class="atelier" data-id="c9"><div class="rank">·</div><div class="label">🧘 <strong>Gérer mes émotions</strong> pendant que je parle (stress, colère, peur)</div></div>
+    <div class="atelier" data-id="c10"><div class="rank">·</div><div class="label">👀 <strong>Décoder le non-verbal</strong> (gestes, regard, ton, silences)</div></div>
+    <div class="atelier" data-id="c11"><div class="rank">·</div><div class="label">🗨️ <strong>Sortir d'une dispute</strong> en famille ou entre amis</div></div>
+    <div class="atelier" data-id="c12"><div class="rank">·</div><div class="label">📱 <strong>Communication en ligne</strong> (messages, réseaux, mails pro)</div></div>
+  </div>
+</div>
+
+<!-- ========== SECTION D : MODALITÉS ========== -->
+<div class="section">
+  <div class="section-title">D · Comment j'aimerais travailler</div>
+  <div class="section-subtitle">Coche les <strong>modalités d'atelier</strong> qui te donneraient envie.</div>
+  <div class="checkboxes">
+    <label><input type="checkbox" name="modal" value="m1"><span>🎭 <strong>Jeux de rôle / mises en situation</strong></span></label>
+    <label><input type="checkbox" name="modal" value="m2"><span>👥 <strong>Discussions en petit groupe</strong> (3-4 personnes)</span></label>
+    <label><input type="checkbox" name="modal" value="m3"><span>🎬 <strong>Vidéos à analyser</strong> (extraits de films, interviews)</span></label>
+    <label><input type="checkbox" name="modal" value="m4"><span>🤝 <strong>Exercices en binôme</strong></span></label>
+    <label><input type="checkbox" name="modal" value="m5"><span>📝 <strong>Travail individuel</strong> avec auto-correction</span></label>
+    <label><input type="checkbox" name="modal" value="m6"><span>🎤 <strong>Théâtre / improvisation</strong></span></label>
+    <label><input type="checkbox" name="modal" value="m7"><span>📋 <strong>Études de cas concrets</strong> (à partir de situations vécues)</span></label>
+    <label><input type="checkbox" name="modal" value="m8"><span>📲 <strong>Quiz et tests interactifs</strong> sur téléphone</span></label>
+    <label><input type="checkbox" name="modal" value="m9"><span>🎙️ <strong>S'enregistrer / se filmer</strong> pour se réécouter</span></label>
+    <label><input type="checkbox" name="modal" value="m10"><span>🧑‍🏫 <strong>Démonstrations du prof</strong> avec explication</span></label>
+  </div>
+</div>
+
+<!-- ========== SECTION E : LIBRE ========== -->
+<div class="section">
+  <div class="section-title">E · Pour finir, à toi la parole</div>
+  <div class="section-subtitle">Ces questions sont libres. Tu peux laisser vide si tu veux.</div>
+
+  <div class="question">
+    <span class="question-label">E1 · Raconte (en quelques mots) <strong>une situation où la communication a mal tourné</strong> et que tu aimerais savoir gérer la prochaine fois :</span>
+    <textarea name="e1" rows="3" placeholder="Ex : un conflit avec un collègue de stage, une dispute en famille, un entretien raté…"></textarea>
+  </div>
+
+  <div class="question">
+    <span class="question-label">E2 · <strong>Un truc précis</strong> que tu veux absolument apprendre dans ces ateliers :</span>
+    <textarea name="e2" rows="2" placeholder="Ex : ne plus rougir, savoir dire non à mon patron…"></textarea>
+  </div>
+
+  <div class="question">
+    <span class="question-label">E3 · En communication, je me considère plutôt :</span>
+    <div class="radio-group">
+      <label><input type="radio" name="e3" value="reserve"><span>Plutôt réservé(e)</span></label>
+      <label><input type="radio" name="e3" value="moyenne"><span>Dans la moyenne</span></label>
+      <label><input type="radio" name="e3" value="expansif"><span>Plutôt expansif(ve)</span></label>
+      <label><input type="radio" name="e3" value="variable"><span>Ça dépend des situations</span></label>
+    </div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">E4 · Après le bac, mon projet principal c'est :</span>
+    <div class="radio-group">
+      <label><input type="radio" name="e4" value="vie_active"><span>💼 Entrer dans la vie active</span></label>
+      <label><input type="radio" name="e4" value="etudes"><span>🎓 Poursuivre des études</span></label>
+      <label><input type="radio" name="e4" value="alternance"><span>🔄 Alternance / apprentissage</span></label>
+      <label><input type="radio" name="e4" value="indecis"><span>🤔 Je ne sais pas encore</span></label>
+    </div>
+  </div>
+
+  <div class="question">
+    <span class="question-label">E5 · Classe / Groupe :</span>
+    <div class="radio-group" id="classeGroup">
+      <label><input type="radio" name="classe" value="TBP1"><span>Terminale Bac Pro 1</span></label>
+      <label><input type="radio" name="classe" value="TBP2"><span>Terminale Bac Pro 2</span></label>
+      <label><input type="radio" name="classe" value="TBP3"><span>Terminale Bac Pro 3</span></label>
+      <label><input type="radio" name="classe" value="autre"><span>Autre</span></label>
+    </div>
+  </div>
+</div>
+
+<div class="error-msg" id="errorMsg"></div>
+
+<button type="submit" class="submit-btn" id="submitBtn">✅ Envoyer mes réponses</button>
+
+</form>
+
+<div class="merci-overlay" id="merci">
+  <div>
+    <div class="check">✓</div>
+    <h2>Merci !</h2>
+    <p>Tes réponses ont bien été enregistrées de façon <strong>anonyme</strong>.</p>
+    <p style="margin-top: 20px; opacity: 0.85;">Les résultats de toute la classe vont permettre de construire des ateliers vraiment utiles pour vous. À très vite !</p>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAWdCMvOiAJln3eT9LIAQD3RWJUD0lQcLI",
+  authDomain: "devoirs-pse.firebaseapp.com",
+  projectId: "devoirs-pse",
+  storageBucket: "devoirs-pse.firebasestorage.app",
+  messagingSenderId: "614730413904",
+  appId: "1:614730413904:web:a5dd478af5de30f6bede55",
+  measurementId: "G-7R9N0JL6GG"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// === Vote prioritaire (sélection ordonnée) ===
+const ateliers = document.querySelectorAll('.atelier');
+const voteInfo = document.getElementById('voteInfo');
+const order = []; // tableau des IDs dans l'ordre de clic
+
+ateliers.forEach(el => {
+  el.addEventListener('click', () => {
+    const id = el.dataset.id;
+    const idx = order.indexOf(id);
+    if (idx >= 0) {
+      order.splice(idx, 1);
+    } else {
+      if (order.length >= 5) {
+        // remplace le dernier
+        const removed = order.pop();
+        const removedEl = document.querySelector(`.atelier[data-id="${removed}"]`);
+        if (removedEl) { removedEl.classList.remove('selected'); removedEl.querySelector('.rank').textContent = '·'; }
+      }
+      order.push(id);
+    }
+    updateVoteUI();
+    updateProgress();
+  });
+});
+
+function updateVoteUI() {
+  ateliers.forEach(el => {
+    const id = el.dataset.id;
+    const rank = order.indexOf(id);
+    if (rank >= 0) {
+      el.classList.add('selected');
+      el.querySelector('.rank').textContent = (rank + 1);
+    } else {
+      el.classList.remove('selected');
+      el.querySelector('.rank').textContent = '·';
+    }
+  });
+  voteInfo.textContent = order.length === 5
+    ? `✅ 5 ateliers choisis dans l'ordre — tu peux ajuster en cliquant`
+    : `👉 Sélectionne 5 ateliers (${order.length} / 5)`;
+  voteInfo.classList.toggle('complete', order.length === 5);
+}
+
+// === Progression ===
+function updateProgress() {
+  // sections requises pour 100% : A (10 échelles) + Section B (≥1) + C (5) + Section D (≥1) + E3 + E4 + classe
+  const total = 10 + 1 + 1 + 1 + 1 + 1 + 1; // 16 jalons
+  let done = 0;
+  for (let i = 1; i <= 10; i++) if (document.querySelector(`input[name="a${i}"]:checked`)) done++;
+  if (document.querySelectorAll('input[name="diff"]:checked').length > 0) done++;
+  if (order.length === 5) done++;
+  if (document.querySelectorAll('input[name="modal"]:checked').length > 0) done++;
+  if (document.querySelector('input[name="e3"]:checked')) done++;
+  if (document.querySelector('input[name="e4"]:checked')) done++;
+  if (document.querySelector('input[name="classe"]:checked')) done++;
+  const pct = Math.round(done / total * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = pct + ' % rempli';
+}
+document.addEventListener('change', updateProgress);
+
+// === Soumission ===
+const form = document.getElementById('sondageForm');
+const btn = document.getElementById('submitBtn');
+const errMsg = document.getElementById('errorMsg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errMsg.classList.remove('show');
+
+  // validations minimales
+  const missing = [];
+  for (let i = 1; i <= 10; i++) {
+    if (!document.querySelector(`input[name="a${i}"]:checked`)) missing.push(`A${i}`);
+  }
+  if (missing.length > 0) {
+    errMsg.textContent = `⚠️ Merci de répondre à toutes les questions de la section A. Manquant : ${missing.join(', ')}`;
+    errMsg.classList.add('show');
+    errMsg.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  if (order.length !== 5) {
+    errMsg.textContent = `⚠️ Tu dois choisir exactement 5 ateliers (Section C). Pour l'instant : ${order.length} / 5.`;
+    errMsg.classList.add('show');
+    errMsg.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Envoi en cours…';
+
+  // collecte
+  const data = {
+    auto_eval: {},
+    difficultes: [],
+    vote_ateliers: order.slice(), // priorité 1 à 5
+    modalites: [],
+    e1_situation: form.elements['e1'].value.trim().slice(0, 500),
+    e2_objectif: form.elements['e2'].value.trim().slice(0, 300),
+    e3_profil: document.querySelector('input[name="e3"]:checked')?.value || null,
+    e4_projet: document.querySelector('input[name="e4"]:checked')?.value || null,
+    classe: document.querySelector('input[name="classe"]:checked')?.value || null,
+    ts: serverTimestamp(),
+    ua: navigator.userAgent.slice(0, 120)
+  };
+  for (let i = 1; i <= 10; i++) {
+    data.auto_eval['a' + i] = parseInt(document.querySelector(`input[name="a${i}"]:checked`).value);
+  }
+  document.querySelectorAll('input[name="diff"]:checked').forEach(c => data.difficultes.push(c.value));
+  document.querySelectorAll('input[name="modal"]:checked').forEach(c => data.modalites.push(c.value));
+
+  try {
+    await addDoc(collection(db, 'sondage_cps'), data);
+    document.getElementById('merci').classList.add('show');
+    window.scrollTo({top:0, behavior:'smooth'});
+  } catch (err) {
+    console.error(err);
+    btn.disabled = false;
+    btn.textContent = '✅ Envoyer mes réponses';
+    errMsg.textContent = `❌ Erreur d'envoi : ${err.message}. Réessaie ou préviens le prof.`;
+    errMsg.classList.add('show');
+  }
+});
+
+updateVoteUI();
+updateProgress();
+</script>
+
+</body>
+</html>
